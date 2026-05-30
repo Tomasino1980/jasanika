@@ -182,6 +182,17 @@ M0 → Version: 0.0.0
 M1 → Version: 0.1.0
 M2 → Version: 0.2.0
 M3 → Version: 0.3.0
+M4 → Version: 0.4.0
+M5 → Version: 0.5.0
+M6 → Version: 0.6.0
+M7 → Version: 0.7.0
+M8 → Version: 0.8.0
+M9 → Version: 0.9.0
+M10 → Version: 0.10.0
+M11 → Version: 0.11.0
+M12 → Version: 0.12.0
+
+etc...
 
 The version number must always match the latest completed milestone.
 
@@ -208,8 +219,7 @@ Before reporting milestone completion:
 
 git status
 
-If changes are present:
-    git add .
+Po dokončení proveď commit s těmito parametry:
     git commit -m "M<milestone> - <milestone name>"
 
 Only after successful commit may the milestone be considered completed.
