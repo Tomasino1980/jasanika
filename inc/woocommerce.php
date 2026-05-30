@@ -59,5 +59,15 @@ function jasanika_enqueue_woocommerce_styles() {
 		array( 'jasanika-variables', 'jasanika-buttons' ),
 		$ver
 	);
+
+	// Product archive stylesheet – shop and product category/tag pages only.
+	if ( is_shop() || is_product_category() || is_product_tag() ) {
+		wp_enqueue_style(
+			'jasanika-product-archive',
+			get_template_directory_uri() . '/assets/css/components/product-archive.css',
+			array( 'jasanika-woocommerce' ),
+			$ver
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_woocommerce_styles' );
