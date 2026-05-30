@@ -69,5 +69,15 @@ function jasanika_enqueue_woocommerce_styles() {
 			$ver
 		);
 	}
+
+	// Single product stylesheet – product pages only.
+	if ( is_product() ) {
+		wp_enqueue_style(
+			'jasanika-single-product',
+			get_template_directory_uri() . '/assets/css/components/single-product.css',
+			array( 'jasanika-woocommerce' ),
+			$ver
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_woocommerce_styles' );
