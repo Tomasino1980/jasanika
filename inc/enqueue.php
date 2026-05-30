@@ -141,6 +141,16 @@ function jasanika_enqueue_assets() {
 		);
 	}
 
+	// Contact page CSS – contact page only.
+	if ( is_page_template( 'page-contact.php' ) ) {
+		wp_enqueue_style(
+			'jasanika-contact-page',
+			$uri . '/assets/css/components/contact-page.css',
+			array( 'jasanika-variables', 'jasanika-buttons' ),
+			$ver
+		);
+	}
+
 	// Archive CSS – archive, category and tag pages only.
 	if ( is_archive() || is_category() || is_tag() ) {
 		wp_enqueue_style(
