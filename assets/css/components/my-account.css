@@ -1,0 +1,505 @@
+/* my-account.css – WooCommerce My Account page styles for the Jasanika theme. */
+
+/* ------------------------------------------------------------------ */
+/* Account layout – Mobile first (single column)                       */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-8);
+	align-items: start;
+}
+
+/* Tablet – side by side */
+@media ( min-width: 768px ) {
+	.jasanika-account {
+		grid-template-columns: 220px 1fr;
+		gap: var(--space-8);
+	}
+}
+
+/* Desktop – wider sidebar */
+@media ( min-width: 1024px ) {
+	.jasanika-account {
+		grid-template-columns: 260px 1fr;
+		gap: var(--space-10);
+	}
+}
+
+/* ------------------------------------------------------------------ */
+/* Account navigation                                                   */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__nav {
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-md);
+	overflow: hidden;
+}
+
+.jasanika-account__nav .woocommerce-MyAccount-navigation ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.jasanika-account__nav .woocommerce-MyAccount-navigation ul li {
+	border-bottom: 1px solid var(--border-soft);
+}
+
+.jasanika-account__nav .woocommerce-MyAccount-navigation ul li:last-child {
+	border-bottom: none;
+}
+
+.jasanika-account__nav .woocommerce-MyAccount-navigation ul li a {
+	display: block;
+	padding: var(--space-4) var(--space-6);
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	font-weight: 500;
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color var(--transition-fast), background var(--transition-fast), padding-left var(--transition-fast);
+}
+
+.jasanika-account__nav .woocommerce-MyAccount-navigation ul li a:hover {
+	color: var(--primary-hover);
+	background: rgba(183, 138, 203, 0.06);
+	padding-left: var(--space-8);
+}
+
+.jasanika-account__nav .woocommerce-MyAccount-navigation ul li.is-active a,
+.jasanika-account__nav .woocommerce-MyAccount-navigation ul li.wc-forward.is-active a {
+	color: var(--primary);
+	background: rgba(183, 138, 203, 0.10);
+	border-left: 3px solid var(--primary);
+	padding-left: calc( var(--space-6) - 3px );
+	font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ */
+/* Account content area                                                 */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content {
+	min-width: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Content card base                                                    */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content .woocommerce-MyAccount-content {
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-md);
+	padding: var(--space-8);
+}
+
+/* ------------------------------------------------------------------ */
+/* Dashboard welcome text                                               */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content .woocommerce-MyAccount-content p {
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	color: var(--text-muted);
+	line-height: var(--leading-normal);
+	margin: 0 0 var(--space-4);
+}
+
+.jasanika-account__content .woocommerce-MyAccount-content p:last-child {
+	margin-bottom: 0;
+}
+
+.jasanika-account__content .woocommerce-MyAccount-content a {
+	color: var(--primary);
+	text-decoration: none;
+	font-weight: 500;
+	transition: color var(--transition-fast);
+}
+
+.jasanika-account__content .woocommerce-MyAccount-content a:hover {
+	color: var(--primary-hover);
+}
+
+/* ------------------------------------------------------------------ */
+/* Section headings                                                     */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content .woocommerce-MyAccount-content h2,
+.jasanika-account__content .woocommerce-MyAccount-content h3 {
+	font-family: var(--font-heading);
+	font-weight: 600;
+	color: var(--text-main);
+	line-height: var(--leading-tight);
+	margin: 0 0 var(--space-6);
+}
+
+.jasanika-account__content .woocommerce-MyAccount-content h2 {
+	font-size: var(--text-2xl);
+}
+
+.jasanika-account__content .woocommerce-MyAccount-content h3 {
+	font-size: var(--text-xl);
+}
+
+/* ------------------------------------------------------------------ */
+/* Orders table                                                         */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content .woocommerce-orders-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.jasanika-account__content .woocommerce-orders-table thead {
+	background: var(--bg-secondary);
+}
+
+.jasanika-account__content .woocommerce-orders-table th {
+	padding: var(--space-3) var(--space-4);
+	font-family: var(--font-body);
+	font-size: var(--text-xs);
+	font-weight: 600;
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	border-bottom: var(--glass-border);
+	text-align: left;
+}
+
+.jasanika-account__content .woocommerce-orders-table td {
+	padding: var(--space-4) var(--space-4);
+	font-size: var(--text-sm);
+	color: var(--text-main);
+	border-bottom: var(--glass-border);
+	vertical-align: middle;
+}
+
+.jasanika-account__content .woocommerce-orders-table tr:last-child td {
+	border-bottom: none;
+}
+
+.jasanika-account__content .woocommerce-orders-table .woocommerce-orders-table__cell-order-number a {
+	color: var(--primary);
+	font-weight: 600;
+}
+
+.jasanika-account__content .woocommerce-orders-table .woocommerce-orders-table__cell-order-total {
+	font-weight: 600;
+	color: var(--primary);
+}
+
+/* Order status badges */
+.jasanika-account__content .woocommerce-orders-table .wc-order-status {
+	display: inline-block;
+	padding: var(--space-1) var(--space-3);
+	border-radius: var(--radius-full);
+	font-size: var(--text-xs);
+	font-weight: 600;
+	background: rgba(183, 138, 203, 0.15);
+	color: var(--primary);
+}
+
+/* View order button */
+.jasanika-account__content .woocommerce-orders-table .button {
+	display: inline-block;
+	padding: var(--space-2) var(--space-4);
+	background: transparent;
+	color: var(--primary);
+	border: 1px solid var(--primary);
+	border-radius: var(--radius-sm);
+	font-family: var(--font-body);
+	font-size: var(--text-xs);
+	font-weight: 500;
+	text-decoration: none;
+	white-space: nowrap;
+	cursor: pointer;
+	transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.jasanika-account__content .woocommerce-orders-table .button:hover {
+	background: var(--primary);
+	color: var(--bg-main);
+}
+
+/* ------------------------------------------------------------------ */
+/* Downloads table                                                      */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content .woocommerce-MyAccount-downloads-file a {
+	color: var(--primary);
+	font-weight: 500;
+	text-decoration: none;
+	transition: color var(--transition-fast);
+}
+
+.jasanika-account__content .woocommerce-MyAccount-downloads-file a:hover {
+	color: var(--primary-hover);
+}
+
+/* ------------------------------------------------------------------ */
+/* Addresses section                                                    */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content .woocommerce-Addresses {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-6);
+}
+
+@media ( min-width: 600px ) {
+	.jasanika-account__content .woocommerce-Addresses {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.jasanika-account__content .woocommerce-Address {
+	background: var(--bg-secondary);
+	border: var(--glass-border);
+	border-radius: var(--radius-md);
+	padding: var(--space-6);
+}
+
+.jasanika-account__content .woocommerce-Address-title {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 0 0 var(--space-4);
+	gap: var(--space-4);
+}
+
+.jasanika-account__content .woocommerce-Address-title h3 {
+	font-family: var(--font-heading);
+	font-size: var(--text-lg);
+	font-weight: 600;
+	color: var(--text-main);
+	margin: 0;
+}
+
+.jasanika-account__content .woocommerce-Address-title .edit {
+	font-family: var(--font-body);
+	font-size: var(--text-xs);
+	color: var(--primary);
+	text-decoration: none;
+	font-weight: 500;
+	white-space: nowrap;
+	transition: color var(--transition-fast);
+}
+
+.jasanika-account__content .woocommerce-Address-title .edit:hover {
+	color: var(--primary-hover);
+}
+
+.jasanika-account__content address {
+	font-style: normal;
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	line-height: var(--leading-loose);
+}
+
+/* ------------------------------------------------------------------ */
+/* Account details form                                                 */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content .woocommerce-EditAccountForm .form-row {
+	margin-bottom: var(--space-4);
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .form-row label {
+	display: block;
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	font-weight: 500;
+	color: var(--text-muted);
+	margin-bottom: var(--space-2);
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .form-row .required {
+	color: var(--primary);
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .form-row input.input-text,
+.jasanika-account__content .woocommerce-EditAccountForm .form-row input[type="password"],
+.jasanika-account__content .woocommerce-EditAccountForm .form-row input[type="email"],
+.jasanika-account__content .woocommerce-EditAccountForm .form-row input[type="text"] {
+	display: block;
+	width: 100%;
+	background: var(--bg-secondary);
+	color: var(--text-main);
+	border: var(--glass-border);
+	border-radius: var(--radius-sm);
+	padding: var(--space-3) var(--space-4);
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	line-height: var(--leading-normal);
+	box-sizing: border-box;
+	transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+	-webkit-appearance: none;
+	appearance: none;
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .form-row input::placeholder {
+	color: var(--text-muted);
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .form-row input:focus {
+	outline: 2px solid var(--primary);
+	outline-offset: 2px;
+	border-color: var(--primary);
+}
+
+/* Two-column first/last name */
+.jasanika-account__content .woocommerce-EditAccountForm .form-row-first,
+.jasanika-account__content .woocommerce-EditAccountForm .form-row-last {
+	display: inline-block;
+	width: calc( 50% - var(--space-2) );
+	box-sizing: border-box;
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .form-row-first {
+	margin-right: var(--space-2);
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .form-row-last {
+	margin-left: var(--space-2);
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .form-row-wide {
+	display: block;
+	clear: both;
+}
+
+/* Save button */
+.jasanika-account__content .woocommerce-EditAccountForm .button {
+	display: inline-block;
+	background: var(--primary);
+	color: var(--bg-main);
+	border: none;
+	border-radius: var(--radius-md);
+	padding: var(--space-3) var(--space-8);
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	font-weight: 600;
+	cursor: pointer;
+	text-align: center;
+	text-decoration: none;
+	transition: background var(--transition-fast), box-shadow var(--transition-fast);
+	box-shadow: var(--shadow-sm);
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .button:hover {
+	background: var(--primary-hover);
+	box-shadow: var(--shadow-md);
+}
+
+.jasanika-account__content .woocommerce-EditAccountForm .button:focus {
+	outline: 2px solid var(--primary-hover);
+	outline-offset: 3px;
+}
+
+/* ------------------------------------------------------------------ */
+/* Notices and messages                                                 */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content .woocommerce-message,
+.jasanika-account__content .woocommerce-error,
+.jasanika-account__content .woocommerce-info {
+	border-radius: var(--radius-md);
+	padding: var(--space-4) var(--space-6);
+	margin: 0 0 var(--space-6);
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	list-style: none;
+}
+
+.jasanika-account__content .woocommerce-message {
+	background: rgba(126, 200, 126, 0.10);
+	border: 1px solid rgba(126, 200, 126, 0.25);
+	color: #7ec87e;
+}
+
+.jasanika-account__content .woocommerce-error {
+	background: rgba(224, 112, 112, 0.10);
+	border: 1px solid rgba(224, 112, 112, 0.25);
+	color: #e07070;
+}
+
+.jasanika-account__content .woocommerce-info {
+	background: rgba(183, 138, 203, 0.10);
+	border: 1px solid rgba(183, 138, 203, 0.20);
+	color: var(--primary);
+}
+
+/* ------------------------------------------------------------------ */
+/* Pagination                                                           */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account__content .woocommerce-pagination ul {
+	display: flex;
+	gap: var(--space-2);
+	list-style: none;
+	margin: var(--space-6) 0 0;
+	padding: 0;
+	flex-wrap: wrap;
+}
+
+.jasanika-account__content .woocommerce-pagination ul li a,
+.jasanika-account__content .woocommerce-pagination ul li span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 36px;
+	height: 36px;
+	padding: 0 var(--space-3);
+	background: var(--bg-secondary);
+	border: var(--glass-border);
+	border-radius: var(--radius-sm);
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.jasanika-account__content .woocommerce-pagination ul li a:hover {
+	background: rgba(183, 138, 203, 0.15);
+	color: var(--primary);
+}
+
+.jasanika-account__content .woocommerce-pagination ul li span.current {
+	background: var(--primary);
+	color: var(--bg-main);
+	border-color: var(--primary);
+	font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive – mobile                                                  */
+/* ------------------------------------------------------------------ */
+
+@media ( max-width: 767px ) {
+
+	.jasanika-account__content .woocommerce-MyAccount-content {
+		padding: var(--space-5);
+	}
+
+	.jasanika-account__content .woocommerce-EditAccountForm .form-row-first,
+	.jasanika-account__content .woocommerce-EditAccountForm .form-row-last {
+		display: block;
+		width: 100%;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.jasanika-account__content .woocommerce-orders-table th,
+	.jasanika-account__content .woocommerce-orders-table td {
+		font-size: var(--text-xs);
+		padding: var(--space-2) var(--space-3);
+	}
+}

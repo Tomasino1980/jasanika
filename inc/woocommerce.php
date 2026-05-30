@@ -99,5 +99,15 @@ function jasanika_enqueue_woocommerce_styles() {
 			$ver
 		);
 	}
+
+	// My Account stylesheet – account pages only.
+	if ( is_account_page() ) {
+		wp_enqueue_style(
+			'jasanika-my-account',
+			get_template_directory_uri() . '/assets/css/components/my-account.css',
+			array( 'jasanika-woocommerce' ),
+			$ver
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_woocommerce_styles' );
