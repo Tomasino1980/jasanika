@@ -131,6 +131,16 @@ function jasanika_enqueue_assets() {
 		);
 	}
 
+	// 404 CSS – 404 page only.
+	if ( is_404() ) {
+		wp_enqueue_style(
+			'jasanika-404',
+			$uri . '/assets/css/components/404.css',
+			array( 'jasanika-variables', 'jasanika-buttons' ),
+			$ver
+		);
+	}
+
 	// Archive CSS – archive, category and tag pages only.
 	if ( is_archive() || is_category() || is_tag() ) {
 		wp_enqueue_style(
