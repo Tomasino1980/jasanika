@@ -110,5 +110,15 @@ function jasanika_enqueue_assets() {
 		array( 'jasanika-containers' ),
 		$ver
 	);
+
+	// Hero slider – front page only.
+	if ( is_front_page() ) {
+		wp_enqueue_style(
+			'jasanika-hero-slider',
+			$uri . '/assets/css/components/hero-slider.css',
+			array( 'jasanika-variables', 'jasanika-buttons' ),
+			$ver
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_assets' );
