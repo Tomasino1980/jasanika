@@ -89,5 +89,15 @@ function jasanika_enqueue_woocommerce_styles() {
 			$ver
 		);
 	}
+
+	// Checkout stylesheet – checkout page only.
+	if ( is_checkout() ) {
+		wp_enqueue_style(
+			'jasanika-checkout',
+			get_template_directory_uri() . '/assets/css/components/checkout.css',
+			array( 'jasanika-woocommerce', 'jasanika-buttons' ),
+			$ver
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_woocommerce_styles' );
