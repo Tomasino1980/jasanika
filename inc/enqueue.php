@@ -161,6 +161,16 @@ function jasanika_enqueue_assets() {
 		);
 	}
 
+	// Category archive CSS – category pages only.
+	if ( is_category() ) {
+		wp_enqueue_style(
+			'jasanika-category-archive',
+			$uri . '/assets/css/components/category-archive.css',
+			array( 'jasanika-archive' ),
+			$ver
+		);
+	}
+
 	// Hero slider – front page only.
 	if ( is_front_page() ) {
 		wp_enqueue_style(

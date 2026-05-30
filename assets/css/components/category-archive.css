@@ -1,0 +1,114 @@
+/* category-archive.css – Category archive page styles. */
+
+/* ---------------------------------------- */
+/* Category Page Wrapper                     */
+/* ---------------------------------------- */
+
+.category-page {
+	background-color: var(--bg-main);
+	padding: var(--space-16) 0;
+}
+
+.category-page__container {
+	max-width: var(--container-xl);
+	margin: 0 auto;
+	padding: 0 var(--space-6);
+}
+
+/* ---------------------------------------- */
+/* Category Header                           */
+/* ---------------------------------------- */
+
+.category-header {
+	text-align: center;
+	margin-bottom: var(--space-12);
+}
+
+.category-header__title {
+	font-family: var(--font-heading);
+	font-size: var(--text-3xl);
+	font-weight: 700;
+	color: var(--text-main);
+	line-height: var(--leading-tight);
+	margin: 0 0 var(--space-4);
+}
+
+.category-header__description {
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	color: var(--text-muted);
+	line-height: var(--leading-loose);
+	max-width: var(--container-md);
+	margin: 0 auto var(--space-4);
+}
+
+.category-header__description p {
+	margin: 0;
+}
+
+/* ---------------------------------------- */
+/* Category Statistics                       */
+/* ---------------------------------------- */
+
+.category-stats {
+	display: flex;
+	justify-content: center;
+}
+
+.category-stats__count {
+	display: inline-block;
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	font-weight: 500;
+	color: var(--accent);
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-full);
+	padding: var(--space-1) var(--space-4);
+}
+
+/* ---------------------------------------- */
+/* Empty State                               */
+/* ---------------------------------------- */
+
+.category-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-6);
+	padding: var(--space-16) 0;
+	text-align: center;
+}
+
+.category-empty__message {
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	color: var(--text-muted);
+	margin: 0;
+}
+
+/* ---------------------------------------- */
+/* Tablet – 2 columns                        */
+/* ---------------------------------------- */
+
+@media (max-width: 1023px) {
+	.category-page {
+		padding: var(--space-12) 0;
+	}
+}
+
+/* ---------------------------------------- */
+/* Mobile – 1 column                         */
+/* ---------------------------------------- */
+
+@media (max-width: 767px) {
+	.category-page {
+		padding: var(--space-10) 0;
+	}
+
+	.category-header__title {
+		font-size: var(--text-2xl);
+	}
+}
