@@ -79,5 +79,15 @@ function jasanika_enqueue_woocommerce_styles() {
 			$ver
 		);
 	}
+
+	// Cart stylesheet – cart page only.
+	if ( is_cart() ) {
+		wp_enqueue_style(
+			'jasanika-cart',
+			get_template_directory_uri() . '/assets/css/components/cart.css',
+			array( 'jasanika-woocommerce', 'jasanika-buttons' ),
+			$ver
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_woocommerce_styles' );
