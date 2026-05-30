@@ -121,6 +121,16 @@ function jasanika_enqueue_assets() {
 		);
 	}
 
+	// Search results CSS – search pages only.
+	if ( is_search() ) {
+		wp_enqueue_style(
+			'jasanika-search-results',
+			$uri . '/assets/css/components/search-results.css',
+			array( 'jasanika-variables', 'jasanika-buttons' ),
+			$ver
+		);
+	}
+
 	// Archive CSS – archive, category and tag pages only.
 	if ( is_archive() || is_category() || is_tag() ) {
 		wp_enqueue_style(
