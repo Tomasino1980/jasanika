@@ -1,0 +1,128 @@
+/* woocommerce.css – WooCommerce foundation styles for Jasanika theme. */
+
+/* ------------------------------------------------------------------ */
+/* Layout wrapper                                                       */
+/* ------------------------------------------------------------------ */
+
+.jasanika-woocommerce-wrap {
+	padding-top: var(--space-12);
+	padding-bottom: var(--space-16);
+	color: var(--text-main);
+}
+
+/* ------------------------------------------------------------------ */
+/* Shop archive – product grid                                          */
+/* ------------------------------------------------------------------ */
+
+.woocommerce ul.products {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: var(--space-6);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.woocommerce ul.products li.product {
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-md);
+	padding: var(--space-4);
+	transition: border-color var(--transition-normal);
+}
+
+.woocommerce ul.products li.product:hover {
+	border-color: var(--primary);
+}
+
+/* ------------------------------------------------------------------ */
+/* Product images                                                       */
+/* ------------------------------------------------------------------ */
+
+.woocommerce ul.products li.product img,
+.woocommerce div.product div.images img {
+	width: 100%;
+	height: auto;
+	border-radius: var(--radius-sm);
+	display: block;
+}
+
+/* ------------------------------------------------------------------ */
+/* Product titles & prices                                              */
+/* ------------------------------------------------------------------ */
+
+.woocommerce ul.products li.product .woocommerce-loop-product__title,
+.woocommerce div.product .product_title {
+	font-family: var(--font-heading);
+	color: var(--text-main);
+}
+
+.woocommerce ul.products li.product .price,
+.woocommerce div.product p.price,
+.woocommerce div.product span.price {
+	color: var(--primary);
+	font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ */
+/* Notices                                                              */
+/* ------------------------------------------------------------------ */
+
+.woocommerce-message,
+.woocommerce-info,
+.woocommerce-error {
+	background: var(--bg-secondary);
+	border-color: var(--primary);
+	color: var(--text-main);
+	border-radius: var(--radius-md);
+	padding: var(--space-4) var(--space-6);
+	margin-bottom: var(--space-6);
+}
+
+/* ------------------------------------------------------------------ */
+/* Breadcrumb                                                           */
+/* ------------------------------------------------------------------ */
+
+.woocommerce-breadcrumb {
+	color: var(--text-muted);
+	font-size: var(--text-sm);
+	margin-bottom: var(--space-6);
+}
+
+.woocommerce-breadcrumb a {
+	color: var(--primary);
+	text-decoration: none;
+}
+
+.woocommerce-breadcrumb a:hover {
+	color: var(--primary-hover);
+}
+
+/* ------------------------------------------------------------------ */
+/* Page titles                                                          */
+/* ------------------------------------------------------------------ */
+
+.woocommerce-products-header__title,
+.woocommerce h1.woocommerce-page-title {
+	font-family: var(--font-heading);
+	color: var(--text-main);
+	margin-bottom: var(--space-8);
+}
+
+/* ------------------------------------------------------------------ */
+/* Result count & ordering                                              */
+/* ------------------------------------------------------------------ */
+
+.woocommerce-result-count {
+	color: var(--text-muted);
+	font-size: var(--text-sm);
+}
+
+.woocommerce-ordering select {
+	background: var(--bg-secondary);
+	color: var(--text-main);
+	border: var(--glass-border);
+	border-radius: var(--radius-sm);
+	padding: var(--space-2) var(--space-4);
+	font-size: var(--text-sm);
+}
