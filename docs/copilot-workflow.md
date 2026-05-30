@@ -43,6 +43,12 @@ pokud nejsou výslovně součástí schváleného Milníku.
 
 Každý Milník má mít jednoznačný rozsah a jasný výstup.
 
+Agent nesmí implementovat funkcionalitu z budoucích Milníků.
+
+Pokud je funkcionalita plánována v pozdějším Milníku roadmapy, musí být implementována až v okamžiku schválení daného Milníku.
+
+---
+
 ## Odpovědnosti
 
 ### Copilot Agent
@@ -50,6 +56,15 @@ Každý Milník má mít jednoznačný rozsah a jasný výstup.
 * vytváří kód
 * upravuje soubory
 * navrhuje řešení
+
+Před zahájením práce musí načíst a respektovat:
+
+* docs/project-rules.md
+* docs/folder-structure.md
+* docs/design-system.md
+* docs/typography.md
+* docs/roadmap.md
+* docs/copilot-workflow.md
 
 ### Vývojář
 
@@ -64,6 +79,14 @@ Každý Milník má mít jednoznačný rozsah a jasný výstup.
 ## Workflow
 
 Zadání Milníku
+
+↓
+
+Schválení Milníku
+
+↓
+
+Načtení dokumentace
 
 ↓
 
@@ -99,6 +122,47 @@ Pokud Agent vytvoří nevyhovující řešení:
 2. Worktree se odstraní.
 3. Vytvoří se nová Session.
 4. Milník se zadá znovu.
+
+---
+
+## Git Workflow
+
+Copilot Agent neprovádí Git operace.
+
+Copilot Agent:
+
+* nevytváří commity
+* nevytváří větve
+* nevytváří worktree
+* nevytváří pull requesty
+* neprovádí merge
+* neprovádí rebase
+* neprovádí push
+* nemění Git konfiguraci
+
+Veškeré Git operace provádí výhradně vývojář.
+
+---
+
+## Historie projektu
+
+Historie projektu obsahuje pouze schválené Milníky.
+
+Příklad:
+
+M0 - INITIAL
+
+M1 - Theme Skeleton
+
+M2 - Layout Foundation
+
+M3 - Administration Foundation
+
+M4 - Menu System
+
+...
+
+V historii nesmí vznikat pomocné commity, experimentální větve ani technické Git operace související s prací Agenta.
 
 ---
 
