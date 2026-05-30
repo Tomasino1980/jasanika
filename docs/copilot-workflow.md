@@ -171,3 +171,16 @@ V historii nesmí vznikat pomocné commity, experimentální větve ani technick
 Agent nikdy nevytváří oficiální historii projektu.
 
 Historii projektu vytváří pouze vývojář.
+
+## Theme Version
+
+At the end of every completed milestone, update the Version field in style.css.
+
+Examples:
+
+M0 → Version: 0.0.0
+M1 → Version: 0.1.0
+M2 → Version: 0.2.0
+M3 → Version: 0.3.0
+
+The version number must always match the latest completed milestone.
