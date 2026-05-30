@@ -205,29 +205,37 @@ Do oficiální historie projektu se dostávají pouze schválené Milníky po me
 
 Na konci každého dokončeného Milníku musí být aktualizována položka Version v souboru style.css.
 
-Verze musí vždy odpovídat nejnovějšímu dokončenému Milníku.
+IMPORTANT
 
-Formát:
+This versioning system is NOT Semantic Versioning.
 
-M0 → Version: 0.0.0
+The version number is derived directly from the Milestone number.
 
-M1 → Version: 0.1.0
+Version Formula:
 
-M2 → Version: 0.2.0
+Version = 0.<Milestone>.0
 
-M3 → Version: 0.3.0
+Examples:
 
-M4 → Version: 0.4.0
+M0  → Version: 0.0.0
 
-M5 → Version: 0.5.0
+M1  → Version: 0.1.0
 
-M6 → Version: 0.6.0
+M2  → Version: 0.2.0
 
-M7 → Version: 0.7.0
+M3  → Version: 0.3.0
 
-M8 → Version: 0.8.0
+M4  → Version: 0.4.0
 
-M9 → Version: 0.9.0
+M5  → Version: 0.5.0
+
+M6  → Version: 0.6.0
+
+M7  → Version: 0.7.0
+
+M8  → Version: 0.8.0
+
+M9  → Version: 0.9.0
 
 M10 → Version: 0.10.0
 
@@ -241,7 +249,47 @@ M14 → Version: 0.14.0
 
 M15 → Version: 0.15.0
 
-Verze musí vždy odpovídat poslednímu dokončenému Milníku.
+M16 → Version: 0.16.0
+
+M17 → Version: 0.17.0
+
+M18 → Version: 0.18.0
+
+M19 → Version: 0.19.0
+
+M20 → Version: 0.20.0
+
+M21 → Version: 0.21.0
+
+M22 → Version: 0.22.0
+
+M23 → Version: 0.23.0
+
+M24 → Version: 0.24.0
+
+M25 → Version: 0.25.0
+
+Rules:
+
+* The second number MUST always equal the Milestone number.
+* Do NOT use Semantic Versioning.
+* Do NOT increment the Major version automatically.
+* Do NOT convert M20 into 1.20.0.
+* Do NOT convert M20 into 1.0.0.
+* Do NOT reset the numbering sequence.
+* The version number must always exactly match the completed Milestone.
+
+Incorrect Examples:
+
+M20 → 1.0.0 ✗
+
+M20 → 1.20.0 ✗
+
+M20 → 0.2.0 ✗
+
+Correct Example:
+
+M20 → 0.20.0 ✓
 
 ---
 
@@ -272,6 +320,7 @@ Pro každý Milník:
 6. Zachovej kompatibilitu s WordPress 7.
 7. Zachovej kompatibilitu s WooCommerce, pokud je součástí projektu.
 8. Aktualizuj Version v style.css podle čísla Milníku.
+9. Dodržuj pravidla verzování definovaná v sekci Theme Version.
 
 ---
 
@@ -297,6 +346,8 @@ M2 - Layout Foundation
 M3 - Administration Foundation
 
 M15 - WooCommerce Foundation
+
+M20 - My Account Foundation
 
 Milník není dokončen, dokud není commit úspěšně vytvořen.
 
