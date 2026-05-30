@@ -126,6 +126,13 @@ function jasanika_enqueue_assets() {
 			array( 'jasanika-variables', 'jasanika-buttons' ),
 			$ver
 		);
+
+		wp_enqueue_style(
+			'jasanika-latest-posts',
+			$uri . '/assets/css/components/latest-posts.css',
+			array( 'jasanika-variables', 'jasanika-buttons' ),
+			$ver
+		);
 	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_assets' );
