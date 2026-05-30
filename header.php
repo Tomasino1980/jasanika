@@ -28,7 +28,16 @@
 			</a>
 
 			<nav class="site-header__nav" aria-label="<?php esc_attr_e( 'Primary navigation', 'jasanika' ); ?>">
-				<?php /* Navigation will be implemented in M4 - Menu System. */ ?>
+				<?php
+				wp_nav_menu(
+					array(
+						'theme_location' => 'primary',
+						'menu_class'     => 'primary-nav__list',
+						'container'      => false,
+						'fallback_cb'    => false,
+					)
+				);
+				?>
 			</nav>
 
 		</div>

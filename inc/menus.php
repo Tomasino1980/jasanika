@@ -4,7 +4,6 @@
  * Menus
  *
  * Registers navigation menus.
- * Navigation will be implemented in M4 - Menu System.
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,6 +11,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 function jasanika_register_menus() {
-	// Navigation menus will be implemented in M4 - Menu System.
+	register_nav_menus(
+		array(
+			'primary' => esc_html__( 'Primary Menu', 'jasanika' ),
+			'footer'  => esc_html__( 'Footer Menu', 'jasanika' ),
+		)
+	);
 }
 add_action( 'after_setup_theme', 'jasanika_register_menus' );

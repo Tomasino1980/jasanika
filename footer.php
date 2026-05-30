@@ -23,7 +23,16 @@
 
 				<div class="footer-widget">
 					<h3 class="footer-widget__title"><?php esc_html_e( 'Navigation', 'jasanika' ); ?></h3>
-					<?php /* Footer navigation will be implemented in M4 - Menu System. */ ?>
+					<?php
+					wp_nav_menu(
+						array(
+							'theme_location' => 'footer',
+							'menu_class'     => 'footer-nav__list',
+							'container'      => false,
+							'fallback_cb'    => false,
+						)
+					);
+					?>
 				</div>
 
 				<div class="footer-widget">
