@@ -19,6 +19,8 @@ get_header();
 
 	<?php get_template_part( 'template-parts/components/categories' ); ?>
 
+	<?php get_template_part( 'template-parts/components/cta-section' ); ?>
+
 </main>
 
 <?php
