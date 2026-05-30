@@ -1,1 +1,77 @@
-/* footer.css – Footer layout styles. Implemented in M2 - Layout Foundation. */
+/* footer.css – Footer layout styles. */
+
+.site-footer {
+	background-color: var(--bg-secondary);
+	border-top: var(--glass-border);
+	margin-top: auto;
+	padding-top: var(--space-12);
+	padding-bottom: var(--space-8);
+}
+
+/* Widgets area */
+.site-footer__widgets {
+	padding-bottom: var(--space-12);
+	border-bottom: var(--glass-border);
+	margin-bottom: var(--space-8);
+}
+
+.site-footer__widgets-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+	.site-footer__widgets-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.site-footer__widgets-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* Individual widget */
+.footer-widget__title {
+	font-family: var(--font-heading);
+	font-size: var(--text-md);
+	font-weight: 600;
+	color: var(--primary);
+	margin-bottom: var(--space-4);
+}
+
+.footer-widget__text {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	line-height: var(--leading-loose);
+}
+
+/* Info bar */
+.site-footer__info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-3);
+	text-align: center;
+}
+
+.site-footer__copyright,
+.site-footer__credits {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+}
+
+.site-footer__credits {
+	font-size: var(--text-xs);
+	opacity: 0.6;
+}
+
+@media (min-width: 640px) {
+	.site-footer__info {
+		flex-direction: row;
+		justify-content: space-between;
+		text-align: left;
+	}
+}

@@ -1,1 +1,47 @@
-/* forms.css – Form component styles. Implemented in M2 - Layout Foundation. */
+/* forms.css – Form component styles. */
+
+.form-group {
+	margin-bottom: var(--space-5);
+}
+
+.form-label {
+	display: block;
+	font-size: var(--text-sm);
+	font-weight: 500;
+	color: var(--text-muted);
+	margin-bottom: var(--space-2);
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+	display: block;
+	width: 100%;
+	padding: var(--space-3) var(--space-4);
+	background-color: var(--bg-secondary);
+	border: 1px solid var(--border-soft);
+	border-radius: var(--radius-md);
+	color: var(--text-main);
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	line-height: var(--leading-normal);
+	transition: border-color var(--transition-fast);
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+	outline: none;
+	border-color: var(--primary);
+}
+
+.form-input::placeholder,
+.form-textarea::placeholder {
+	color: var(--text-muted);
+	opacity: 0.6;
+}
+
+.form-textarea {
+	resize: vertical;
+	min-height: 120px;
+}

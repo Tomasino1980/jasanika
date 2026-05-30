@@ -1,1 +1,95 @@
-/* reset.css – CSS reset and base styles. Implemented in M2 - Layout Foundation. */
+/* reset.css – CSS reset and base styles. */
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin:  0;
+	padding: 0;
+}
+
+html {
+	font-size: 16px;
+	scroll-behavior: smooth;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	background-color: var(--bg-main);
+	color: var(--text-main);
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	line-height: var(--leading-normal);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+	display: block;
+	max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+	font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	overflow-wrap: break-word;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+a {
+	color: var(--primary);
+	text-decoration: none;
+}
+
+a:hover {
+	color: var(--primary-hover);
+}
+
+button {
+	cursor: pointer;
+	border: none;
+	background: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/* WordPress alignment classes */
+.alignleft   { float: left;  margin-right: var(--space-6); }
+.alignright  { float: right; margin-left:  var(--space-6); }
+.aligncenter { display: block; margin: 0 auto; }
+.alignwide   { width: 100%; }
+.alignfull   { width: 100vw; margin-left: calc(50% - 50vw); }
+
+/* Screen reader text */
+.screen-reader-text {
+	clip: rect(1px, 1px, 1px, 1px);
+	position: absolute;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	white-space: nowrap;
+}

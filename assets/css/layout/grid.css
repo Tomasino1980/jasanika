@@ -1,1 +1,48 @@
-/* grid.css – Grid system. Implemented in M2 - Layout Foundation. */
+/* grid.css – Grid system. */
+
+.grid {
+	display: grid;
+	gap: var(--space-6);
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Auto-responsive grids */
+.grid-auto-sm { grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+.grid-auto-md { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.grid-auto-lg { grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); }
+
+/* Gap utilities */
+.gap-2  { gap: var(--space-2);  }
+.gap-4  { gap: var(--space-4);  }
+.gap-6  { gap: var(--space-6);  }
+.gap-8  { gap: var(--space-8);  }
+.gap-12 { gap: var(--space-12); }
+
+/* Flex utilities */
+.flex            { display: flex; }
+.flex-col        { flex-direction: column; }
+.flex-wrap       { flex-wrap: wrap; }
+.items-center    { align-items: center; }
+.items-start     { align-items: flex-start; }
+.justify-between { justify-content: space-between; }
+.justify-center  { justify-content: center; }
+.justify-end     { justify-content: flex-end; }
+
+/* Responsive grid overrides */
+@media (min-width: 640px) {
+	.sm\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 768px) {
+	.md\:grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+	.md\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1024px) {
+	.lg\:grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+	.lg\:grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+}

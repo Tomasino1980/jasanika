@@ -1,1 +1,34 @@
-/* containers.css – Container styles. Implemented in M2 - Layout Foundation. */
+/* containers.css – Container styles. */
+
+.container {
+	width: 100%;
+	max-width: var(--container-xl);
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: var(--space-4);
+	padding-left: var(--space-4);
+}
+
+.container-sm   { max-width: var(--container-sm);  }
+.container-md   { max-width: var(--container-md);  }
+.container-lg   { max-width: var(--container-lg);  }
+.container-wide { max-width: var(--container-2xl); }
+
+@media (min-width: 640px) {
+	.container {
+		padding-right: var(--space-6);
+		padding-left:  var(--space-6);
+	}
+}
+
+@media (min-width: 1024px) {
+	.container {
+		padding-right: var(--space-8);
+		padding-left:  var(--space-8);
+	}
+}
+
+/* Site main – grows to fill available space */
+.site-main {
+	flex: 1;
+}

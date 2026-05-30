@@ -1,1 +1,69 @@
-/* typography.css – Typography styles. Implemented in M2 - Layout Foundation. */
+/* typography.css – Typography styles. */
+
+/* Headings – Playfair Display */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: var(--font-heading);
+	font-weight: 700;
+	line-height: var(--leading-tight);
+	color: var(--text-main);
+}
+
+/* Mobile-first heading scale */
+h1 { font-size: var(--text-2xl); }
+h2 { font-size: var(--text-xl);  }
+h3 { font-size: var(--text-lg);  }
+h4 { font-size: var(--text-md);  }
+h5 { font-size: var(--text-base); }
+h6 { font-size: var(--text-sm);  }
+
+@media (min-width: 768px) {
+	h1 { font-size: var(--text-3xl); }
+	h2 { font-size: var(--text-2xl); }
+	h3 { font-size: var(--text-xl);  }
+	h4 { font-size: var(--text-lg);  }
+	h5 { font-size: var(--text-md);  }
+	h6 { font-size: var(--text-base); }
+}
+
+@media (min-width: 1024px) {
+	h1 { font-size: var(--text-4xl); }
+	h2 { font-size: var(--text-3xl); }
+	h3 { font-size: var(--text-2xl); }
+}
+
+/* Body text – Inter */
+p {
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	line-height: var(--leading-normal);
+	color: var(--text-main);
+	margin-bottom: var(--space-4);
+}
+
+p:last-child {
+	margin-bottom: 0;
+}
+
+/* Utility classes */
+.text-muted    { color: var(--text-muted); }
+
+.text-xs   { font-size: var(--text-xs);   }
+.text-sm   { font-size: var(--text-sm);   }
+.text-base { font-size: var(--text-base); }
+.text-md   { font-size: var(--text-md);   }
+.text-lg   { font-size: var(--text-lg);   }
+.text-xl   { font-size: var(--text-xl);   }
+
+.font-normal   { font-weight: 400; }
+.font-medium   { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold     { font-weight: 700; }
+
+.text-left   { text-align: left;   }
+.text-center { text-align: center; }
+.text-right  { text-align: right;  }
