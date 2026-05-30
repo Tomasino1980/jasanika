@@ -175,8 +175,9 @@ Historii projektu vytváří pouze vývojář.
 ## Theme Version
 
 At the end of every completed milestone, update the Version field in style.css.
+Verze musí vždy odpovídat nejnovějšímu dokončenému milníku.
+Verze musí být ve formátu Major.Milestone.Patch, kde:
 
-Examples:
 
 M0 → Version: 0.0.0
 M1 → Version: 0.1.0
@@ -191,8 +192,6 @@ M9 → Version: 0.9.0
 M10 → Version: 0.10.0
 M11 → Version: 0.11.0
 M12 → Version: 0.12.0
-
-etc...
 
 The version number must always match the latest completed milestone.
 
@@ -219,7 +218,6 @@ Before reporting milestone completion:
 
 git status
 
-Po dokončení proveď commit s těmito parametry:
-    git commit -m "M<milestone> - <milestone name>"
+Po dokončení proveď commit s názvem Milníku (například "M1 - Theme Skeleton").
 
 Only after successful commit may the milestone be considered completed.
