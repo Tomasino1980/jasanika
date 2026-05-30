@@ -184,3 +184,22 @@ M2 → Version: 0.2.0
 M3 → Version: 0.3.0
 
 The version number must always match the latest completed milestone.
+
+## Git Workflow Rules
+
+For every milestone:
+
+1. Create all changes only inside the current agent branch/worktree.
+2. Never modify the main branch directly.
+3. Commit all completed work into the current agent branch.
+4. Do not ask the user to manually copy files between branches.
+5. Do not create additional branches unless explicitly requested.
+6. The implementation branch must always start from the current main branch state.
+7. At milestone completion, provide a summary of:
+
+   * Modified files
+   * Created files
+   * Acceptance criteria
+   * Suggested commit message
+
+Main branch updates are performed only after user review and approval.
