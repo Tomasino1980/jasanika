@@ -203,3 +203,13 @@ For every milestone:
    * Suggested commit message
 
 Main branch updates are performed only after user review and approval.
+
+Before reporting milestone completion:
+
+git status
+
+If changes are present:
+    git add .
+    git commit -m "M<milestone> - <milestone name>"
+
+Only after successful commit may the milestone be considered completed.
