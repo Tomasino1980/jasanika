@@ -17,6 +17,8 @@ get_header();
 
 	<?php get_template_part( 'template-parts/components/latest-posts' ); ?>
 
+	<?php get_template_part( 'template-parts/components/categories' ); ?>
+
 </main>
 
 <?php

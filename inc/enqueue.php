@@ -133,6 +133,13 @@ function jasanika_enqueue_assets() {
 			array( 'jasanika-variables', 'jasanika-buttons' ),
 			$ver
 		);
+
+		wp_enqueue_style(
+			'jasanika-categories',
+			$uri . '/assets/css/components/categories.css',
+			array( 'jasanika-variables' ),
+			$ver
+		);
 	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_assets' );
