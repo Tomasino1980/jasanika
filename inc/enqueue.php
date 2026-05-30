@@ -111,6 +111,16 @@ function jasanika_enqueue_assets() {
 		$ver
 	);
 
+	// Single post CSS – single posts only.
+	if ( is_single() ) {
+		wp_enqueue_style(
+			'jasanika-single-post',
+			$uri . '/assets/css/components/single-post.css',
+			array( 'jasanika-variables', 'jasanika-buttons' ),
+			$ver
+		);
+	}
+
 	// Archive CSS – archive, category and tag pages only.
 	if ( is_archive() || is_category() || is_tag() ) {
 		wp_enqueue_style(
