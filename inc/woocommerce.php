@@ -70,6 +70,16 @@ function jasanika_enqueue_woocommerce_styles() {
 		);
 	}
 
+	// Product categories stylesheet – product category pages only.
+	if ( is_product_category() ) {
+		wp_enqueue_style(
+			'jasanika-product-categories',
+			get_template_directory_uri() . '/assets/css/components/product-categories.css',
+			array( 'jasanika-product-archive' ),
+			$ver
+		);
+	}
+
 	// Single product stylesheet – product pages only.
 	if ( is_product() ) {
 		wp_enqueue_style(

@@ -1,0 +1,148 @@
+/* product-categories.css – WooCommerce product category page styles. */
+
+/* ------------------------------------------------------------------ */
+/* Category header                                                      */
+/* ------------------------------------------------------------------ */
+
+.product-cat__header {
+	margin-bottom: var(--space-10);
+}
+
+.product-cat__title {
+	font-family: var(--font-heading);
+	font-size: var(--text-3xl);
+	color: var(--text-main);
+	margin-bottom: var(--space-4);
+	line-height: var(--leading-tight);
+}
+
+.product-cat__description {
+	color: var(--text-muted);
+	font-size: var(--text-base);
+	line-height: var(--leading-normal);
+	max-width: 680px;
+	margin-bottom: var(--space-4);
+}
+
+.product-cat__count {
+	color: var(--text-muted);
+	font-size: var(--text-sm);
+	margin: 0;
+}
+
+.product-cat__count-number {
+	color: var(--primary);
+	font-weight: 600;
+}
+
+/* ------------------------------------------------------------------ */
+/* Child categories – Mobile first (1 column)                          */
+/* ------------------------------------------------------------------ */
+
+.product-cat__children {
+	margin-bottom: var(--space-10);
+}
+
+.product-cat__children-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-4);
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+/* Tablet – 2 columns */
+@media ( min-width: 768px ) {
+	.product-cat__children-grid {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+}
+
+/* Desktop – 4 columns */
+@media ( min-width: 1024px ) {
+	.product-cat__children-grid {
+		grid-template-columns: repeat( 4, 1fr );
+	}
+}
+
+/* ------------------------------------------------------------------ */
+/* Child category card                                                  */
+/* ------------------------------------------------------------------ */
+
+.product-cat__child-link {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-1);
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-md);
+	padding: var(--space-5) var(--space-4);
+	text-decoration: none;
+	transition:
+		border-color var(--transition-normal),
+		transform var(--transition-normal),
+		box-shadow var(--transition-normal);
+}
+
+.product-cat__child-link:hover {
+	border-color: var(--primary);
+	transform: translateY( -2px );
+	box-shadow: var(--shadow-md);
+}
+
+.product-cat__child-link:focus-visible {
+	outline: 2px solid var(--primary);
+	outline-offset: 2px;
+}
+
+.product-cat__child-name {
+	font-family: var(--font-heading);
+	font-size: var(--text-lg);
+	color: var(--text-main);
+	line-height: var(--leading-tight);
+	transition: color var(--transition-fast);
+}
+
+.product-cat__child-link:hover .product-cat__child-name {
+	color: var(--primary);
+}
+
+.product-cat__child-count {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+}
+
+/* ------------------------------------------------------------------ */
+/* Empty state                                                          */
+/* ------------------------------------------------------------------ */
+
+.product-cat__empty {
+	padding: var(--space-16) var(--space-4);
+	text-align: center;
+}
+
+.product-cat__empty-text {
+	color: var(--text-muted);
+	font-size: var(--text-md);
+	margin-bottom: var(--space-8);
+}
+
+.product-cat__empty-btn {
+	display: inline-block;
+	background: var(--primary);
+	color: var(--bg-main);
+	border: none;
+	border-radius: var(--radius-sm);
+	padding: var(--space-3) var(--space-8);
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	font-weight: 600;
+	text-decoration: none;
+	transition: background var(--transition-fast);
+}
+
+.product-cat__empty-btn:hover {
+	background: var(--primary-hover);
+	color: var(--bg-main);
+}
