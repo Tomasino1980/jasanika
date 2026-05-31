@@ -181,6 +181,16 @@ function jasanika_enqueue_assets() {
 		);
 	}
 
+	// Author archive CSS – author pages only.
+	if ( is_author() ) {
+		wp_enqueue_style(
+			'jasanika-author-archive',
+			$uri . '/assets/css/components/author-archive.css',
+			array( 'jasanika-archive', 'jasanika-buttons' ),
+			$ver
+		);
+	}
+
 	// Hero slider – front page only.
 	if ( is_front_page() ) {
 		wp_enqueue_style(
