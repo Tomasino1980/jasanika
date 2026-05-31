@@ -11,6 +11,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+require_once get_template_directory() . '/inc/admin/dashboard-widgets.php';
 require_once get_template_directory() . '/inc/admin/pages/dashboard.php';
 require_once get_template_directory() . '/inc/admin/pages/menu-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/slider-manager.php';

@@ -1,0 +1,439 @@
+/**
+ * Jasanika Admin – Dashboard Styles
+ *
+ * Styles for the Jasanika → Dashboard admin page.
+ * Loaded exclusively on the Dashboard page to avoid global admin pollution.
+ */
+
+/* ---------------------------------------------------------------------------
+   Layout wrapper
+--------------------------------------------------------------------------- */
+
+.jasanika-dashboard {
+	max-width: 1400px;
+	padding: 12px 0 40px;
+	color: #f5f2f7;
+}
+
+.jasanika-dashboard__header {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin-bottom: 28px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.jasanika-dashboard__title {
+	margin: 0 !important;
+	font-size: 1.6rem !important;
+	color: #f5f2f7 !important;
+	line-height: 1.2 !important;
+}
+
+.jasanika-dashboard__subtitle {
+	margin: 4px 0 0 !important;
+	color: #b9b1c4;
+	font-size: 0.9rem;
+}
+
+.jasanika-dashboard__icon {
+	font-size: 2rem;
+	color: #b78acb;
+}
+
+/* ---------------------------------------------------------------------------
+   Sections
+--------------------------------------------------------------------------- */
+
+.jasanika-dashboard__section {
+	margin-bottom: 28px;
+}
+
+.jasanika-dashboard__section-title {
+	font-size: 0.8rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #b9b1c4;
+	margin: 0 0 12px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ---------------------------------------------------------------------------
+   Statistics cards row
+--------------------------------------------------------------------------- */
+
+.jasanika-stats-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 16px;
+}
+
+.jasanika-stat-card {
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	padding: 20px 22px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	transition: border-color 0.2s;
+}
+
+.jasanika-stat-card:hover {
+	border-color: rgba(183, 138, 203, 0.3);
+}
+
+.jasanika-stat-card__icon {
+	font-size: 1.8rem;
+	color: #b78acb;
+	flex-shrink: 0;
+}
+
+.jasanika-stat-card__body {
+	min-width: 0;
+}
+
+.jasanika-stat-card__number {
+	font-size: 2rem;
+	font-weight: 700;
+	color: #f5f2f7;
+	line-height: 1;
+	margin-bottom: 4px;
+}
+
+.jasanika-stat-card__label {
+	font-size: 0.8rem;
+	color: #b9b1c4;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+}
+
+/* ---------------------------------------------------------------------------
+   Activity row: recent posts + recent orders
+--------------------------------------------------------------------------- */
+
+.jasanika-activity-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+
+/* ---------------------------------------------------------------------------
+   Panel card (shared by activity + status)
+--------------------------------------------------------------------------- */
+
+.jasanika-panel {
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.jasanika-panel__header {
+	padding: 14px 18px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.jasanika-panel__title {
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: #f5f2f7;
+	margin: 0;
+}
+
+.jasanika-panel__icon {
+	color: #b78acb;
+	font-size: 1rem;
+}
+
+.jasanika-panel__body {
+	padding: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Activity list (posts / orders)
+--------------------------------------------------------------------------- */
+
+.jasanika-activity-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.jasanika-activity-list__item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 18px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	gap: 12px;
+}
+
+.jasanika-activity-list__item:last-child {
+	border-bottom: none;
+}
+
+.jasanika-activity-list__primary {
+	font-size: 0.85rem;
+	color: #f5f2f7;
+	font-weight: 500;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	max-width: 200px;
+}
+
+.jasanika-activity-list__primary a {
+	color: #b78acb;
+	text-decoration: none;
+}
+
+.jasanika-activity-list__primary a:hover {
+	color: #c79cda;
+	text-decoration: underline;
+}
+
+.jasanika-activity-list__meta {
+	font-size: 0.78rem;
+	color: #b9b1c4;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.jasanika-activity-list__empty {
+	padding: 20px 18px;
+	font-size: 0.85rem;
+	color: #b9b1c4;
+	text-align: center;
+}
+
+/* ---------------------------------------------------------------------------
+   Order status badges
+--------------------------------------------------------------------------- */
+
+.jasanika-order-status {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 4px;
+	font-size: 0.72rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	background: rgba(255, 255, 255, 0.08);
+	color: #b9b1c4;
+}
+
+.jasanika-order-status--processing {
+	background: rgba(183, 138, 203, 0.2);
+	color: #b78acb;
+}
+
+.jasanika-order-status--completed {
+	background: rgba(80, 200, 120, 0.15);
+	color: #6ed29a;
+}
+
+.jasanika-order-status--pending {
+	background: rgba(241, 201, 93, 0.15);
+	color: #f1c95d;
+}
+
+.jasanika-order-status--cancelled,
+.jasanika-order-status--refunded,
+.jasanika-order-status--failed {
+	background: rgba(220, 80, 80, 0.15);
+	color: #e07070;
+}
+
+.jasanika-order-status--on-hold {
+	background: rgba(176, 138, 103, 0.2);
+	color: #b08a67;
+}
+
+/* ---------------------------------------------------------------------------
+   System status table
+--------------------------------------------------------------------------- */
+
+.jasanika-status-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.jasanika-status-table tr {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.jasanika-status-table tr:last-child {
+	border-bottom: none;
+}
+
+.jasanika-status-table td {
+	padding: 11px 18px;
+	font-size: 0.85rem;
+}
+
+.jasanika-status-table__label {
+	color: #b9b1c4;
+	width: 45%;
+}
+
+.jasanika-status-table__value {
+	color: #f5f2f7;
+	font-weight: 500;
+}
+
+/* ---------------------------------------------------------------------------
+   Configuration status grid
+--------------------------------------------------------------------------- */
+
+.jasanika-config-grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 12px;
+}
+
+.jasanika-config-card {
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	padding: 14px 16px;
+	text-align: center;
+	transition: border-color 0.2s;
+}
+
+.jasanika-config-card--ok {
+	border-color: rgba(80, 200, 120, 0.2);
+}
+
+.jasanika-config-card--warn {
+	border-color: rgba(241, 201, 93, 0.2);
+}
+
+.jasanika-config-card__status {
+	font-size: 1.2rem;
+	line-height: 1;
+	margin-bottom: 6px;
+}
+
+.jasanika-config-card--ok .jasanika-config-card__status {
+	color: #6ed29a;
+}
+
+.jasanika-config-card--warn .jasanika-config-card__status {
+	color: #f1c95d;
+}
+
+.jasanika-config-card__label {
+	font-size: 0.78rem;
+	color: #b9b1c4;
+	font-weight: 500;
+	display: block;
+	margin-bottom: 4px;
+}
+
+.jasanika-config-card__note {
+	font-size: 0.72rem;
+}
+
+.jasanika-config-card--ok .jasanika-config-card__note {
+	color: #6ed29a;
+}
+
+.jasanika-config-card--warn .jasanika-config-card__note {
+	color: #f1c95d;
+}
+
+/* ---------------------------------------------------------------------------
+   Quick actions
+--------------------------------------------------------------------------- */
+
+.jasanika-quick-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.jasanika-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 9px 18px;
+	border-radius: 6px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+	transition: background 0.2s, color 0.2s;
+	line-height: 1;
+}
+
+.jasanika-btn--primary {
+	background: #b78acb;
+	color: #1b1a1f;
+}
+
+.jasanika-btn--primary:hover {
+	background: #c79cda;
+	color: #1b1a1f;
+}
+
+.jasanika-btn--secondary {
+	background: rgba(255, 255, 255, 0.06);
+	color: #f5f2f7;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.jasanika-btn--secondary:hover {
+	background: rgba(183, 138, 203, 0.15);
+	color: #b78acb;
+	border-color: rgba(183, 138, 203, 0.3);
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive – Tablet (≤1200px)
+--------------------------------------------------------------------------- */
+
+@media screen and (max-width: 1200px) {
+	.jasanika-stats-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.jasanika-config-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive – Mobile (≤782px)
+--------------------------------------------------------------------------- */
+
+@media screen and (max-width: 782px) {
+	.jasanika-stats-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.jasanika-activity-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.jasanika-config-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.jasanika-activity-list__primary {
+		max-width: 140px;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.jasanika-config-grid {
+		grid-template-columns: 1fr;
+	}
+}
