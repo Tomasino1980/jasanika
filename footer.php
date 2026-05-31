@@ -180,6 +180,8 @@
 	</div>
 </footer>
 
+<?php get_template_part( 'template-parts/components/cookie-banner' ); ?>
+
 <?php wp_footer(); ?>
 
 </body>

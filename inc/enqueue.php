@@ -292,6 +292,51 @@ function jasanika_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_assets' );
 
 // ---------------------------------------------------------------------------
+// Cookie Consent Assets
+// ---------------------------------------------------------------------------
+
+/**
+ * Enqueue cookie consent banner CSS and JS when the banner is enabled.
+ * Assets are loaded only when jasanika_cookie_consent_is_banner_enabled() is true,
+ * keeping the front-end free from unnecessary scripts.
+ */
+function jasanika_enqueue_cookie_consent_assets(): void {
+	if ( ! jasanika_cookie_consent_is_banner_enabled() ) {
+		return;
+	}
+
+	$ver = wp_get_theme()->get( 'Version' );
+	$uri = get_template_directory_uri();
+
+	wp_enqueue_style(
+		'jasanika-cookie-banner',
+		$uri . '/assets/css/components/cookie-banner.css',
+		array( 'jasanika-variables' ),
+		$ver
+	);
+
+	wp_enqueue_script(
+		'jasanika-cookie-consent',
+		$uri . '/assets/js/cookie-consent.js',
+		array(),
+		$ver,
+		true
+	);
+
+	$settings = jasanika_cookie_consent_get_settings();
+
+	wp_localize_script(
+		'jasanika-cookie-consent',
+		'jasanikaCookieConsent',
+		array(
+			'expiration' => (int) $settings['consent_expiration'],
+			'version'    => '1',
+		)
+	);
+}
+add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_cookie_consent_assets' );
+
+// ---------------------------------------------------------------------------
 // Brand CSS Variables
 // ---------------------------------------------------------------------------
 
