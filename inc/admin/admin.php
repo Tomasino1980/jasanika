@@ -18,6 +18,7 @@ require_once get_template_directory() . '/inc/admin/pages/slider-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/testimonials-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/newsletter-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/theme-settings.php';
+require_once get_template_directory() . '/inc/admin/pages/seo-manager.php';
 
 add_action( 'admin_menu', 'jasanika_register_admin_menu' );
 
@@ -95,5 +96,15 @@ function jasanika_register_admin_menu(): void {
 		'manage_options',
 		'jasanika-theme-settings',
 		'jasanika_admin_page_theme_settings'
+	);
+
+	// SEO Manager sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'SEO Manager', 'jasanika' ),
+		__( 'SEO Manager', 'jasanika' ),
+		'manage_options',
+		'jasanika-seo-manager',
+		'jasanika_admin_page_seo_manager'
 	);
 }

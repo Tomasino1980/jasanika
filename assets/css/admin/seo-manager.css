@@ -1,0 +1,359 @@
+/**
+ * Jasanika Admin – SEO Manager Styles
+ *
+ * Styles for the Jasanika → SEO Manager admin page and the SEO meta box.
+ * Uses the Jasanika admin design system (dark theme, purple accents).
+ */
+
+/* ---------------------------------------------------------------------------
+   Page Layout
+--------------------------------------------------------------------------- */
+
+.jasanika-seo {
+	max-width: 1000px;
+	padding: 12px 0 40px;
+	color: #f5f2f7;
+}
+
+/* ---------------------------------------------------------------------------
+   Header
+--------------------------------------------------------------------------- */
+
+.jasanika-seo__header {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 24px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.jasanika-seo__header-icon {
+	font-size: 2rem;
+	color: #b78acb;
+}
+
+.jasanika-seo__title {
+	margin: 0 !important;
+	font-size: 1.6rem !important;
+	color: #f5f2f7 !important;
+	line-height: 1.2 !important;
+}
+
+.jasanika-seo__subtitle {
+	margin: 4px 0 0 !important;
+	color: #b9b1c4;
+	font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Sitemap Notice
+--------------------------------------------------------------------------- */
+
+.jasanika-seo__sitemap-notice {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: rgba(183, 138, 203, 0.12);
+	border: 1px solid rgba(183, 138, 203, 0.3);
+	border-radius: 6px;
+	padding: 10px 16px;
+	margin-bottom: 24px;
+	color: #f5f2f7;
+	font-size: 0.9rem;
+}
+
+.jasanika-seo__sitemap-notice .dashicons {
+	color: #b78acb;
+	font-size: 1rem;
+	width: 16px;
+	height: 16px;
+}
+
+.jasanika-seo__sitemap-notice a {
+	color: #b78acb;
+	text-decoration: none;
+}
+
+.jasanika-seo__sitemap-notice a:hover {
+	color: #c79cda;
+	text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------------------
+   Settings Form
+--------------------------------------------------------------------------- */
+
+.jasanika-seo__form .form-table {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	margin-bottom: 8px;
+}
+
+.jasanika-seo__form .form-table th {
+	color: #f5f2f7;
+	font-weight: 600;
+	font-size: 0.875rem;
+	padding: 16px 20px;
+	width: 220px;
+	vertical-align: top;
+}
+
+.jasanika-seo__form .form-table td {
+	padding: 14px 20px;
+	vertical-align: top;
+}
+
+.jasanika-seo__form h2,
+.jasanika-seo__form .wp-heading-inline {
+	color: #f5f2f7 !important;
+	font-size: 1rem !important;
+	font-weight: 600 !important;
+	margin: 28px 0 4px !important;
+	padding: 0 !important;
+	border: none !important;
+}
+
+/* Section headings rendered by do_settings_sections */
+.jasanika-seo__form > h2:first-of-type {
+	margin-top: 0 !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Section Description
+--------------------------------------------------------------------------- */
+
+.jasanika-seo__section-desc {
+	color: #b9b1c4;
+	font-size: 0.85rem;
+	margin: 0 0 8px;
+}
+
+/* ---------------------------------------------------------------------------
+   Form Controls
+--------------------------------------------------------------------------- */
+
+.jasanika-seo__input,
+.jasanika-seo__textarea {
+	background: rgba(255, 255, 255, 0.06) !important;
+	border: 1px solid rgba(255, 255, 255, 0.15) !important;
+	border-radius: 4px !important;
+	color: #f5f2f7 !important;
+	padding: 8px 10px !important;
+	font-size: 0.875rem !important;
+	transition: border-color 0.2s ease;
+}
+
+.jasanika-seo__input:focus,
+.jasanika-seo__textarea:focus {
+	border-color: #b78acb !important;
+	outline: none !important;
+	box-shadow: 0 0 0 2px rgba(183, 138, 203, 0.2) !important;
+}
+
+.jasanika-seo__input::placeholder,
+.jasanika-seo__textarea::placeholder {
+	color: rgba(185, 177, 196, 0.5) !important;
+}
+
+.jasanika-seo__textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+/* ---------------------------------------------------------------------------
+   Toggle (Checkbox)
+--------------------------------------------------------------------------- */
+
+.jasanika-seo__toggle {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+}
+
+.jasanika-seo__toggle input[type="checkbox"] {
+	width: 16px;
+	height: 16px;
+	accent-color: #b78acb;
+	cursor: pointer;
+}
+
+.jasanika-seo__toggle-label {
+	color: #f5f2f7;
+	font-size: 0.875rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Hint Text
+--------------------------------------------------------------------------- */
+
+.jasanika-seo__hint {
+	color: #b9b1c4;
+	font-size: 0.8rem;
+	margin: 6px 0 0 !important;
+}
+
+/* ---------------------------------------------------------------------------
+   Media Field
+--------------------------------------------------------------------------- */
+
+.jasanika-seo__media-field {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+.jasanika-seo__media-field .button {
+	background: rgba(183, 138, 203, 0.15) !important;
+	border-color: rgba(183, 138, 203, 0.4) !important;
+	color: #b78acb !important;
+	white-space: nowrap;
+}
+
+.jasanika-seo__media-field .button:hover {
+	background: rgba(183, 138, 203, 0.25) !important;
+	border-color: #b78acb !important;
+}
+
+.jasanika-seo__media-preview {
+	margin-top: 8px;
+}
+
+.jasanika-seo__media-preview img {
+	max-width: 200px;
+	max-height: 120px;
+	border-radius: 4px;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	display: block;
+}
+
+/* ---------------------------------------------------------------------------
+   Submit Button
+--------------------------------------------------------------------------- */
+
+.jasanika-seo__submit.button-primary {
+	background: #b78acb !important;
+	border-color: #b78acb !important;
+	color: #1b1a1f !important;
+	font-weight: 600 !important;
+	padding: 8px 20px !important;
+	height: auto !important;
+	font-size: 0.9rem !important;
+	border-radius: 4px !important;
+	margin-top: 16px !important;
+}
+
+.jasanika-seo__submit.button-primary:hover {
+	background: #c79cda !important;
+	border-color: #c79cda !important;
+}
+
+/* ---------------------------------------------------------------------------
+   SEO Meta Box (post / page / product edit screen)
+--------------------------------------------------------------------------- */
+
+.jasanika-seo-metabox {
+	padding: 4px 0;
+}
+
+.jasanika-seo-metabox__field {
+	margin-bottom: 18px;
+}
+
+.jasanika-seo-metabox__field:last-child {
+	margin-bottom: 4px;
+}
+
+.jasanika-seo-metabox__label {
+	display: block;
+	font-weight: 600;
+	font-size: 0.8rem;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	color: #3c434a;
+	margin-bottom: 6px;
+}
+
+.jasanika-seo-metabox__input,
+.jasanika-seo-metabox__textarea {
+	background: #fff !important;
+	border: 1px solid #dcdcde !important;
+	border-radius: 3px !important;
+	color: #3c434a !important;
+	padding: 6px 8px !important;
+	font-size: 0.875rem !important;
+}
+
+.jasanika-seo-metabox__input:focus,
+.jasanika-seo-metabox__textarea:focus {
+	border-color: #b78acb !important;
+	box-shadow: 0 0 0 1px #b78acb !important;
+	outline: none !important;
+}
+
+.jasanika-seo-metabox__textarea {
+	resize: vertical;
+}
+
+/* ---------------------------------------------------------------------------
+   Score Preview
+--------------------------------------------------------------------------- */
+
+.jasanika-seo-metabox__score {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin-top: 6px;
+	font-size: 0.8rem;
+	color: #787c82;
+}
+
+.jasanika-seo-metabox__score-count {
+	font-weight: 700;
+	color: #3c434a;
+}
+
+.jasanika-seo-metabox__score-badge {
+	display: inline-flex;
+	align-items: center;
+	padding: 2px 8px;
+	border-radius: 10px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.jasanika-seo-metabox__score-badge--neutral {
+	background: rgba(120, 124, 130, 0.15);
+	color: #787c82;
+}
+
+.jasanika-seo-metabox__score-badge--good {
+	background: rgba(0, 163, 42, 0.12);
+	color: #007a1e;
+}
+
+.jasanika-seo-metabox__score-badge--warning {
+	background: rgba(241, 201, 93, 0.2);
+	color: #8a6000;
+}
+
+.jasanika-seo-metabox__score-badge--toolong {
+	background: rgba(200, 60, 60, 0.12);
+	color: #a00;
+}
+
+.jasanika-seo-metabox__score-hint {
+	color: #aaa;
+	font-size: 0.75rem;
+	margin-left: 4px;
+}
+
+.jasanika-seo-metabox__hint {
+	color: #787c82;
+	font-size: 0.8rem;
+	margin: 4px 0 0 !important;
+}
