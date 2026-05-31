@@ -29,13 +29,13 @@ if ( ! empty( $managed_slides ) ) {
 		);
 	}
 } else {
-	// Static fallback placeholder – displayed when no slides are configured.
+	// Fallback: use Theme Settings values (or built-in defaults when empty).
 	$hero_slides = array(
 		array(
-			'heading'     => __( 'Vítejte na Jasanika', 'jasanika' ),
-			'description' => __( 'Ručně tvořený WordPress obchod a blog.', 'jasanika' ),
-			'cta_label'   => __( 'Zjistit více', 'jasanika' ),
-			'cta_url'     => get_permalink( get_option( 'page_for_posts' ) ) ?: home_url( '/' ),
+			'heading'     => jasanika_get_hero_heading(),
+			'description' => jasanika_get_hero_description(),
+			'cta_label'   => jasanika_get_hero_button_text(),
+			'cta_url'     => jasanika_get_hero_button_url(),
 			'image_url'   => get_template_directory_uri() . '/assets/images/hero/hero-placeholder.svg',
 			'image_alt'   => __( 'Jasanika – ručně tvořené dekorace', 'jasanika' ),
 		),

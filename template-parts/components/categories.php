@@ -4,7 +4,12 @@
  * Categories
  *
  * Displays up to 6 post categories ordered by post count on the homepage.
+ * Section title is managed from Jasanika → Theme Settings → Homepage Content.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $categories = get_categories(
 	array(
@@ -23,7 +28,7 @@ if ( empty( $categories ) ) {
 <section class="categories">
 	<div class="categories__container">
 
-		<h2 class="categories__heading"><?php esc_html_e( 'Browse Categories', 'jasanika' ); ?></h2>
+		<h2 class="categories__heading"><?php echo esc_html( jasanika_get_categories_section_title() ); ?></h2>
 
 		<div class="categories__grid">
 

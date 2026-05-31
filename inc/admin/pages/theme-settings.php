@@ -236,6 +236,284 @@ function jasanika_theme_settings_init(): void {
 			'placeholder' => __( 'Handmade with love', 'jasanika' ),
 		)
 	);
+
+	// --- Homepage Content Section --------------------------------------------
+
+	add_settings_section(
+		'jasanika_section_homepage',
+		__( 'Homepage Content', 'jasanika' ),
+		'__return_false',
+		'jasanika-theme-settings'
+	);
+
+	// Hero defaults.
+	add_settings_field(
+		'jasanika_hero_heading',
+		__( 'Hero Heading', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'hero_heading',
+			'placeholder' => __( 'Vítejte na Jasanika', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_hero_description',
+		__( 'Hero Description', 'jasanika' ),
+		'jasanika_settings_field_textarea',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'hero_description',
+			'placeholder' => __( 'Ručně tvořený WordPress obchod a blog.', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_hero_button_text',
+		__( 'Hero Button Text', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'hero_button_text',
+			'placeholder' => __( 'Zjistit více', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_hero_button_url',
+		__( 'Hero Button URL', 'jasanika' ),
+		'jasanika_settings_field_url',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array( 'key' => 'hero_button_url' )
+	);
+
+	// Feature Block 1.
+	add_settings_field(
+		'jasanika_feature_1_title',
+		__( 'Feature Block 1 – Title', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'feature_1_title',
+			'placeholder' => __( 'Handmade Products', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_feature_1_description',
+		__( 'Feature Block 1 – Description', 'jasanika' ),
+		'jasanika_settings_field_textarea',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'feature_1_description',
+			'placeholder' => __( 'Discover custom handmade creations.', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_feature_1_button_text',
+		__( 'Feature Block 1 – Button Text', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'feature_1_button_text',
+			'placeholder' => __( 'Explore', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_feature_1_button_url',
+		__( 'Feature Block 1 – Button URL', 'jasanika' ),
+		'jasanika_settings_field_url',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array( 'key' => 'feature_1_button_url' )
+	);
+
+	// Feature Block 2.
+	add_settings_field(
+		'jasanika_feature_2_title',
+		__( 'Feature Block 2 – Title', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'feature_2_title',
+			'placeholder' => __( 'Blog Articles', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_feature_2_description',
+		__( 'Feature Block 2 – Description', 'jasanika' ),
+		'jasanika_settings_field_textarea',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'feature_2_description',
+			'placeholder' => __( 'Read tutorials and project stories.', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_feature_2_button_text',
+		__( 'Feature Block 2 – Button Text', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'feature_2_button_text',
+			'placeholder' => __( 'Read More', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_feature_2_button_url',
+		__( 'Feature Block 2 – Button URL', 'jasanika' ),
+		'jasanika_settings_field_url',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array( 'key' => 'feature_2_button_url' )
+	);
+
+	// Feature Block 3.
+	add_settings_field(
+		'jasanika_feature_3_title',
+		__( 'Feature Block 3 – Title', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'feature_3_title',
+			'placeholder' => __( 'Custom Orders', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_feature_3_description',
+		__( 'Feature Block 3 – Description', 'jasanika' ),
+		'jasanika_settings_field_textarea',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'feature_3_description',
+			'placeholder' => __( 'Request personalized products.', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_feature_3_button_text',
+		__( 'Feature Block 3 – Button Text', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'feature_3_button_text',
+			'placeholder' => __( 'Get in Touch', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_feature_3_button_url',
+		__( 'Feature Block 3 – Button URL', 'jasanika' ),
+		'jasanika_settings_field_url',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array( 'key' => 'feature_3_button_url' )
+	);
+
+	// CTA Section.
+	add_settings_field(
+		'jasanika_cta_title',
+		__( 'CTA Heading', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'cta_title',
+			'placeholder' => __( 'Máte vlastní nápad?', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_cta_description',
+		__( 'CTA Description', 'jasanika' ),
+		'jasanika_settings_field_textarea',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'cta_description',
+			'placeholder' => __( 'Vyrábíme zakázkové výrobky podle vašich představ. Kontaktujte nás a společně najdeme řešení.', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_cta_button_text',
+		__( 'CTA Button Text', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'cta_button_text',
+			'placeholder' => __( 'Kontaktujte nás', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_cta_button_url',
+		__( 'CTA Button URL', 'jasanika' ),
+		'jasanika_settings_field_url',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array( 'key' => 'cta_button_url' )
+	);
+
+	// Categories section.
+	add_settings_field(
+		'jasanika_categories_section_title',
+		__( 'Categories Section Title', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'categories_section_title',
+			'placeholder' => __( 'Procházet kategorie', 'jasanika' ),
+		)
+	);
+
+	// Latest posts section.
+	add_settings_field(
+		'jasanika_latest_posts_section_title',
+		__( 'Latest Posts Section Title', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key'         => 'latest_posts_section_title',
+			'placeholder' => __( 'Nejnovější články', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_latest_posts_count',
+		__( 'Number of Posts', 'jasanika' ),
+		'jasanika_settings_field_number',
+		'jasanika-theme-settings',
+		'jasanika_section_homepage',
+		array(
+			'key' => 'latest_posts_count',
+			'min' => 1,
+			'max' => 12,
+		)
+	);
 }
 
 // ---------------------------------------------------------------------------
@@ -277,6 +555,44 @@ function jasanika_sanitize_settings( mixed $input ): array {
 	// Footer.
 	$sanitized['copyright_text'] = sanitize_text_field( $input['copyright_text'] ?? '' );
 	$sanitized['footer_note']    = sanitize_text_field( $input['footer_note']    ?? '' );
+
+	// Homepage – Hero.
+	$sanitized['hero_heading']     = sanitize_text_field( $input['hero_heading']     ?? '' );
+	$sanitized['hero_description'] = sanitize_textarea_field( $input['hero_description'] ?? '' );
+	$sanitized['hero_button_text'] = sanitize_text_field( $input['hero_button_text'] ?? '' );
+	$sanitized['hero_button_url']  = esc_url_raw( $input['hero_button_url']  ?? '' );
+
+	// Homepage – Feature Block 1.
+	$sanitized['feature_1_title']       = sanitize_text_field( $input['feature_1_title']       ?? '' );
+	$sanitized['feature_1_description'] = sanitize_textarea_field( $input['feature_1_description'] ?? '' );
+	$sanitized['feature_1_button_text'] = sanitize_text_field( $input['feature_1_button_text'] ?? '' );
+	$sanitized['feature_1_button_url']  = esc_url_raw( $input['feature_1_button_url']  ?? '' );
+
+	// Homepage – Feature Block 2.
+	$sanitized['feature_2_title']       = sanitize_text_field( $input['feature_2_title']       ?? '' );
+	$sanitized['feature_2_description'] = sanitize_textarea_field( $input['feature_2_description'] ?? '' );
+	$sanitized['feature_2_button_text'] = sanitize_text_field( $input['feature_2_button_text'] ?? '' );
+	$sanitized['feature_2_button_url']  = esc_url_raw( $input['feature_2_button_url']  ?? '' );
+
+	// Homepage – Feature Block 3.
+	$sanitized['feature_3_title']       = sanitize_text_field( $input['feature_3_title']       ?? '' );
+	$sanitized['feature_3_description'] = sanitize_textarea_field( $input['feature_3_description'] ?? '' );
+	$sanitized['feature_3_button_text'] = sanitize_text_field( $input['feature_3_button_text'] ?? '' );
+	$sanitized['feature_3_button_url']  = esc_url_raw( $input['feature_3_button_url']  ?? '' );
+
+	// Homepage – CTA.
+	$sanitized['cta_title']       = sanitize_text_field( $input['cta_title']       ?? '' );
+	$sanitized['cta_description'] = sanitize_textarea_field( $input['cta_description'] ?? '' );
+	$sanitized['cta_button_text'] = sanitize_text_field( $input['cta_button_text'] ?? '' );
+	$sanitized['cta_button_url']  = esc_url_raw( $input['cta_button_url']  ?? '' );
+
+	// Homepage – Categories.
+	$sanitized['categories_section_title'] = sanitize_text_field( $input['categories_section_title'] ?? '' );
+
+	// Homepage – Latest Posts.
+	$sanitized['latest_posts_section_title'] = sanitize_text_field( $input['latest_posts_section_title'] ?? '' );
+	$latest_posts_count                      = absint( $input['latest_posts_count'] ?? 3 );
+	$sanitized['latest_posts_count']         = min( max( $latest_posts_count, 1 ), 12 );
 
 	return $sanitized;
 }
@@ -385,6 +701,46 @@ function jasanika_settings_field_media( array $args ): void {
 // ---------------------------------------------------------------------------
 // Page Render
 // ---------------------------------------------------------------------------
+
+/**
+ * Render a textarea field.
+ *
+ * @param array $args Field arguments: key, placeholder (optional).
+ */
+function jasanika_settings_field_textarea( array $args ): void {
+	$options     = get_option( 'jasanika_settings', array() );
+	$value       = $options[ $args['key'] ] ?? '';
+	$placeholder = $args['placeholder'] ?? '';
+
+	printf(
+		'<textarea id="jasanika_%1$s" name="jasanika_settings[%1$s]" placeholder="%3$s" class="regular-text" rows="3">%2$s</textarea>',
+		esc_attr( $args['key'] ),
+		esc_textarea( $value ),
+		esc_attr( $placeholder )
+	);
+}
+
+/**
+ * Render a number input field.
+ *
+ * @param array $args Field arguments: key, min (optional), max (optional).
+ */
+function jasanika_settings_field_number( array $args ): void {
+	$options = get_option( 'jasanika_settings', array() );
+	$value   = isset( $options[ $args['key'] ] ) && '' !== $options[ $args['key'] ]
+		? (int) $options[ $args['key'] ]
+		: 3;
+	$min     = isset( $args['min'] ) ? (int) $args['min'] : 1;
+	$max     = isset( $args['max'] ) ? (int) $args['max'] : 12;
+
+	printf(
+		'<input type="number" id="jasanika_%1$s" name="jasanika_settings[%1$s]" value="%2$d" min="%3$d" max="%4$d" class="small-text">',
+		esc_attr( $args['key'] ),
+		$value,
+		$min,
+		$max
+	);
+}
 
 /**
  * Renders the Theme Settings admin page.

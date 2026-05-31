@@ -3,14 +3,19 @@
 /**
  * Latest Posts
  *
- * Displays the latest 3 published blog posts on the homepage.
+ * Displays the latest published blog posts on the homepage.
+ * Section title and post count are managed from Jasanika → Theme Settings → Homepage Content.
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 $latest_posts_query = new WP_Query(
 	array(
 		'post_type'           => 'post',
 		'post_status'         => 'publish',
-		'posts_per_page'      => 3,
+		'posts_per_page'      => jasanika_get_latest_posts_count(),
 		'ignore_sticky_posts' => true,
 	)
 );
@@ -19,7 +24,7 @@ $latest_posts_query = new WP_Query(
 <section class="latest-posts">
 	<div class="latest-posts__container">
 
-		<h2 class="latest-posts__heading"><?php esc_html_e( 'Latest Articles', 'jasanika' ); ?></h2>
+		<h2 class="latest-posts__heading"><?php echo esc_html( jasanika_get_latest_posts_section_title() ); ?></h2>
 
 		<?php if ( $latest_posts_query->have_posts() ) : ?>
 
