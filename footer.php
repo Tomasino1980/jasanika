@@ -14,11 +14,24 @@
 		<div class="site-footer__widgets">
 			<div class="site-footer__widgets-grid">
 
-					<div class="footer-widget">
+					<div class="footer-widget footer-widget--brand">
+					<?php $footer_logo = jasanika_get_footer_logo(); ?>
+					<?php if ( $footer_logo ) : ?>
+						<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="footer-branding__link">
+							<?php echo $footer_logo; // Output is escaped within the helper. ?>
+						</a>
+					<?php endif; ?>
 					<h3 class="footer-widget__title"><?php echo esc_html( jasanika_get_company_name() ); ?></h3>
-					<p class="footer-widget__text">
-						<?php echo esc_html( jasanika_get_company_slogan() ); ?>
-					</p>
+					<?php $company_description = jasanika_get_company_description(); ?>
+					<?php if ( $company_description ) : ?>
+						<p class="footer-widget__text">
+							<?php echo esc_html( $company_description ); ?>
+						</p>
+					<?php else : ?>
+						<p class="footer-widget__text">
+							<?php echo esc_html( jasanika_get_company_slogan() ); ?>
+						</p>
+					<?php endif; ?>
 				</div>
 
 				<div class="footer-widget">

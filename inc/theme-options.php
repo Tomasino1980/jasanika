@@ -39,12 +39,67 @@ function jasanika_get_company_slogan(): string {
 	return (string) jasanika_get_option( 'company_slogan', get_bloginfo( 'description' ) );
 }
 
+function jasanika_get_company_description(): string {
+	return (string) jasanika_get_option( 'company_description', '' );
+}
+
 function jasanika_get_logo_url(): string {
 	return (string) jasanika_get_option( 'logo_url', '' );
 }
 
+function jasanika_get_footer_logo_url(): string {
+	return (string) jasanika_get_option( 'footer_logo_url', '' );
+}
+
 function jasanika_get_favicon_url(): string {
 	return (string) jasanika_get_option( 'favicon_url', '' );
+}
+
+/**
+ * Return the header logo as an HTML img element, or the company name as a span fallback.
+ *
+ * The returned string is already properly escaped.
+ */
+function jasanika_get_logo(): string {
+	$url = jasanika_get_logo_url();
+
+	if ( $url ) {
+		return '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( jasanika_get_company_name() ) . '" class="site-branding__logo">';
+	}
+
+	return '<span class="site-branding__name">' . esc_html( jasanika_get_company_name() ) . '</span>';
+}
+
+/**
+ * Return the footer logo as an HTML img element, or an empty string when none is configured.
+ *
+ * The returned string is already properly escaped.
+ */
+function jasanika_get_footer_logo(): string {
+	$url = jasanika_get_footer_logo_url();
+
+	if ( ! $url ) {
+		return '';
+	}
+
+	return '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( jasanika_get_company_name() ) . '" class="footer-branding__logo">';
+}
+
+/**
+ * Return a validated brand colour HEX value.
+ *
+ * @param string $key     Colour key: primary | secondary | accent.
+ * @param string $default Fallback HEX value when the option is empty or invalid.
+ * @return string Validated #rrggbb value, or $default.
+ */
+function jasanika_get_brand_color( string $key, string $default = '' ): string {
+	$color = (string) jasanika_get_option( 'brand_' . $key, $default );
+
+	if ( $color && preg_match( '/^#[0-9a-fA-F]{6}$/', $color ) ) {
+		return $color;
+	}
+
+	return $default;
 }
 
 // ---------------------------------------------------------------------------

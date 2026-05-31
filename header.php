@@ -22,16 +22,7 @@
 
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-branding">
 
-			<?php $logo_url = jasanika_get_logo_url(); ?>
-			<?php if ( $logo_url ) : ?>
-				<img
-					src="<?php echo esc_url( $logo_url ); ?>"
-					alt="<?php echo esc_attr( jasanika_get_company_name() ); ?>"
-					class="site-branding__logo"
-				>
-			<?php else : ?>
-				<span class="site-branding__name"><?php echo esc_html( jasanika_get_company_name() ); ?></span>
-			<?php endif; ?>
+			<?php echo jasanika_get_logo(); // Output is escaped within the helper. ?>
 
 			<?php $slogan = jasanika_get_company_slogan(); ?>
 			<?php if ( $slogan ) : ?>

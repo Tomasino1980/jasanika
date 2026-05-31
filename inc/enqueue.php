@@ -237,3 +237,48 @@ function jasanika_enqueue_assets() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_assets' );
+
+// ---------------------------------------------------------------------------
+// Brand CSS Variables
+// ---------------------------------------------------------------------------
+
+/**
+ * Inject dynamic brand-colour CSS variables as inline styles on the variables stylesheet.
+ * Only fires when at least one brand colour is configured.
+ */
+function jasanika_enqueue_brand_css_variables(): void {
+	$primary   = jasanika_get_brand_color( 'primary',   '' );
+	$secondary = jasanika_get_brand_color( 'secondary', '' );
+	$accent    = jasanika_get_brand_color( 'accent',    '' );
+
+	if ( ! $primary && ! $secondary && ! $accent ) {
+		return;
+	}
+
+	$vars = ':root{';
+	if ( $primary )   { $vars .= '--brand-primary:' . $primary . ';'; }
+	if ( $secondary ) { $vars .= '--brand-secondary:' . $secondary . ';'; }
+	if ( $accent )    { $vars .= '--brand-accent:' . $accent . ';'; }
+	$vars .= '}';
+
+	wp_add_inline_style( 'jasanika-variables', $vars );
+}
+add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_brand_css_variables' );
+
+// ---------------------------------------------------------------------------
+// Favicon
+// ---------------------------------------------------------------------------
+
+/**
+ * Output the custom favicon link tag into the site <head>.
+ */
+function jasanika_output_favicon(): void {
+	$favicon_url = jasanika_get_favicon_url();
+
+	if ( ! $favicon_url ) {
+		return;
+	}
+
+	echo '<link rel="icon" href="' . esc_url( $favicon_url ) . '">' . "\n";
+}
+add_action( 'wp_head', 'jasanika_output_favicon', 1 );

@@ -34,7 +34,7 @@ function jasanika_theme_settings_enqueue( string $hook ): void {
 		'jasanika-media-uploader',
 		get_template_directory_uri() . '/assets/js/admin/media-uploader.js',
 		array(),
-		'0.31.0',
+		'0.34.0',
 		true
 	);
 }
@@ -82,26 +82,86 @@ function jasanika_theme_settings_init(): void {
 	);
 
 	add_settings_field(
+		'jasanika_company_description',
+		__( 'Company Description', 'jasanika' ),
+		'jasanika_settings_field_textarea',
+		'jasanika-theme-settings',
+		'jasanika_section_branding',
+		array(
+			'key'         => 'company_description',
+			'placeholder' => __( 'Short description of your company', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
 		'jasanika_logo_url',
-		__( 'Logo URL', 'jasanika' ),
+		__( 'Header Logo', 'jasanika' ),
 		'jasanika_settings_field_media',
 		'jasanika-theme-settings',
 		'jasanika_section_branding',
 		array(
 			'key'         => 'logo_url',
-			'media_title' => __( 'Select Logo', 'jasanika' ),
+			'media_title' => __( 'Select Header Logo', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_footer_logo_url',
+		__( 'Footer Logo', 'jasanika' ),
+		'jasanika_settings_field_media',
+		'jasanika-theme-settings',
+		'jasanika_section_branding',
+		array(
+			'key'         => 'footer_logo_url',
+			'media_title' => __( 'Select Footer Logo', 'jasanika' ),
 		)
 	);
 
 	add_settings_field(
 		'jasanika_favicon_url',
-		__( 'Favicon URL', 'jasanika' ),
+		__( 'Favicon', 'jasanika' ),
 		'jasanika_settings_field_media',
 		'jasanika-theme-settings',
 		'jasanika_section_branding',
 		array(
 			'key'         => 'favicon_url',
 			'media_title' => __( 'Select Favicon', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_brand_primary',
+		__( 'Primary Color', 'jasanika' ),
+		'jasanika_settings_field_color',
+		'jasanika-theme-settings',
+		'jasanika_section_branding',
+		array(
+			'key'     => 'brand_primary',
+			'default' => '#b78acb',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_brand_secondary',
+		__( 'Secondary Color', 'jasanika' ),
+		'jasanika_settings_field_color',
+		'jasanika-theme-settings',
+		'jasanika_section_branding',
+		array(
+			'key'     => 'brand_secondary',
+			'default' => '#24212b',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_brand_accent',
+		__( 'Accent Color', 'jasanika' ),
+		'jasanika_settings_field_color',
+		'jasanika-theme-settings',
+		'jasanika_section_branding',
+		array(
+			'key'     => 'brand_accent',
+			'default' => '#f1c95d',
 		)
 	);
 
@@ -534,10 +594,15 @@ function jasanika_sanitize_settings( mixed $input ): array {
 	$sanitized = array();
 
 	// Branding.
-	$sanitized['company_name']   = sanitize_text_field( $input['company_name']   ?? '' );
-	$sanitized['company_slogan'] = sanitize_text_field( $input['company_slogan'] ?? '' );
-	$sanitized['logo_url']       = esc_url_raw( $input['logo_url']       ?? '' );
-	$sanitized['favicon_url']    = esc_url_raw( $input['favicon_url']    ?? '' );
+	$sanitized['company_name']        = sanitize_text_field( $input['company_name']        ?? '' );
+	$sanitized['company_slogan']      = sanitize_text_field( $input['company_slogan']      ?? '' );
+	$sanitized['company_description'] = sanitize_textarea_field( $input['company_description'] ?? '' );
+	$sanitized['logo_url']            = esc_url_raw( $input['logo_url']            ?? '' );
+	$sanitized['footer_logo_url']     = esc_url_raw( $input['footer_logo_url']     ?? '' );
+	$sanitized['favicon_url']         = esc_url_raw( $input['favicon_url']         ?? '' );
+	$sanitized['brand_primary']       = jasanika_sanitize_hex_color( $input['brand_primary']   ?? '' );
+	$sanitized['brand_secondary']     = jasanika_sanitize_hex_color( $input['brand_secondary'] ?? '' );
+	$sanitized['brand_accent']        = jasanika_sanitize_hex_color( $input['brand_accent']    ?? '' );
 
 	// Contact.
 	$sanitized['phone']          = sanitize_text_field( $input['phone']          ?? '' );
@@ -602,6 +667,27 @@ function jasanika_sanitize_settings( mixed $input ): array {
 // ---------------------------------------------------------------------------
 
 /**
+ * Sanitize a HEX colour value.
+ * Returns an empty string if the value is not a valid 6-digit HEX colour.
+ *
+ * @param string $color Raw input.
+ * @return string Sanitized #rrggbb string or empty string.
+ */
+function jasanika_sanitize_hex_color( string $color ): string {
+	$color = trim( $color );
+
+	if ( '' === $color ) {
+		return '';
+	}
+
+	if ( preg_match( '/^#[0-9a-fA-F]{6}$/', $color ) ) {
+		return strtolower( $color );
+	}
+
+	return '';
+}
+
+/**
  * Render a plain text input field.
  *
  * @param array $args Field arguments: key, placeholder (optional).
@@ -652,7 +738,7 @@ function jasanika_settings_field_url( array $args ): void {
 }
 
 /**
- * Render a media uploader field (text input + Select Image button + preview).
+ * Render a media uploader field (text input + Select Image button + Remove button + preview).
  *
  * @param array $args Field arguments: key, media_title (optional).
  */
@@ -661,7 +747,9 @@ function jasanika_settings_field_media( array $args ): void {
 	$value       = $options[ $args['key'] ] ?? '';
 	$field_id    = 'jasanika_' . $args['key'];
 	$preview_id  = 'jasanika_preview_' . $args['key'];
+	$remove_id   = 'jasanika_remove_' . $args['key'];
 	$media_title = $args['media_title'] ?? __( 'Select Image', 'jasanika' );
+	$has_image   = ! empty( $value );
 	?>
 	<input
 		type="text"
@@ -679,22 +767,23 @@ function jasanika_settings_field_media( array $args ): void {
 	>
 		<?php esc_html_e( 'Select Image', 'jasanika' ); ?>
 	</button>
-	<?php if ( $value ) : ?>
-		<br>
-		<img
-			id="<?php echo esc_attr( $preview_id ); ?>"
-			src="<?php echo esc_url( $value ); ?>"
-			style="max-width:150px;margin-top:8px;"
-			alt=""
-		>
-	<?php else : ?>
-		<img
-			id="<?php echo esc_attr( $preview_id ); ?>"
-			src=""
-			style="max-width:150px;margin-top:8px;display:none;"
-			alt=""
-		>
-	<?php endif; ?>
+	<button
+		type="button"
+		id="<?php echo esc_attr( $remove_id ); ?>"
+		class="button jasanika-media-remove-btn"
+		data-remove="<?php echo esc_attr( $field_id ); ?>"
+		data-preview="<?php echo esc_attr( $preview_id ); ?>"
+		style="<?php echo $has_image ? '' : 'display:none;'; ?>"
+	>
+		<?php esc_html_e( 'Remove Image', 'jasanika' ); ?>
+	</button>
+	<br>
+	<img
+		id="<?php echo esc_attr( $preview_id ); ?>"
+		src="<?php echo esc_url( $value ); ?>"
+		style="max-width:150px;margin-top:8px;<?php echo $has_image ? '' : 'display:none;'; ?>"
+		alt=""
+	>
 	<?php
 }
 
@@ -740,6 +829,45 @@ function jasanika_settings_field_number( array $args ): void {
 		$min,
 		$max
 	);
+}
+
+/**
+ * Render a colour input field (native colour picker + HEX text input pair).
+ *
+ * @param array $args Field arguments: key, default (optional).
+ */
+function jasanika_settings_field_color( array $args ): void {
+	$options   = get_option( 'jasanika_settings', array() );
+	$value     = $options[ $args['key'] ] ?? '';
+	$default   = $args['default'] ?? '#000000';
+	$field_id  = 'jasanika_' . $args['key'];
+	$native_id = 'jasanika_color_native_' . $args['key'];
+
+	// Use default as initial native picker value when field is empty.
+	$native_value = ( $value && preg_match( '/^#[0-9a-fA-F]{6}$/', $value ) ) ? $value : $default;
+	?>
+	<div class="jasanika-color-wrap" style="display:flex;align-items:center;gap:8px;">
+		<input
+			type="color"
+			id="<?php echo esc_attr( $native_id ); ?>"
+			class="jasanika-color-native"
+			value="<?php echo esc_attr( $native_value ); ?>"
+			data-text-target="<?php echo esc_attr( $field_id ); ?>"
+		>
+		<input
+			type="text"
+			id="<?php echo esc_attr( $field_id ); ?>"
+			name="jasanika_settings[<?php echo esc_attr( $args['key'] ); ?>]"
+			value="<?php echo esc_attr( $value ); ?>"
+			placeholder="<?php echo esc_attr( $default ); ?>"
+			class="regular-text jasanika-color-text"
+			pattern="^#[0-9a-fA-F]{6}$"
+			maxlength="7"
+			style="font-family:monospace;"
+		>
+	</div>
+	<p class="description"><?php esc_html_e( 'Enter a HEX colour, e.g. #c89af5', 'jasanika' ); ?></p>
+	<?php
 }
 
 /**
