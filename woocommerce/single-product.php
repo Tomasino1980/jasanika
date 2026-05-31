@@ -58,6 +58,22 @@ while ( have_posts() ) :
 </article><!-- #product-<?php the_ID(); ?> -->
 
 <?php
+	// Related Products – displayed below the product details.
+	$related_ids = wc_get_related_products( $product->get_id(), 4 );
+
+	if ( ! empty( $related_ids ) ) {
+		get_template_part(
+			'template-parts/woocommerce/product-recommendations',
+			null,
+			array(
+				'title'    => __( 'Související produkty', 'jasanika' ),
+				'products' => $related_ids,
+			)
+		);
+	}
+?>
+
+<?php
 	do_action( 'woocommerce_after_single_product' );
 
 endwhile;

@@ -186,6 +186,22 @@ do_action( 'woocommerce_before_cart' );
 
 	</div><!-- .cart-layout -->
 
+	<?php
+	// Cross-Sells – displayed below the cart.
+	$cross_sell_ids = array_map( 'absint', WC()->cart->get_cross_sells() );
+
+	if ( ! empty( $cross_sell_ids ) ) {
+		get_template_part(
+			'template-parts/woocommerce/product-recommendations',
+			null,
+			array(
+				'title'    => __( 'Mohlo by vás zajímat', 'jasanika' ),
+				'products' => $cross_sell_ids,
+			)
+		);
+	}
+	?>
+
 <?php endif; ?>
 
 <?php do_action( 'woocommerce_after_cart' ); ?>

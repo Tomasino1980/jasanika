@@ -114,6 +114,13 @@ function jasanika_enqueue_woocommerce_styles() {
 			array( 'jasanika-woocommerce' ),
 			$ver
 		);
+
+		wp_enqueue_style(
+			'jasanika-product-recommendations',
+			get_template_directory_uri() . '/assets/css/components/product-recommendations.css',
+			array( 'jasanika-woocommerce' ),
+			$ver
+		);
 	}
 
 	// Cart stylesheet – cart page only.
@@ -122,6 +129,13 @@ function jasanika_enqueue_woocommerce_styles() {
 			'jasanika-cart',
 			get_template_directory_uri() . '/assets/css/components/cart.css',
 			array( 'jasanika-woocommerce', 'jasanika-buttons' ),
+			$ver
+		);
+
+		wp_enqueue_style(
+			'jasanika-product-recommendations',
+			get_template_directory_uri() . '/assets/css/components/product-recommendations.css',
+			array( 'jasanika-woocommerce' ),
 			$ver
 		);
 	}
@@ -181,6 +195,18 @@ add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_woocommerce_styles' );
  * Ordering is provided by the product-filters sidebar template instead.
  */
 remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+
+/**
+ * Remove default WooCommerce related products output from the single product summary hook.
+ * Related products are rendered via the custom product-recommendations component in single-product.php.
+ */
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20 );
+
+/**
+ * Remove default WooCommerce cross-sell display from the cart collaterals hook.
+ * Cross-sells are rendered via the custom product-recommendations component in cart/cart.php.
+ */
+remove_action( 'woocommerce_cart_collaterals', 'woocommerce_cross_sell_display' );
 
 /**
  * Apply product filters (stock) on WooCommerce product queries (shop, category, tag).
