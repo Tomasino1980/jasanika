@@ -257,3 +257,89 @@ function jasanika_get_latest_posts_count(): int {
 	$count = (int) jasanika_get_option( 'latest_posts_count', 3 );
 	return min( max( $count, 1 ), 12 );
 }
+
+// ---------------------------------------------------------------------------
+// Footer Builder
+// ---------------------------------------------------------------------------
+
+/**
+ * Return the allowed HTML tags for footer column content (wp_kses).
+ *
+ * @return array<string, array<string, bool>>
+ */
+function jasanika_footer_allowed_html(): array {
+	return array(
+		'a'      => array(
+			'href'   => true,
+			'title'  => true,
+			'target' => true,
+			'rel'    => true,
+		),
+		'strong' => array(),
+		'em'     => array(),
+		'br'     => array(),
+		'p'      => array( 'class' => true ),
+		'span'   => array( 'class' => true ),
+		'ul'     => array( 'class' => true ),
+		'ol'     => array( 'class' => true ),
+		'li'     => array( 'class' => true ),
+	);
+}
+
+/**
+ * Get footer column data by column number.
+ *
+ * @param int $n Column number 1–4.
+ * @return array{ title: string, content: string }
+ */
+function jasanika_get_footer_column( int $n ): array {
+	$n = max( 1, min( 4, $n ) );
+
+	return array(
+		'title'   => (string) jasanika_get_option( "footer_col_{$n}_title",   '' ),
+		'content' => (string) jasanika_get_option( "footer_col_{$n}_content", '' ),
+	);
+}
+
+/**
+ * Get footer contact block data.
+ *
+ * Falls back to main Theme Settings contact fields when dedicated
+ * footer contact fields are empty.
+ *
+ * @return array{ company: string, phone: string, email: string, address: string }
+ */
+function jasanika_get_footer_contact(): array {
+	$company = (string) jasanika_get_option( 'footer_contact_company', '' );
+	if ( ! $company ) {
+		$company = jasanika_get_company_name();
+	}
+
+	$phone = (string) jasanika_get_option( 'footer_contact_phone', '' );
+	if ( ! $phone ) {
+		$phone = jasanika_get_phone();
+	}
+
+	$email = (string) jasanika_get_option( 'footer_contact_email', '' );
+	if ( ! $email ) {
+		$email = jasanika_get_email();
+	}
+
+	$address = (string) jasanika_get_option( 'footer_contact_address', '' );
+	if ( ! $address ) {
+		$street = jasanika_get_address_street();
+		$city   = jasanika_get_address_city();
+		$zip    = jasanika_get_address_zip();
+		$parts  = array_filter( array( $street, trim( $zip . ' ' . $city ) ) );
+		if ( $parts ) {
+			$address = implode( ', ', $parts );
+		}
+	}
+
+	return array(
+		'company' => $company,
+		'phone'   => $phone,
+		'email'   => $email,
+		'address' => $address,
+	);
+}

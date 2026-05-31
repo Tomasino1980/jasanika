@@ -74,6 +74,13 @@ function jasanika_enqueue_assets() {
 		$ver
 	);
 
+	wp_enqueue_style(
+		'jasanika-footer-builder',
+		$uri . '/assets/css/components/footer-builder.css',
+		array( 'jasanika-footer' ),
+		$ver
+	);
+
 	// Component layer.
 	wp_enqueue_style(
 		'jasanika-buttons',

@@ -34,7 +34,7 @@ function jasanika_theme_settings_enqueue( string $hook ): void {
 		'jasanika-media-uploader',
 		get_template_directory_uri() . '/assets/js/admin/media-uploader.js',
 		array(),
-		'0.34.0',
+		'0.35.0',
 		true
 	);
 }
@@ -574,6 +574,87 @@ function jasanika_theme_settings_init(): void {
 			'max' => 12,
 		)
 	);
+
+	// --- Footer Builder Section ----------------------------------------------
+
+	add_settings_section(
+		'jasanika_section_footer_builder',
+		__( 'Footer Builder', 'jasanika' ),
+		'__return_false',
+		'jasanika-theme-settings'
+	);
+
+	// Footer Columns 1–4.
+	for ( $i = 1; $i <= 4; $i++ ) {
+		add_settings_field(
+			"jasanika_footer_col_{$i}_title",
+			/* translators: %d: column number */
+			sprintf( __( 'Footer Column %d – Title', 'jasanika' ), $i ),
+			'jasanika_settings_field_text',
+			'jasanika-theme-settings',
+			'jasanika_section_footer_builder',
+			array( 'key' => "footer_col_{$i}_title" )
+		);
+
+		add_settings_field(
+			"jasanika_footer_col_{$i}_content",
+			/* translators: %d: column number */
+			sprintf( __( 'Footer Column %d – Content', 'jasanika' ), $i ),
+			'jasanika_settings_field_kses_textarea',
+			'jasanika-theme-settings',
+			'jasanika_section_footer_builder',
+			array(
+				'key'         => "footer_col_{$i}_content",
+				'description' => __( 'Supports plain text, HTML links and basic formatting.', 'jasanika' ),
+			)
+		);
+	}
+
+	// Footer Contact Block.
+	add_settings_field(
+		'jasanika_footer_contact_company',
+		__( 'Footer Contact – Company Name', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_footer_builder',
+		array(
+			'key'         => 'footer_contact_company',
+			'placeholder' => __( 'Leave empty to use Company Name from Branding', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_footer_contact_phone',
+		__( 'Footer Contact – Phone', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_footer_builder',
+		array(
+			'key'         => 'footer_contact_phone',
+			'placeholder' => __( 'Leave empty to use Phone from Contact Information', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_footer_contact_email',
+		__( 'Footer Contact – Email', 'jasanika' ),
+		'jasanika_settings_field_email',
+		'jasanika-theme-settings',
+		'jasanika_section_footer_builder',
+		array( 'key' => 'footer_contact_email' )
+	);
+
+	add_settings_field(
+		'jasanika_footer_contact_address',
+		__( 'Footer Contact – Address', 'jasanika' ),
+		'jasanika_settings_field_textarea',
+		'jasanika-theme-settings',
+		'jasanika_section_footer_builder',
+		array(
+			'key'         => 'footer_contact_address',
+			'placeholder' => __( 'Leave empty to use Address from Contact Information', 'jasanika' ),
+		)
+	);
 }
 
 // ---------------------------------------------------------------------------
@@ -658,6 +739,19 @@ function jasanika_sanitize_settings( mixed $input ): array {
 	$sanitized['latest_posts_section_title'] = sanitize_text_field( $input['latest_posts_section_title'] ?? '' );
 	$latest_posts_count                      = absint( $input['latest_posts_count'] ?? 3 );
 	$sanitized['latest_posts_count']         = min( max( $latest_posts_count, 1 ), 12 );
+
+	// Footer Builder – Columns.
+	$footer_allowed = jasanika_footer_allowed_html();
+	for ( $i = 1; $i <= 4; $i++ ) {
+		$sanitized[ "footer_col_{$i}_title" ]   = sanitize_text_field( $input[ "footer_col_{$i}_title" ]   ?? '' );
+		$sanitized[ "footer_col_{$i}_content" ] = wp_kses( $input[ "footer_col_{$i}_content" ] ?? '', $footer_allowed );
+	}
+
+	// Footer Builder – Contact Block.
+	$sanitized['footer_contact_company'] = sanitize_text_field( $input['footer_contact_company']    ?? '' );
+	$sanitized['footer_contact_phone']   = sanitize_text_field( $input['footer_contact_phone']      ?? '' );
+	$sanitized['footer_contact_email']   = sanitize_email( $input['footer_contact_email']           ?? '' );
+	$sanitized['footer_contact_address'] = sanitize_textarea_field( $input['footer_contact_address'] ?? '' );
 
 	return $sanitized;
 }
@@ -790,6 +884,27 @@ function jasanika_settings_field_media( array $args ): void {
 // ---------------------------------------------------------------------------
 // Page Render
 // ---------------------------------------------------------------------------
+
+/**
+ * Render a textarea field for HTML content sanitized with wp_kses().
+ *
+ * @param array $args Field arguments: key, description (optional).
+ */
+function jasanika_settings_field_kses_textarea( array $args ): void {
+	$options     = get_option( 'jasanika_settings', array() );
+	$value       = $options[ $args['key'] ] ?? '';
+	$description = $args['description'] ?? '';
+
+	printf(
+		'<textarea id="jasanika_%1$s" name="jasanika_settings[%1$s]" class="large-text" rows="5">%2$s</textarea>',
+		esc_attr( $args['key'] ),
+		esc_textarea( $value )
+	);
+
+	if ( $description ) {
+		echo '<p class="description">' . esc_html( $description ) . '</p>';
+	}
+}
 
 /**
  * Render a textarea field.

@@ -1,0 +1,222 @@
+/* footer-builder.css – Footer Builder component styles. */
+
+/* ---------------------------------------------------------------------------
+   Widget Area
+--------------------------------------------------------------------------- */
+
+.footer-builder__widgets {
+	padding-bottom: var(--space-8);
+	border-bottom: var(--glass-border);
+	margin-bottom: var(--space-8);
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-8);
+}
+
+@media (min-width: 768px) {
+	.footer-builder__widgets {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.footer-builder__widgets {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Footer Columns
+--------------------------------------------------------------------------- */
+
+.footer-builder__columns {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--space-8);
+	padding-bottom: var(--space-12);
+	border-bottom: var(--glass-border);
+	margin-bottom: var(--space-8);
+}
+
+@media (min-width: 768px) {
+	.footer-builder__columns {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (min-width: 1024px) {
+	.footer-builder__columns {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.footer-builder__column-title {
+	font-family: var(--font-heading);
+	font-size: var(--text-md);
+	font-weight: 600;
+	color: var(--primary);
+	margin-bottom: var(--space-4);
+}
+
+.footer-builder__column-content {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	line-height: var(--leading-loose);
+}
+
+.footer-builder__column-content a {
+	color: var(--primary);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.footer-builder__column-content a:hover {
+	color: var(--primary-hover);
+}
+
+.footer-builder__column-content ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.footer-builder__column-content li {
+	margin-bottom: var(--space-2);
+}
+
+.footer-builder__column-content p {
+	margin-bottom: var(--space-3);
+}
+
+/* ---------------------------------------------------------------------------
+   Footer Bottom – Contact, Social & Navigation
+--------------------------------------------------------------------------- */
+
+.footer-builder__bottom {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-8);
+	padding-bottom: var(--space-8);
+	border-bottom: var(--glass-border);
+	margin-bottom: var(--space-8);
+}
+
+@media (min-width: 768px) {
+	.footer-builder__bottom {
+		flex-direction: row;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: var(--space-12);
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Contact Block
+--------------------------------------------------------------------------- */
+
+.footer-builder__contact {
+	flex: 1;
+}
+
+.footer-builder__brand-logo {
+	display: block;
+	margin-bottom: var(--space-4);
+}
+
+.footer-builder__brand-logo img {
+	max-height: 48px;
+	width: auto;
+}
+
+.footer-builder__contact-company {
+	font-family: var(--font-heading);
+	font-size: var(--text-md);
+	font-weight: 600;
+	color: var(--primary);
+	margin-bottom: var(--space-4);
+}
+
+.footer-contact__list {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 var(--space-6) 0;
+}
+
+.footer-contact__item {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	margin-bottom: var(--space-2);
+	line-height: var(--leading-loose);
+}
+
+.footer-contact__item a {
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.footer-contact__item a:hover {
+	color: var(--primary);
+}
+
+/* ---------------------------------------------------------------------------
+   Social Networks
+--------------------------------------------------------------------------- */
+
+.footer-social__list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-4);
+}
+
+.footer-social__item {
+	display: flex;
+}
+
+.footer-social__link {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color 0.2s ease;
+	padding: var(--space-1) 0;
+}
+
+.footer-social__link:hover {
+	color: var(--primary);
+}
+
+/* ---------------------------------------------------------------------------
+   Footer Navigation
+--------------------------------------------------------------------------- */
+
+.footer-builder__nav {
+	flex-shrink: 0;
+}
+
+.footer-nav__list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-2);
+}
+
+.footer-nav__list li a {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color 0.2s ease;
+}
+
+.footer-nav__list li a:hover {
+	color: var(--primary);
+}
+
+/* Sub-menus hidden in footer */
+.footer-nav__list .sub-menu {
+	display: none;
+}
