@@ -575,6 +575,52 @@ function jasanika_theme_settings_init(): void {
 		)
 	);
 
+	// --- Featured Products Section ------------------------------------------
+
+	add_settings_section(
+		'jasanika_section_featured_products',
+		__( 'Featured Products', 'jasanika' ),
+		'__return_false',
+		'jasanika-theme-settings'
+	);
+
+	add_settings_field(
+		'jasanika_featured_products_title',
+		__( 'Section Title', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_featured_products',
+		array(
+			'key'         => 'featured_products_title',
+			'placeholder' => __( 'Featured Products', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_featured_products_description',
+		__( 'Section Description', 'jasanika' ),
+		'jasanika_settings_field_textarea',
+		'jasanika-theme-settings',
+		'jasanika_section_featured_products',
+		array(
+			'key'         => 'featured_products_description',
+			'placeholder' => __( 'Explore our latest handcrafted creations.', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_featured_products_count',
+		__( 'Number of Products', 'jasanika' ),
+		'jasanika_settings_field_number',
+		'jasanika-theme-settings',
+		'jasanika_section_featured_products',
+		array(
+			'key' => 'featured_products_count',
+			'min' => 1,
+			'max' => 12,
+		)
+	);
+
 	// --- Homepage Builder Section -------------------------------------------
 
 	add_settings_section(
@@ -748,6 +794,12 @@ function jasanika_sanitize_settings( mixed $input ): array {
 	$sanitized['latest_posts_section_title'] = sanitize_text_field( $input['latest_posts_section_title'] ?? '' );
 	$latest_posts_count                      = absint( $input['latest_posts_count'] ?? 3 );
 	$sanitized['latest_posts_count']         = min( max( $latest_posts_count, 1 ), 12 );
+
+	// Featured Products.
+	$sanitized['featured_products_title']       = sanitize_text_field( $input['featured_products_title'] ?? '' );
+	$sanitized['featured_products_description'] = sanitize_textarea_field( $input['featured_products_description'] ?? '' );
+	$featured_products_count                    = absint( $input['featured_products_count'] ?? 4 );
+	$sanitized['featured_products_count']       = min( max( $featured_products_count, 1 ), 12 );
 
 	// Footer Builder – Columns.
 	$footer_allowed = jasanika_footer_allowed_html();

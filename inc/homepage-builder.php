@@ -63,6 +63,12 @@ function jasanika_homepage_sections_registry(): array {
 			'default_order'   => 6,
 			'default_enabled' => true,
 		),
+		'featured_products' => array(
+			'label'           => __( 'Featured Products', 'jasanika' ),
+			'template'        => 'template-parts/components/featured-products',
+			'default_order'   => 7,
+			'default_enabled' => true,
+		),
 	);
 }
 

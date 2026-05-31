@@ -248,6 +248,13 @@ function jasanika_enqueue_assets() {
 			array( 'jasanika-variables' ),
 			$ver
 		);
+
+		wp_enqueue_style(
+			'jasanika-featured-products',
+			$uri . '/assets/css/components/featured-products.css',
+			array( 'jasanika-variables', 'jasanika-buttons' ),
+			$ver
+		);
 	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_assets' );
