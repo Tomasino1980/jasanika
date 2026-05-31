@@ -1,0 +1,315 @@
+/* diagnostics.css – Diagnostics Manager Admin Page */
+
+/* ---------------------------------------------------------------------------
+   Layout
+--------------------------------------------------------------------------- */
+
+.jasanika-diag {
+	max-width: 1200px;
+}
+
+.jasanika-diag__layout {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+	margin-top: 20px;
+}
+
+@media ( max-width: 1024px ) {
+	.jasanika-diag__layout {
+		grid-template-columns: 1fr;
+	}
+}
+
+.jasanika-diag__col {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+/* ---------------------------------------------------------------------------
+   Header
+--------------------------------------------------------------------------- */
+
+.jasanika-diag__header {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	margin-bottom: 4px;
+	padding: 20px 24px;
+	background: #1e1e1e;
+	border: 1px solid #3a3a3a;
+	border-radius: 8px;
+}
+
+.jasanika-diag__header-icon {
+	font-size: 2rem !important;
+	color: #b78acb;
+	width: 2rem !important;
+	height: 2rem !important;
+	flex-shrink: 0;
+	margin-top: 4px;
+}
+
+.jasanika-diag__title {
+	font-size: 1.375rem;
+	font-weight: 700;
+	color: #f5f2f7;
+	margin: 0 0 4px;
+	line-height: 1.2;
+}
+
+.jasanika-diag__subtitle {
+	color: #b9b1c4;
+	margin: 0;
+	font-size: 0.9375rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Cards
+--------------------------------------------------------------------------- */
+
+.jasanika-diag__card {
+	background: #1e1e1e;
+	border: 1px solid #3a3a3a;
+	border-radius: 8px;
+	padding: 20px 24px;
+}
+
+.jasanika-diag__card-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 1rem;
+	font-weight: 700;
+	color: #f5f2f7;
+	margin: 0 0 16px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #3a3a3a;
+}
+
+.jasanika-diag__card-title .dashicons {
+	color: #b78acb;
+	font-size: 1.125rem !important;
+	width: 1.125rem !important;
+	height: 1.125rem !important;
+	flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Table
+--------------------------------------------------------------------------- */
+
+.jasanika-diag__table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.jasanika-diag__table tr {
+	border-bottom: 1px solid #2e2e2e;
+}
+
+.jasanika-diag__table tr:last-child {
+	border-bottom: none;
+}
+
+.jasanika-diag__table td {
+	padding: 10px 4px;
+	font-size: 0.875rem;
+	color: #b9b1c4;
+	vertical-align: middle;
+}
+
+.jasanika-diag__table td:first-child {
+	width: 60%;
+	color: #f5f2f7;
+}
+
+.jasanika-diag__table td:last-child {
+	text-align: right;
+}
+
+/* ---------------------------------------------------------------------------
+   Value
+--------------------------------------------------------------------------- */
+
+.jasanika-diag__value {
+	display: inline-block;
+	font-size: 0.8125rem;
+	color: #b9b1c4;
+	background: #2a2a2a;
+	border: 1px solid #3a3a3a;
+	border-radius: 4px;
+	padding: 2px 8px;
+	font-family: monospace;
+}
+
+/* ---------------------------------------------------------------------------
+   Badges
+--------------------------------------------------------------------------- */
+
+.jasanika-diag__badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	font-size: 0.8125rem;
+	font-weight: 600;
+	border-radius: 4px;
+	padding: 3px 8px;
+	white-space: nowrap;
+}
+
+.jasanika-diag__badge .dashicons {
+	font-size: 0.9375rem !important;
+	width: 0.9375rem !important;
+	height: 0.9375rem !important;
+}
+
+.jasanika-diag__badge--ok {
+	background: rgba( 74, 181, 106, 0.12 );
+	color: #4ab56a;
+	border: 1px solid rgba( 74, 181, 106, 0.25 );
+}
+
+.jasanika-diag__badge--warn {
+	background: rgba( 241, 201, 93, 0.12 );
+	color: #f1c95d;
+	border: 1px solid rgba( 241, 201, 93, 0.25 );
+}
+
+/* ---------------------------------------------------------------------------
+   Content Statistics
+--------------------------------------------------------------------------- */
+
+.jasanika-diag__stats {
+	display: grid;
+	grid-template-columns: repeat( 5, 1fr );
+	gap: 12px;
+}
+
+@media ( max-width: 1200px ) {
+	.jasanika-diag__stats {
+		grid-template-columns: repeat( 3, 1fr );
+	}
+}
+
+@media ( max-width: 600px ) {
+	.jasanika-diag__stats {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+}
+
+.jasanika-diag__stat {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	background: #252525;
+	border: 1px solid #3a3a3a;
+	border-radius: 6px;
+	padding: 14px 8px;
+	gap: 4px;
+}
+
+.jasanika-diag__stat-value {
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: #b78acb;
+	line-height: 1;
+}
+
+.jasanika-diag__stat-label {
+	font-size: 0.75rem;
+	color: #b9b1c4;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+/* ---------------------------------------------------------------------------
+   Quick Links
+--------------------------------------------------------------------------- */
+
+.jasanika-diag__quick-links {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 10px;
+}
+
+@media ( max-width: 600px ) {
+	.jasanika-diag__quick-links {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons
+--------------------------------------------------------------------------- */
+
+.jasanika-diag__btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 14px;
+	background: #2a2a2a;
+	border: 1px solid #4a4a4a;
+	border-radius: 6px;
+	color: #f5f2f7;
+	font-size: 0.875rem;
+	font-weight: 500;
+	text-decoration: none;
+	cursor: pointer;
+	transition: background 0.18s, border-color 0.18s, color 0.18s;
+	width: 100%;
+	justify-content: center;
+	box-sizing: border-box;
+}
+
+.jasanika-diag__btn:hover,
+.jasanika-diag__btn:focus {
+	background: #b78acb;
+	border-color: #b78acb;
+	color: #1b1a1f;
+	text-decoration: none;
+	outline: none;
+}
+
+.jasanika-diag__btn .dashicons {
+	font-size: 1rem !important;
+	width: 1rem !important;
+	height: 1rem !important;
+	flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Export
+--------------------------------------------------------------------------- */
+
+.jasanika-diag__export-desc {
+	color: #b9b1c4;
+	font-size: 0.875rem;
+	margin: 0 0 14px;
+}
+
+.jasanika-diag__export-actions {
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.jasanika-diag__export-actions form {
+	flex: 1;
+	min-width: 140px;
+}
+
+.jasanika-diag__btn--export {
+	background: #252525;
+	border-color: #b78acb;
+	color: #b78acb;
+}
+
+.jasanika-diag__btn--export:hover,
+.jasanika-diag__btn--export:focus {
+	background: #b78acb;
+	border-color: #b78acb;
+	color: #1b1a1f;
+}

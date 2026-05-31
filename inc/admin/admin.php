@@ -21,6 +21,7 @@ require_once get_template_directory() . '/inc/admin/pages/theme-settings.php';
 require_once get_template_directory() . '/inc/admin/pages/seo-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/cookie-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/backup-manager.php';
+require_once get_template_directory() . '/inc/admin/pages/diagnostics-manager.php';
 
 add_action( 'admin_menu', 'jasanika_register_admin_menu' );
 
@@ -128,5 +129,15 @@ function jasanika_register_admin_menu(): void {
 		'manage_options',
 		'jasanika-backup-manager',
 		'jasanika_admin_page_backup_manager'
+	);
+
+	// Diagnostics sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Diagnostics', 'jasanika' ),
+		__( 'Diagnostics', 'jasanika' ),
+		'manage_options',
+		'jasanika-diagnostics',
+		'jasanika_admin_page_diagnostics'
 	);
 }
