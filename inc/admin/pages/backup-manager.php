@@ -39,7 +39,7 @@ function jasanika_backup_manager_enqueue( string $hook ): void {
 		'jasanika-backup-manager',
 		get_template_directory_uri() . '/assets/css/admin/backup-manager.css',
 		array(),
-		'0.43.0'
+		wp_get_theme()->get( 'Version' )
 	);
 }
 

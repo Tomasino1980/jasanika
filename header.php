@@ -16,6 +16,8 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<a class="skip-to-content" href="#main"><?php esc_html_e( 'Skip to content', 'jasanika' ); ?></a>
+
 <header id="site-header" class="site-header">
 	<div class="container">
 		<div class="site-header__inner">

@@ -40,7 +40,7 @@ function jasanika_cookie_manager_enqueue( string $hook ): void {
 		'jasanika-cookie-manager',
 		get_template_directory_uri() . '/assets/css/admin/cookie-manager.css',
 		array(),
-		'0.42.0'
+		wp_get_theme()->get( 'Version' )
 	);
 }
 

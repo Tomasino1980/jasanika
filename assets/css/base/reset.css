@@ -93,3 +93,32 @@ table {
 	overflow: hidden;
 	white-space: nowrap;
 }
+
+/* Skip to content – visually hidden until focused */
+.skip-to-content {
+	position: absolute;
+	top: -100%;
+	left: var(--space-4);
+	z-index: calc(var(--z-header) + 1);
+	padding: var(--space-3) var(--space-6);
+	background-color: var(--primary);
+	color: var(--bg-main);
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	font-weight: 600;
+	border-radius: var(--radius-md);
+	text-decoration: none;
+	transition: top var(--transition-fast);
+}
+
+.skip-to-content:focus {
+	top: var(--space-4);
+	outline: 2px solid var(--primary-hover);
+	outline-offset: 2px;
+}
+
+/* Global keyboard focus styles */
+:focus-visible {
+	outline: 2px solid var(--primary);
+	outline-offset: 2px;
+}

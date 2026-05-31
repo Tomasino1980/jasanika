@@ -52,7 +52,7 @@ function jasanika_profile_manager_enqueue( string $hook ): void {
 		'jasanika-profile-manager',
 		get_template_directory_uri() . '/assets/css/admin/profile-manager.css',
 		array(),
-		'0.46.0'
+		wp_get_theme()->get( 'Version' )
 	);
 }
 

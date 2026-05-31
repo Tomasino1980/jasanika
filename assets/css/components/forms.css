@@ -28,6 +28,14 @@
 	transition: border-color var(--transition-fast);
 }
 
+.form-input:focus-visible,
+.form-textarea:focus-visible,
+.form-select:focus-visible {
+	outline: 2px solid var(--primary);
+	outline-offset: 0;
+	border-color: var(--primary);
+}
+
 .form-input:focus,
 .form-textarea:focus,
 .form-select:focus {

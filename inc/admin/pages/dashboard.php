@@ -28,7 +28,7 @@ function jasanika_dashboard_enqueue( string $hook ): void {
 		'jasanika-dashboard',
 		get_template_directory_uri() . '/assets/css/admin/dashboard.css',
 		array(),
-		'0.36.0'
+		wp_get_theme()->get( 'Version' )
 	);
 }
 

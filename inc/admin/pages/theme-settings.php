@@ -34,7 +34,7 @@ function jasanika_theme_settings_enqueue( string $hook ): void {
 		'jasanika-media-uploader',
 		get_template_directory_uri() . '/assets/js/admin/media-uploader.js',
 		array(),
-		'0.35.0',
+		wp_get_theme()->get( 'Version' ),
 		true
 	);
 }

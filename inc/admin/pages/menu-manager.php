@@ -31,7 +31,7 @@ function jasanika_menu_manager_enqueue( string $hook ): void {
 		'jasanika-menu-manager',
 		get_template_directory_uri() . '/assets/css/admin/menu-manager.css',
 		array(),
-		'0.44.0'
+		wp_get_theme()->get( 'Version' )
 	);
 }
 

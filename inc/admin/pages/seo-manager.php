@@ -37,11 +37,13 @@ function jasanika_seo_manager_enqueue( string $hook ): void {
 		return;
 	}
 
+	$ver = wp_get_theme()->get( 'Version' );
+
 	wp_enqueue_style(
 		'jasanika-seo-manager',
 		get_template_directory_uri() . '/assets/css/admin/seo-manager.css',
 		array(),
-		'0.41.0'
+		$ver
 	);
 
 	wp_enqueue_media();
@@ -50,7 +52,7 @@ function jasanika_seo_manager_enqueue( string $hook ): void {
 		'jasanika-seo-manager',
 		get_template_directory_uri() . '/assets/js/admin/media-uploader.js',
 		array(),
-		'0.41.0',
+		$ver,
 		true
 	);
 

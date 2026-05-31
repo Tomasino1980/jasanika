@@ -138,6 +138,8 @@ function jasanika_update_center_version_to_milestone( string $version ): int {
  */
 function jasanika_update_center_get_changelog(): array {
 	return array(
+		50 => array( 'name' => 'Release Candidate & Stabilization', 'version' => '0.50.0', 'date' => '2026-05' ),
+		49 => array( 'name' => 'Theme Presets',                     'version' => '0.49.0', 'date' => '2026-05' ),
 		48 => array( 'name' => 'Update Center',              'version' => '0.48.0', 'date' => '2026-05' ),
 		47 => array( 'name' => 'Maintenance Mode',           'version' => '0.47.0', 'date' => '2026-05' ),
 		46 => array( 'name' => 'Profile Manager',            'version' => '0.46.0', 'date' => '2026-04' ),
@@ -238,6 +240,18 @@ function jasanika_update_center_get_modules(): array {
 		array(
 			'label'  => __( 'Maintenance Mode', 'jasanika' ),
 			'active' => file_exists( $dir . '/inc/admin/pages/maintenance-manager.php' ),
+		),
+		array(
+			'label'  => __( 'Diagnostics Manager', 'jasanika' ),
+			'active' => file_exists( $dir . '/inc/admin/pages/diagnostics-manager.php' ),
+		),
+		array(
+			'label'  => __( 'Theme Presets', 'jasanika' ),
+			'active' => file_exists( $dir . '/inc/admin/pages/theme-presets.php' ),
+		),
+		array(
+			'label'  => __( 'Update Center', 'jasanika' ),
+			'active' => file_exists( $dir . '/inc/admin/pages/update-center.php' ),
 		),
 	);
 }

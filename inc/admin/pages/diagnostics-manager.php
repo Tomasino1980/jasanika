@@ -44,7 +44,7 @@ function jasanika_diagnostics_enqueue( string $hook ): void {
 		'jasanika-diagnostics',
 		get_template_directory_uri() . '/assets/css/admin/diagnostics.css',
 		array(),
-		'0.45.0'
+		wp_get_theme()->get( 'Version' )
 	);
 }
 
