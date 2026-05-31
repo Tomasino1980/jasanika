@@ -1,0 +1,502 @@
+/* backup-manager.css – Backup Manager Admin Page */
+
+/* ---------------------------------------------------------------------------
+   Header
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__header {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	margin-bottom: 24px;
+	padding: 20px 24px;
+	background: #1e1e1e;
+	border: 1px solid #3a3a3a;
+	border-radius: 8px;
+}
+
+.jasanika-backup__header-icon {
+	font-size: 2rem !important;
+	color: #b78acb;
+	width: 2rem !important;
+	height: 2rem !important;
+	flex-shrink: 0;
+	margin-top: 4px;
+}
+
+.jasanika-backup__title {
+	font-size: 1.375rem;
+	font-weight: 700;
+	color: #f5f2f7;
+	margin: 0 0 4px;
+	line-height: 1.2;
+}
+
+.jasanika-backup__subtitle {
+	color: #b9b1c4;
+	margin: 0;
+	font-size: 0.9375rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Notices
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__notice {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 14px 18px;
+	border-radius: 6px;
+	margin-bottom: 20px;
+	font-size: 0.9375rem;
+	line-height: 1.5;
+}
+
+.jasanika-backup__notice .dashicons {
+	flex-shrink: 0;
+	font-size: 1.25rem;
+	width: 1.25rem;
+	height: 1.25rem;
+	margin-top: 1px;
+}
+
+.jasanika-backup__notice--success {
+	background: rgba( 80, 180, 120, 0.12 );
+	border: 1px solid rgba( 80, 180, 120, 0.3 );
+	color: #7ed4a0;
+}
+
+.jasanika-backup__notice--success .dashicons {
+	color: #7ed4a0;
+}
+
+.jasanika-backup__notice--error {
+	background: rgba( 200, 80, 80, 0.12 );
+	border: 1px solid rgba( 200, 80, 80, 0.3 );
+	color: #e08080;
+}
+
+.jasanika-backup__notice--error .dashicons {
+	color: #e08080;
+}
+
+.jasanika-backup__notice-warning {
+	display: block;
+	margin-top: 6px;
+	color: #f1c95d;
+	font-size: 0.875rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Cards
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__card {
+	background: #1e1e1e;
+	border: 1px solid #3a3a3a;
+	border-radius: 8px;
+	padding: 22px 24px;
+	margin-bottom: 20px;
+}
+
+.jasanika-backup__card-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 1.0625rem;
+	font-weight: 600;
+	color: #f5f2f7;
+	margin: 0 0 14px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #3a3a3a;
+}
+
+.jasanika-backup__card-title .dashicons {
+	color: #b78acb;
+	font-size: 1.125rem;
+	width: 1.125rem;
+	height: 1.125rem;
+}
+
+.jasanika-backup__card-desc {
+	color: #b9b1c4;
+	font-size: 0.9rem;
+	margin: 0 0 18px;
+}
+
+/* ---------------------------------------------------------------------------
+   Quick Actions
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
+}
+
+.jasanika-backup__action-item {
+	flex: 1;
+	min-width: 200px;
+	max-width: 280px;
+}
+
+.jasanika-backup__action-hint {
+	color: #8c8c8c;
+	font-size: 0.8125rem;
+	margin: 8px 0 0;
+	line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 7px;
+	padding: 9px 18px;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	border-radius: 6px;
+	border: 1px solid transparent;
+	cursor: pointer;
+	transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.jasanika-backup__btn .dashicons {
+	font-size: 1rem;
+	width: 1rem;
+	height: 1rem;
+}
+
+/* Primary – purple */
+.jasanika-backup__btn--primary {
+	background: rgba( 183, 138, 203, 0.18 );
+	color: #b78acb;
+	border-color: rgba( 183, 138, 203, 0.35 );
+}
+
+.jasanika-backup__btn--primary:hover {
+	background: rgba( 183, 138, 203, 0.28 );
+	border-color: rgba( 199, 156, 218, 0.5 );
+	color: #c79cda;
+}
+
+/* Secondary – muted */
+.jasanika-backup__btn--secondary {
+	background: rgba( 185, 177, 196, 0.1 );
+	color: #b9b1c4;
+	border-color: rgba( 185, 177, 196, 0.25 );
+}
+
+.jasanika-backup__btn--secondary:hover {
+	background: rgba( 185, 177, 196, 0.18 );
+	border-color: rgba( 185, 177, 196, 0.4 );
+	color: #d0cad9;
+}
+
+/* Outline – ghost style */
+.jasanika-backup__btn--outline {
+	background: transparent;
+	color: #b9b1c4;
+	border-color: #3a3a3a;
+}
+
+.jasanika-backup__btn--outline:hover {
+	background: rgba( 255, 255, 255, 0.05 );
+	border-color: #555;
+	color: #f5f2f7;
+}
+
+/* Danger – muted amber (restore/import) */
+.jasanika-backup__btn--danger {
+	background: rgba( 241, 201, 93, 0.1 );
+	color: #f1c95d;
+	border-color: rgba( 241, 201, 93, 0.3 );
+}
+
+.jasanika-backup__btn--danger:hover {
+	background: rgba( 241, 201, 93, 0.18 );
+	border-color: rgba( 241, 201, 93, 0.5 );
+	color: #f5d47a;
+}
+
+/* ---------------------------------------------------------------------------
+   Version Information
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__version-grid {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 240px, 1fr ) );
+	gap: 14px;
+}
+
+.jasanika-backup__version-item {
+	background: rgba( 255, 255, 255, 0.03 );
+	border: 1px solid #3a3a3a;
+	border-radius: 6px;
+	padding: 14px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.jasanika-backup__version-item--warning {
+	border-color: rgba( 241, 201, 93, 0.35 );
+	background: rgba( 241, 201, 93, 0.05 );
+}
+
+.jasanika-backup__version-label {
+	font-size: 0.8125rem;
+	color: #b9b1c4;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.jasanika-backup__version-value {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 0.9375rem;
+	color: #f5f2f7;
+}
+
+.jasanika-backup__version-none {
+	color: #666;
+	font-style: italic;
+	font-size: 0.875rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Badges
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__badge {
+	display: inline-block;
+	font-size: 0.6875rem;
+	font-weight: 600;
+	border-radius: 20px;
+	padding: 2px 8px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.jasanika-backup__badge--ok {
+	background: rgba( 80, 180, 120, 0.15 );
+	color: #7ed4a0;
+	border: 1px solid rgba( 80, 180, 120, 0.3 );
+}
+
+.jasanika-backup__badge--warning {
+	background: rgba( 241, 201, 93, 0.12 );
+	color: #f1c95d;
+	border: 1px solid rgba( 241, 201, 93, 0.3 );
+}
+
+/* ---------------------------------------------------------------------------
+   System Information Table
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__info-table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.9375rem;
+}
+
+.jasanika-backup__info-table th,
+.jasanika-backup__info-table td {
+	padding: 10px 14px;
+	border-bottom: 1px solid #2e2e2e;
+	text-align: left;
+}
+
+.jasanika-backup__info-table th {
+	width: 220px;
+	color: #b9b1c4;
+	font-weight: 600;
+	background: rgba( 255, 255, 255, 0.02 );
+}
+
+.jasanika-backup__info-table td {
+	color: #f5f2f7;
+}
+
+.jasanika-backup__info-table tr:last-child th,
+.jasanika-backup__info-table tr:last-child td {
+	border-bottom: none;
+}
+
+.jasanika-backup__info-table code {
+	background: rgba( 255, 255, 255, 0.06 );
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 0.875rem;
+	color: #b78acb;
+}
+
+/* ---------------------------------------------------------------------------
+   Restore Protection Warning
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__restore-warning {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 14px 18px;
+	background: rgba( 241, 201, 93, 0.07 );
+	border: 1px solid rgba( 241, 201, 93, 0.25 );
+	border-radius: 6px;
+	margin-bottom: 20px;
+}
+
+.jasanika-backup__restore-warning > .dashicons {
+	flex-shrink: 0;
+	font-size: 1.375rem;
+	width: 1.375rem;
+	height: 1.375rem;
+	color: #f1c95d;
+	margin-top: 2px;
+}
+
+.jasanika-backup__restore-warning strong {
+	display: block;
+	color: #f1c95d;
+	font-size: 0.9375rem;
+	margin-bottom: 4px;
+}
+
+.jasanika-backup__restore-warning p {
+	color: #b9b1c4;
+	font-size: 0.875rem;
+	margin: 0;
+	line-height: 1.6;
+}
+
+/* ---------------------------------------------------------------------------
+   Import Form
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__import-form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.jasanika-backup__file-row {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.jasanika-backup__file-label {
+	font-size: 0.9375rem;
+	font-weight: 600;
+	color: #f5f2f7;
+}
+
+.jasanika-backup__file-controls {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.jasanika-backup__file-input {
+	font-size: 0.875rem;
+	color: #b9b1c4;
+	cursor: pointer;
+}
+
+.jasanika-backup__file-name {
+	font-size: 0.875rem;
+	color: #b78acb;
+	font-style: italic;
+}
+
+.jasanika-backup__file-hint {
+	color: #8c8c8c;
+	font-size: 0.8125rem;
+	margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Backup History Table
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__history-table {
+	border: 1px solid #3a3a3a !important;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.jasanika-backup__history-table thead th {
+	background: rgba( 255, 255, 255, 0.04 ) !important;
+	color: #b9b1c4 !important;
+	font-weight: 600;
+	font-size: 0.875rem;
+	border-bottom: 1px solid #3a3a3a !important;
+	padding: 10px 14px !important;
+}
+
+.jasanika-backup__history-table tbody tr {
+	border-bottom: 1px solid #2a2a2a;
+}
+
+.jasanika-backup__history-table tbody td {
+	padding: 9px 14px !important;
+	color: #f5f2f7 !important;
+	font-size: 0.9rem;
+}
+
+.jasanika-backup__history-table code {
+	background: rgba( 255, 255, 255, 0.06 );
+	padding: 2px 6px;
+	border-radius: 4px;
+	font-size: 0.8125rem;
+	color: #b78acb;
+}
+
+/* Type badges */
+
+.jasanika-backup__type-badge {
+	display: inline-block;
+	font-size: 0.75rem;
+	font-weight: 600;
+	border-radius: 20px;
+	padding: 2px 9px;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+.jasanika-backup__type-badge--export_settings {
+	background: rgba( 183, 138, 203, 0.14 );
+	color: #b78acb;
+	border: 1px solid rgba( 183, 138, 203, 0.3 );
+}
+
+.jasanika-backup__type-badge--export_full {
+	background: rgba( 176, 138, 103, 0.14 );
+	color: #b08a67;
+	border: 1px solid rgba( 176, 138, 103, 0.3 );
+}
+
+.jasanika-backup__type-badge--import {
+	background: rgba( 241, 201, 93, 0.1 );
+	color: #f1c95d;
+	border: 1px solid rgba( 241, 201, 93, 0.25 );
+}
+
+/* ---------------------------------------------------------------------------
+   Empty State
+--------------------------------------------------------------------------- */
+
+.jasanika-backup__empty {
+	color: #666;
+	font-style: italic;
+	font-size: 0.9375rem;
+	padding: 12px 0;
+}

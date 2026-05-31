@@ -20,6 +20,7 @@ require_once get_template_directory() . '/inc/admin/pages/newsletter-manager.php
 require_once get_template_directory() . '/inc/admin/pages/theme-settings.php';
 require_once get_template_directory() . '/inc/admin/pages/seo-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/cookie-manager.php';
+require_once get_template_directory() . '/inc/admin/pages/backup-manager.php';
 
 add_action( 'admin_menu', 'jasanika_register_admin_menu' );
 
@@ -117,5 +118,15 @@ function jasanika_register_admin_menu(): void {
 		'manage_options',
 		'jasanika-cookie-manager',
 		'jasanika_admin_page_cookie_manager'
+	);
+
+	// Backup Manager sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Backup Manager', 'jasanika' ),
+		__( 'Backup Manager', 'jasanika' ),
+		'manage_options',
+		'jasanika-backup-manager',
+		'jasanika_admin_page_backup_manager'
 	);
 }
