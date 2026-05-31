@@ -1,0 +1,628 @@
+/* profile-manager.css – Profile Manager Admin Page */
+
+/* ---------------------------------------------------------------------------
+   Header
+--------------------------------------------------------------------------- */
+
+.jasanika-profile-manager {
+	max-width: 1200px;
+}
+
+.jasanika-pm__header {
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	margin-bottom: 24px;
+	padding: 20px 24px;
+	background: #1e1e1e;
+	border: 1px solid #3a3a3a;
+	border-radius: 8px;
+}
+
+.jasanika-pm__header-icon {
+	font-size: 2rem !important;
+	color: #b78acb;
+	width: 2rem !important;
+	height: 2rem !important;
+	flex-shrink: 0;
+	margin-top: 4px;
+}
+
+.jasanika-pm__title {
+	font-size: 1.375rem;
+	font-weight: 700;
+	color: #f5f2f7;
+	margin: 0 0 4px;
+	line-height: 1.2;
+}
+
+.jasanika-pm__subtitle {
+	color: #b9b1c4;
+	margin: 0;
+	font-size: 0.9375rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Notices
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__notice {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	padding: 14px 18px;
+	border-radius: 6px;
+	margin-bottom: 20px;
+	font-size: 0.9375rem;
+	line-height: 1.5;
+}
+
+.jasanika-pm__notice .dashicons {
+	flex-shrink: 0;
+	font-size: 1.25rem;
+	width: 1.25rem;
+	height: 1.25rem;
+	margin-top: 1px;
+}
+
+.jasanika-pm__notice--success {
+	background: rgba( 80, 180, 120, 0.12 );
+	border: 1px solid rgba( 80, 180, 120, 0.3 );
+	color: #7ed4a0;
+}
+
+.jasanika-pm__notice--success .dashicons {
+	color: #7ed4a0;
+}
+
+.jasanika-pm__notice--error {
+	background: rgba( 200, 80, 80, 0.12 );
+	border: 1px solid rgba( 200, 80, 80, 0.3 );
+	color: #e08080;
+}
+
+.jasanika-pm__notice--error .dashicons {
+	color: #e08080;
+}
+
+.jasanika-pm__notice--warning {
+	background: rgba( 241, 201, 93, 0.08 );
+	border: 1px solid rgba( 241, 201, 93, 0.3 );
+	color: #f1c95d;
+}
+
+.jasanika-pm__notice--warning .dashicons {
+	color: #f1c95d;
+}
+
+/* ---------------------------------------------------------------------------
+   Layout
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__layout {
+	display: grid;
+	grid-template-columns: 1fr 320px;
+	gap: 20px;
+	align-items: start;
+}
+
+@media ( max-width: 960px ) {
+	.jasanika-pm__layout {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Cards
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__card {
+	background: #1e1e1e;
+	border: 1px solid #3a3a3a;
+	border-radius: 8px;
+	padding: 22px 24px;
+	margin-bottom: 20px;
+}
+
+.jasanika-pm__card--compare {
+	margin-bottom: 24px;
+}
+
+.jasanika-pm__card-title {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	font-size: 1.0625rem;
+	font-weight: 600;
+	color: #f5f2f7;
+	margin: 0 0 14px;
+	padding-bottom: 12px;
+	border-bottom: 1px solid #3a3a3a;
+}
+
+.jasanika-pm__card-title .dashicons {
+	color: #b78acb;
+	font-size: 1.125rem;
+	width: 1.125rem;
+	height: 1.125rem;
+}
+
+.jasanika-pm__count {
+	margin-left: auto;
+	background: rgba( 183, 138, 203, 0.15 );
+	color: #b78acb;
+	border: 1px solid rgba( 183, 138, 203, 0.3 );
+	border-radius: 20px;
+	padding: 1px 9px;
+	font-size: 0.8125rem;
+	font-weight: 600;
+}
+
+.jasanika-pm__card-desc {
+	color: #b9b1c4;
+	font-size: 0.9rem;
+	margin: -6px 0 18px;
+	line-height: 1.6;
+}
+
+.jasanika-pm__empty {
+	color: #666;
+	font-style: italic;
+	font-size: 0.9375rem;
+	margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Profile Cards
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__profiles {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.jasanika-pm__profile-card {
+	background: rgba( 255, 255, 255, 0.02 );
+	border: 1px solid #3a3a3a;
+	border-radius: 6px;
+	padding: 14px 16px;
+	display: flex;
+	align-items: flex-start;
+	gap: 16px;
+	flex-wrap: wrap;
+}
+
+.jasanika-pm__profile-card--active {
+	border-color: rgba( 183, 138, 203, 0.45 );
+	background: rgba( 183, 138, 203, 0.05 );
+}
+
+.jasanika-pm__profile-info {
+	flex: 1;
+	min-width: 160px;
+}
+
+.jasanika-pm__profile-name {
+	font-size: 1rem;
+	font-weight: 600;
+	color: #f5f2f7;
+	margin-bottom: 6px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	flex-wrap: wrap;
+}
+
+/* Active Badge */
+
+.jasanika-pm__active-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	background: rgba( 80, 180, 120, 0.14 );
+	color: #7ed4a0;
+	border: 1px solid rgba( 80, 180, 120, 0.3 );
+	border-radius: 20px;
+	padding: 2px 8px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.jasanika-pm__active-badge .dashicons {
+	font-size: 0.875rem;
+	width: 0.875rem;
+	height: 0.875rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Profile Preview (details/summary)
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__profile-preview {
+	margin-top: 6px;
+}
+
+.jasanika-pm__preview-toggle {
+	font-size: 0.8125rem;
+	color: #b78acb;
+	cursor: pointer;
+	user-select: none;
+	list-style: none;
+}
+
+.jasanika-pm__preview-toggle::-webkit-details-marker {
+	display: none;
+}
+
+.jasanika-pm__preview-toggle::before {
+	content: '▸ ';
+	font-size: 0.6875rem;
+}
+
+details[open] .jasanika-pm__preview-toggle::before {
+	content: '▾ ';
+}
+
+.jasanika-pm__preview-body {
+	margin-top: 10px;
+}
+
+.jasanika-pm__preview-grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 8px;
+}
+
+.jasanika-pm__preview-row {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.jasanika-pm__preview-row--full {
+	grid-column: 1 / -1;
+}
+
+.jasanika-pm__preview-label {
+	font-size: 0.75rem;
+	color: #b9b1c4;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.jasanika-pm__preview-value {
+	font-size: 0.875rem;
+	color: #f5f2f7;
+}
+
+/* ---------------------------------------------------------------------------
+   Quick Actions
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__profile-actions {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	flex-wrap: wrap;
+	flex-shrink: 0;
+}
+
+.jasanika-pm__profile-actions form {
+	margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Buttons
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 7px 14px;
+	font-size: 0.875rem;
+	font-weight: 600;
+	border-radius: 5px;
+	border: 1px solid transparent;
+	cursor: pointer;
+	transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+	text-decoration: none;
+	white-space: nowrap;
+	line-height: 1;
+}
+
+.jasanika-pm__btn .dashicons {
+	font-size: 0.9375rem;
+	width: 0.9375rem;
+	height: 0.9375rem;
+}
+
+/* Primary – purple */
+.jasanika-pm__btn--primary {
+	background: rgba( 183, 138, 203, 0.18 );
+	color: #b78acb;
+	border-color: rgba( 183, 138, 203, 0.35 );
+}
+
+.jasanika-pm__btn--primary:hover {
+	background: rgba( 183, 138, 203, 0.28 );
+	border-color: rgba( 199, 156, 218, 0.5 );
+	color: #c79cda;
+}
+
+/* Secondary – muted */
+.jasanika-pm__btn--secondary {
+	background: rgba( 185, 177, 196, 0.1 );
+	color: #b9b1c4;
+	border-color: rgba( 185, 177, 196, 0.25 );
+}
+
+.jasanika-pm__btn--secondary:hover {
+	background: rgba( 185, 177, 196, 0.18 );
+	border-color: rgba( 185, 177, 196, 0.4 );
+	color: #d0cad9;
+}
+
+/* Outline – ghost */
+.jasanika-pm__btn--outline {
+	background: transparent;
+	color: #b9b1c4;
+	border-color: #3a3a3a;
+}
+
+.jasanika-pm__btn--outline:hover {
+	background: rgba( 255, 255, 255, 0.05 );
+	border-color: #555;
+	color: #f5f2f7;
+}
+
+/* Activate – green */
+.jasanika-pm__btn--activate {
+	background: rgba( 80, 180, 120, 0.12 );
+	color: #7ed4a0;
+	border-color: rgba( 80, 180, 120, 0.3 );
+}
+
+.jasanika-pm__btn--activate:hover {
+	background: rgba( 80, 180, 120, 0.2 );
+	border-color: rgba( 80, 180, 120, 0.5 );
+	color: #9ee8b8;
+}
+
+/* Export – natural */
+.jasanika-pm__btn--export {
+	background: rgba( 176, 138, 103, 0.12 );
+	color: #b08a67;
+	border-color: rgba( 176, 138, 103, 0.3 );
+}
+
+.jasanika-pm__btn--export:hover {
+	background: rgba( 176, 138, 103, 0.2 );
+	border-color: rgba( 176, 138, 103, 0.5 );
+	color: #c8a080;
+}
+
+/* Duplicate – accent */
+.jasanika-pm__btn--duplicate {
+	background: rgba( 241, 201, 93, 0.08 );
+	color: #f1c95d;
+	border-color: rgba( 241, 201, 93, 0.25 );
+}
+
+.jasanika-pm__btn--duplicate:hover {
+	background: rgba( 241, 201, 93, 0.15 );
+	border-color: rgba( 241, 201, 93, 0.45 );
+	color: #f5d47a;
+}
+
+/* Delete – red/muted */
+.jasanika-pm__btn--delete {
+	background: rgba( 200, 80, 80, 0.1 );
+	color: #e08080;
+	border-color: rgba( 200, 80, 80, 0.25 );
+}
+
+.jasanika-pm__btn--delete:hover {
+	background: rgba( 200, 80, 80, 0.18 );
+	border-color: rgba( 200, 80, 80, 0.45 );
+	color: #f09090;
+}
+
+/* ---------------------------------------------------------------------------
+   Forms
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.jasanika-pm__form-row {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.jasanika-pm__label {
+	font-size: 0.9375rem;
+	font-weight: 600;
+	color: #f5f2f7;
+}
+
+.jasanika-pm__required {
+	color: #e08080;
+	margin-left: 3px;
+}
+
+.jasanika-pm__input,
+.jasanika-pm__textarea {
+	background: rgba( 255, 255, 255, 0.04 );
+	border: 1px solid #3a3a3a;
+	border-radius: 5px;
+	padding: 9px 12px;
+	color: #f5f2f7;
+	font-size: 0.9375rem;
+	transition: border-color 0.15s ease;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.jasanika-pm__input:focus,
+.jasanika-pm__textarea:focus {
+	outline: none;
+	border-color: rgba( 183, 138, 203, 0.6 );
+	background: rgba( 255, 255, 255, 0.06 );
+}
+
+.jasanika-pm__textarea {
+	resize: vertical;
+	min-height: 80px;
+}
+
+.jasanika-pm__file-input {
+	font-size: 0.875rem;
+	color: #b9b1c4;
+	cursor: pointer;
+	padding: 4px 0;
+}
+
+.jasanika-pm__hint {
+	color: #8c8c8c;
+	font-size: 0.8125rem;
+	margin: 2px 0 0;
+	line-height: 1.5;
+}
+
+.jasanika-pm__form-actions {
+	padding-top: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   Comparison Panel
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__compare-grid {
+	display: grid;
+	grid-template-columns: 1fr 40px 1fr;
+	gap: 16px;
+	align-items: start;
+	margin-bottom: 20px;
+}
+
+@media ( max-width: 700px ) {
+	.jasanika-pm__compare-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.jasanika-pm__compare-arrow {
+		display: none;
+	}
+}
+
+.jasanika-pm__compare-col {
+	background: rgba( 255, 255, 255, 0.02 );
+	border: 1px solid #3a3a3a;
+	border-radius: 6px;
+	padding: 16px;
+}
+
+.jasanika-pm__compare-arrow {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding-top: 48px;
+	color: #555;
+}
+
+.jasanika-pm__compare-arrow .dashicons {
+	font-size: 1.5rem;
+	width: 1.5rem;
+	height: 1.5rem;
+}
+
+.jasanika-pm__compare-col-title {
+	font-size: 0.9375rem;
+	font-weight: 600;
+	color: #b9b1c4;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	margin: 0 0 12px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #3a3a3a;
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.jasanika-pm__compare-col-title--current {
+	color: #b9b1c4;
+}
+
+.jasanika-pm__compare-col-title--import {
+	color: #b78acb;
+}
+
+.jasanika-pm__compare-name {
+	font-size: 1rem;
+	color: #f5f2f7;
+	font-weight: 700;
+	text-transform: none;
+	letter-spacing: 0;
+}
+
+.jasanika-pm__compare-rows {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.jasanika-pm__compare-row {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+}
+
+.jasanika-pm__compare-label {
+	font-size: 0.75rem;
+	color: #b9b1c4;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+.jasanika-pm__compare-value {
+	font-size: 0.9rem;
+	color: #f5f2f7;
+	line-height: 1.5;
+}
+
+.jasanika-pm__compare-desc {
+	margin: 12px 0 0;
+	font-size: 0.875rem;
+	color: #b9b1c4;
+	font-style: italic;
+	line-height: 1.5;
+}
+
+.jasanika-pm__compare-actions {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding-top: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   Text utilities
+--------------------------------------------------------------------------- */
+
+.jasanika-pm__text-muted {
+	color: #666;
+	font-style: italic;
+}
+
+.jasanika-pm__text-warning {
+	color: #f1c95d;
+}
