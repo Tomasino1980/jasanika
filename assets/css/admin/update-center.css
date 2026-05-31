@@ -1,0 +1,615 @@
+/**
+ * Jasanika Admin – Update Center Styles
+ *
+ * Styles for the Jasanika → Update Center admin page.
+ * Loaded exclusively on the Update Center page.
+ */
+
+/* ---------------------------------------------------------------------------
+   Page wrapper
+--------------------------------------------------------------------------- */
+
+.jasanika-update-center {
+	max-width: 1400px;
+	padding: 12px 0 40px;
+	color: #f5f2f7;
+}
+
+.jasanika-update-center__header {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 28px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.jasanika-update-center__icon {
+	font-size: 2rem;
+	color: #b78acb;
+	flex-shrink: 0;
+}
+
+.jasanika-update-center__title {
+	margin: 0 !important;
+	font-size: 1.6rem !important;
+	color: #f5f2f7 !important;
+	line-height: 1.2 !important;
+}
+
+.jasanika-update-center__subtitle {
+	margin: 4px 0 0 !important;
+	color: #b9b1c4;
+	font-size: 0.9rem;
+}
+
+.jasanika-update-center__version-badge {
+	margin-left: auto;
+	background: rgba(183, 138, 203, 0.15);
+	border: 1px solid rgba(183, 138, 203, 0.3);
+	border-radius: 20px;
+	padding: 6px 16px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	color: #b78acb;
+	white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------------
+   Sections
+--------------------------------------------------------------------------- */
+
+.jasanika-uc-section {
+	margin-bottom: 32px;
+}
+
+.jasanika-uc-section__title {
+	font-size: 0.78rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #b9b1c4;
+	margin: 0 0 14px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ---------------------------------------------------------------------------
+   Update Notices
+--------------------------------------------------------------------------- */
+
+.jasanika-uc-notices {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 28px;
+}
+
+.jasanika-uc-notice {
+	display: flex;
+	align-items: flex-start;
+	gap: 12px;
+	padding: 14px 18px;
+	border-radius: 8px;
+	border: 1px solid;
+	font-size: 0.875rem;
+}
+
+.jasanika-uc-notice--milestone {
+	background: rgba(183, 138, 203, 0.1);
+	border-color: rgba(183, 138, 203, 0.3);
+}
+
+.jasanika-uc-notice--migration {
+	background: rgba(241, 201, 93, 0.08);
+	border-color: rgba(241, 201, 93, 0.3);
+}
+
+.jasanika-uc-notice--config {
+	background: rgba(176, 138, 103, 0.1);
+	border-color: rgba(176, 138, 103, 0.3);
+}
+
+.jasanika-uc-notice__icon {
+	font-size: 1rem;
+	flex-shrink: 0;
+	margin-top: 1px;
+}
+
+.jasanika-uc-notice--milestone .jasanika-uc-notice__icon { color: #b78acb; }
+.jasanika-uc-notice--migration .jasanika-uc-notice__icon { color: #f1c95d; }
+.jasanika-uc-notice--config    .jasanika-uc-notice__icon { color: #b08a67; }
+
+.jasanika-uc-notice__body {
+	flex: 1;
+	min-width: 0;
+}
+
+.jasanika-uc-notice__title {
+	font-weight: 600;
+	margin-bottom: 2px;
+}
+
+.jasanika-uc-notice--milestone .jasanika-uc-notice__title { color: #b78acb; }
+.jasanika-uc-notice--migration .jasanika-uc-notice__title { color: #f1c95d; }
+.jasanika-uc-notice--config    .jasanika-uc-notice__title { color: #b08a67; }
+
+.jasanika-uc-notice__text {
+	color: #b9b1c4;
+	font-size: 0.84rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Version Overview Cards
+--------------------------------------------------------------------------- */
+
+.jasanika-uc-version-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 16px;
+}
+
+.jasanika-uc-version-card {
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	padding: 20px 22px;
+}
+
+.jasanika-uc-version-card__label {
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	color: #b9b1c4;
+	margin-bottom: 8px;
+}
+
+.jasanika-uc-version-card__value {
+	font-size: 1.5rem;
+	font-weight: 700;
+	color: #b78acb;
+	line-height: 1.1;
+}
+
+.jasanika-uc-version-card__sub {
+	font-size: 0.78rem;
+	color: #b9b1c4;
+	margin-top: 4px;
+}
+
+/* ---------------------------------------------------------------------------
+   Theme Information Table
+--------------------------------------------------------------------------- */
+
+.jasanika-uc-info-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.jasanika-uc-info-table tr {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.jasanika-uc-info-table tr:last-child {
+	border-bottom: none;
+}
+
+.jasanika-uc-info-table td {
+	padding: 12px 18px;
+	font-size: 0.875rem;
+}
+
+.jasanika-uc-info-table__label {
+	color: #b9b1c4;
+	width: 200px;
+	font-weight: 500;
+}
+
+.jasanika-uc-info-table__value {
+	color: #f5f2f7;
+}
+
+.jasanika-uc-info-table__value a {
+	color: #b78acb;
+	text-decoration: none;
+}
+
+.jasanika-uc-info-table__value a:hover {
+	color: #c79cda;
+	text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------------------
+   Module Overview Grid
+--------------------------------------------------------------------------- */
+
+.jasanika-uc-modules-grid {
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	gap: 12px;
+}
+
+.jasanika-uc-module-card {
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	padding: 14px 16px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.jasanika-uc-module-card__status {
+	font-size: 1rem;
+	line-height: 1;
+	flex-shrink: 0;
+}
+
+.jasanika-uc-module-card--active .jasanika-uc-module-card__status {
+	color: #6ed29a;
+}
+
+.jasanika-uc-module-card--inactive .jasanika-uc-module-card__status {
+	color: #b9b1c4;
+}
+
+.jasanika-uc-module-card__label {
+	font-size: 0.82rem;
+	color: #f5f2f7;
+	font-weight: 500;
+	line-height: 1.3;
+}
+
+.jasanika-uc-module-card--active {
+	border-color: rgba(110, 210, 154, 0.2);
+}
+
+/* ---------------------------------------------------------------------------
+   System Compatibility
+--------------------------------------------------------------------------- */
+
+.jasanika-uc-compat-grid {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 16px;
+}
+
+.jasanika-uc-compat-card {
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	padding: 20px 22px;
+}
+
+.jasanika-uc-compat-card__label {
+	font-size: 0.78rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	color: #b9b1c4;
+	margin-bottom: 6px;
+}
+
+.jasanika-uc-compat-card__version {
+	font-size: 1.25rem;
+	font-weight: 700;
+	color: #f5f2f7;
+	margin-bottom: 8px;
+}
+
+.jasanika-uc-compat-badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 5px;
+	padding: 3px 10px;
+	border-radius: 4px;
+	font-size: 0.78rem;
+	font-weight: 600;
+}
+
+.jasanika-uc-compat-badge--ok {
+	background: rgba(110, 210, 154, 0.15);
+	color: #6ed29a;
+}
+
+.jasanika-uc-compat-badge--warn {
+	background: rgba(241, 201, 93, 0.15);
+	color: #f1c95d;
+}
+
+.jasanika-uc-compat-badge--na {
+	background: rgba(255, 255, 255, 0.06);
+	color: #b9b1c4;
+}
+
+/* ---------------------------------------------------------------------------
+   Changelog Viewer
+--------------------------------------------------------------------------- */
+
+.jasanika-uc-changelog {
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	overflow: hidden;
+	max-height: 360px;
+	overflow-y: auto;
+}
+
+.jasanika-uc-changelog::-webkit-scrollbar {
+	width: 6px;
+}
+
+.jasanika-uc-changelog::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.03);
+}
+
+.jasanika-uc-changelog::-webkit-scrollbar-thumb {
+	background: rgba(183, 138, 203, 0.3);
+	border-radius: 3px;
+}
+
+.jasanika-uc-changelog-item {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	padding: 12px 18px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	transition: background 0.15s;
+}
+
+.jasanika-uc-changelog-item:last-child {
+	border-bottom: none;
+}
+
+.jasanika-uc-changelog-item:hover {
+	background: rgba(255, 255, 255, 0.02);
+}
+
+.jasanika-uc-changelog-item--current {
+	background: rgba(183, 138, 203, 0.07);
+	border-left: 3px solid #b78acb;
+}
+
+.jasanika-uc-changelog-item__milestone {
+	font-size: 0.75rem;
+	font-weight: 700;
+	color: #b78acb;
+	min-width: 40px;
+	text-align: right;
+	flex-shrink: 0;
+}
+
+.jasanika-uc-changelog-item--current .jasanika-uc-changelog-item__milestone {
+	color: #c79cda;
+}
+
+.jasanika-uc-changelog-item__name {
+	font-size: 0.875rem;
+	color: #f5f2f7;
+	font-weight: 500;
+	flex: 1;
+}
+
+.jasanika-uc-changelog-item__version {
+	font-size: 0.78rem;
+	color: #b9b1c4;
+	flex-shrink: 0;
+}
+
+.jasanika-uc-changelog-item__badge {
+	font-size: 0.7rem;
+	font-weight: 600;
+	padding: 2px 8px;
+	border-radius: 3px;
+	background: rgba(183, 138, 203, 0.2);
+	color: #b78acb;
+	flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Release History Table
+--------------------------------------------------------------------------- */
+
+.jasanika-uc-release-table {
+	width: 100%;
+	border-collapse: collapse;
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.jasanika-uc-release-table thead tr {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+	background: rgba(255, 255, 255, 0.03);
+}
+
+.jasanika-uc-release-table th {
+	padding: 10px 18px;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+	color: #b9b1c4;
+	text-align: left;
+}
+
+.jasanika-uc-release-table tbody tr {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.jasanika-uc-release-table tbody tr:last-child {
+	border-bottom: none;
+}
+
+.jasanika-uc-release-table td {
+	padding: 12px 18px;
+	font-size: 0.875rem;
+	color: #f5f2f7;
+}
+
+.jasanika-uc-release-table td:first-child {
+	font-weight: 700;
+	color: #b78acb;
+	white-space: nowrap;
+}
+
+.jasanika-uc-release-table td:nth-child(2) {
+	color: #b9b1c4;
+	white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------------------
+   Export Report
+--------------------------------------------------------------------------- */
+
+.jasanika-uc-export {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+.jasanika-uc-export__description {
+	font-size: 0.875rem;
+	color: #b9b1c4;
+	margin-bottom: 14px;
+}
+
+.jasanika-uc-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 9px 18px;
+	border-radius: 6px;
+	font-size: 0.85rem;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+	border: none;
+	transition: background 0.2s, color 0.2s, border-color 0.2s;
+	line-height: 1;
+	background: transparent;
+}
+
+.jasanika-uc-btn--txt {
+	background: rgba(255, 255, 255, 0.06);
+	color: #f5f2f7;
+	border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.jasanika-uc-btn--txt:hover {
+	background: rgba(183, 138, 203, 0.15);
+	color: #b78acb;
+	border-color: rgba(183, 138, 203, 0.3);
+}
+
+.jasanika-uc-btn--json {
+	background: rgba(183, 138, 203, 0.12);
+	color: #b78acb;
+	border: 1px solid rgba(183, 138, 203, 0.25);
+}
+
+.jasanika-uc-btn--json:hover {
+	background: rgba(183, 138, 203, 0.22);
+	color: #c79cda;
+	border-color: rgba(183, 138, 203, 0.4);
+}
+
+/* ---------------------------------------------------------------------------
+   Dashboard Widget (wp-admin/index.php)
+--------------------------------------------------------------------------- */
+
+.jasanika-version-widget {
+	padding: 4px 0;
+}
+
+.jasanika-version-widget__row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	font-size: 0.875rem;
+}
+
+.jasanika-version-widget__row:last-child {
+	border-bottom: none;
+}
+
+.jasanika-version-widget__label {
+	color: #b9b1c4;
+}
+
+.jasanika-version-widget__value {
+	color: #f5f2f7;
+	font-weight: 600;
+}
+
+.jasanika-version-widget__link {
+	display: inline-block;
+	margin-top: 12px;
+	font-size: 0.8rem;
+	color: #b78acb;
+	text-decoration: none;
+}
+
+.jasanika-version-widget__link:hover {
+	color: #c79cda;
+	text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive – Tablet (≤1200px)
+--------------------------------------------------------------------------- */
+
+@media screen and (max-width: 1200px) {
+	.jasanika-uc-version-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.jasanika-uc-modules-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive – Mobile (≤782px)
+--------------------------------------------------------------------------- */
+
+@media screen and (max-width: 782px) {
+	.jasanika-update-center__header {
+		flex-wrap: wrap;
+	}
+
+	.jasanika-update-center__version-badge {
+		margin-left: 0;
+	}
+
+	.jasanika-uc-version-grid {
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.jasanika-uc-modules-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.jasanika-uc-compat-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.jasanika-uc-version-grid {
+		grid-template-columns: 1fr;
+	}
+
+	.jasanika-uc-modules-grid {
+		grid-template-columns: 1fr;
+	}
+}

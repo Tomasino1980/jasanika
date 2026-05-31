@@ -24,6 +24,7 @@ require_once get_template_directory() . '/inc/admin/pages/backup-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/diagnostics-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/profile-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/maintenance-manager.php';
+require_once get_template_directory() . '/inc/admin/pages/update-center.php';
 
 add_action( 'admin_menu', 'jasanika_register_admin_menu' );
 
@@ -161,5 +162,15 @@ function jasanika_register_admin_menu(): void {
 		'manage_options',
 		'jasanika-maintenance-manager',
 		'jasanika_admin_page_maintenance_manager'
+	);
+
+	// Update Center sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Update Center', 'jasanika' ),
+		__( 'Update Center', 'jasanika' ),
+		'manage_options',
+		'jasanika-update-center',
+		'jasanika_admin_page_update_center'
 	);
 }
