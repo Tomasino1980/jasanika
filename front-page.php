@@ -11,15 +11,9 @@ get_header();
 
 <main id="main" class="site-main">
 
-	<?php get_template_part( 'template-parts/components/hero-slider' ); ?>
-
-	<?php get_template_part( 'template-parts/components/feature-blocks' ); ?>
-
-	<?php get_template_part( 'template-parts/components/latest-posts' ); ?>
-
-	<?php get_template_part( 'template-parts/components/categories' ); ?>
-
-	<?php get_template_part( 'template-parts/components/cta-section' ); ?>
+	<?php foreach ( jasanika_get_enabled_homepage_sections() as $key => $section ) : ?>
+		<?php jasanika_render_homepage_section( $key ); ?>
+	<?php endforeach; ?>
 
 </main>
 

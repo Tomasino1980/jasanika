@@ -575,6 +575,15 @@ function jasanika_theme_settings_init(): void {
 		)
 	);
 
+	// --- Homepage Builder Section -------------------------------------------
+
+	add_settings_section(
+		'jasanika_section_homepage_builder',
+		__( 'Homepage Builder', 'jasanika' ),
+		'jasanika_settings_section_homepage_builder_cb',
+		'jasanika-theme-settings'
+	);
+
 	// --- Footer Builder Section ----------------------------------------------
 
 	add_settings_section(
@@ -753,6 +762,17 @@ function jasanika_sanitize_settings( mixed $input ): array {
 	$sanitized['footer_contact_email']   = sanitize_email( $input['footer_contact_email']           ?? '' );
 	$sanitized['footer_contact_address'] = sanitize_textarea_field( $input['footer_contact_address'] ?? '' );
 
+	// Homepage Builder – section enabled / order.
+	foreach ( array_keys( jasanika_homepage_sections_registry() ) as $key ) {
+		$enabled_key = 'hb_' . $key . '_enabled';
+		$order_key   = 'hb_' . $key . '_order';
+
+		$sanitized[ $enabled_key ] = isset( $input[ $enabled_key ] ) ? 1 : 0;
+
+		$order = absint( $input[ $order_key ] ?? 0 );
+		$sanitized[ $order_key ] = max( 1, min( 99, $order ) );
+	}
+
 	return $sanitized;
 }
 
@@ -878,6 +898,75 @@ function jasanika_settings_field_media( array $args ): void {
 		style="max-width:150px;margin-top:8px;<?php echo $has_image ? '' : 'display:none;'; ?>"
 		alt=""
 	>
+	<?php
+}
+
+// ---------------------------------------------------------------------------
+// Homepage Builder Section Callback
+// ---------------------------------------------------------------------------
+
+/**
+ * Renders the Homepage Builder table in the Theme Settings admin page.
+ *
+ * Displays a table-like interface listing each registered homepage section
+ * with its Enabled checkbox and Sort Order number input. Fields are saved
+ * as part of the jasanika_settings option group.
+ */
+function jasanika_settings_section_homepage_builder_cb(): void {
+	$registry = jasanika_homepage_sections_registry();
+	$settings = get_option( 'jasanika_settings', array() );
+	?>
+	<p class="description">
+		<?php esc_html_e( 'Enable or disable each homepage section and set its display order.', 'jasanika' ); ?>
+	</p>
+	<table class="widefat striped jasanika-homepage-builder-table" style="margin-top:12px;">
+		<thead>
+			<tr>
+				<th><?php esc_html_e( 'Section Name', 'jasanika' ); ?></th>
+				<th><?php esc_html_e( 'Enabled', 'jasanika' ); ?></th>
+				<th><?php esc_html_e( 'Sort Order', 'jasanika' ); ?></th>
+			</tr>
+		</thead>
+		<tbody>
+			<?php foreach ( $registry as $key => $section ) :
+				$enabled_key = 'hb_' . $key . '_enabled';
+				$order_key   = 'hb_' . $key . '_order';
+
+				$enabled = isset( $settings[ $enabled_key ] )
+					? (bool) $settings[ $enabled_key ]
+					: $section['default_enabled'];
+
+				$order = ( isset( $settings[ $order_key ] ) && '' !== $settings[ $order_key ] )
+					? (int) $settings[ $order_key ]
+					: $section['default_order'];
+			?>
+			<tr>
+				<td><strong><?php echo esc_html( $section['label'] ); ?></strong></td>
+				<td>
+					<label>
+						<input
+							type="checkbox"
+							name="jasanika_settings[<?php echo esc_attr( $enabled_key ); ?>]"
+							value="1"
+							<?php checked( $enabled ); ?>
+						>
+						<?php esc_html_e( 'Yes', 'jasanika' ); ?>
+					</label>
+				</td>
+				<td>
+					<input
+						type="number"
+						name="jasanika_settings[<?php echo esc_attr( $order_key ); ?>]"
+						value="<?php echo esc_attr( (string) $order ); ?>"
+						min="1"
+						max="99"
+						class="small-text"
+					>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+		</tbody>
+	</table>
 	<?php
 }
 
