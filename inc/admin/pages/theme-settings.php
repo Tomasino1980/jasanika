@@ -621,6 +621,63 @@ function jasanika_theme_settings_init(): void {
 		)
 	);
 
+	// --- Newsletter Section --------------------------------------------------
+
+	add_settings_section(
+		'jasanika_section_newsletter',
+		__( 'Newsletter', 'jasanika' ),
+		'__return_false',
+		'jasanika-theme-settings'
+	);
+
+	add_settings_field(
+		'jasanika_newsletter_title',
+		__( 'Section Title', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_newsletter',
+		array(
+			'key'         => 'newsletter_title',
+			'placeholder' => __( 'Newsletter', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_newsletter_description',
+		__( 'Section Description', 'jasanika' ),
+		'jasanika_settings_field_textarea',
+		'jasanika-theme-settings',
+		'jasanika_section_newsletter',
+		array(
+			'key'         => 'newsletter_description',
+			'placeholder' => __( 'Subscribe to receive updates and special offers.', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_newsletter_success',
+		__( 'Success Message', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_newsletter',
+		array(
+			'key'         => 'newsletter_success',
+			'placeholder' => __( 'Thank you for subscribing.', 'jasanika' ),
+		)
+	);
+
+	add_settings_field(
+		'jasanika_newsletter_privacy_text',
+		__( 'Privacy Checkbox Text', 'jasanika' ),
+		'jasanika_settings_field_text',
+		'jasanika-theme-settings',
+		'jasanika_section_newsletter',
+		array(
+			'key'         => 'newsletter_privacy_text',
+			'placeholder' => __( 'I agree to the Privacy Policy.', 'jasanika' ),
+		)
+	);
+
 	// --- Homepage Builder Section -------------------------------------------
 
 	add_settings_section(
@@ -800,6 +857,12 @@ function jasanika_sanitize_settings( mixed $input ): array {
 	$sanitized['featured_products_description'] = sanitize_textarea_field( $input['featured_products_description'] ?? '' );
 	$featured_products_count                    = absint( $input['featured_products_count'] ?? 4 );
 	$sanitized['featured_products_count']       = min( max( $featured_products_count, 1 ), 12 );
+
+	// Newsletter.
+	$sanitized['newsletter_title']        = sanitize_text_field( $input['newsletter_title']        ?? '' );
+	$sanitized['newsletter_description']  = sanitize_textarea_field( $input['newsletter_description']  ?? '' );
+	$sanitized['newsletter_success']      = sanitize_text_field( $input['newsletter_success']      ?? '' );
+	$sanitized['newsletter_privacy_text'] = sanitize_text_field( $input['newsletter_privacy_text'] ?? '' );
 
 	// Footer Builder – Columns.
 	$footer_allowed = jasanika_footer_allowed_html();

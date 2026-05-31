@@ -1,0 +1,190 @@
+/**
+ * Newsletter Section
+ *
+ * Styles for the newsletter subscription component.
+ * Design system: dark background, purple primary, glassmorphism panels.
+ */
+
+/* ---------------------------------------------------------------------------
+   Section
+   ------------------------------------------------------------------------- */
+
+.newsletter-section {
+	background-color: var(--bg-secondary);
+	padding: 80px 0;
+}
+
+.newsletter-section__container {
+	max-width: 680px;
+	margin: 0 auto;
+	padding: 0 24px;
+	text-align: center;
+}
+
+/* ---------------------------------------------------------------------------
+   Heading & Description
+   ------------------------------------------------------------------------- */
+
+.newsletter-section__heading {
+	font-family: var(--font-heading, 'Playfair Display', serif);
+	font-size: 2rem;
+	font-weight: 700;
+	color: var(--text-main);
+	margin: 0 0 16px;
+}
+
+.newsletter-section__description {
+	color: var(--text-muted);
+	font-size: 1rem;
+	line-height: 1.7;
+	margin: 0 0 40px;
+}
+
+/* ---------------------------------------------------------------------------
+   Form Layout
+   ------------------------------------------------------------------------- */
+
+.newsletter-section__form {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.newsletter-section__input-row {
+	display: flex;
+	gap: 12px;
+	flex-wrap: wrap;
+}
+
+/* ---------------------------------------------------------------------------
+   Email Input
+   ------------------------------------------------------------------------- */
+
+.newsletter-section__email {
+	flex: 1;
+	min-width: 220px;
+	padding: 12px 16px;
+	background: var(--panel-bg);
+	border: 1px solid var(--border-soft);
+	border-radius: 4px;
+	color: var(--text-main);
+	font-family: inherit;
+	font-size: 1rem;
+	outline: none;
+	transition: border-color 0.2s ease;
+}
+
+.newsletter-section__email:focus {
+	border-color: var(--primary);
+}
+
+.newsletter-section__email::placeholder {
+	color: var(--text-muted);
+}
+
+/* ---------------------------------------------------------------------------
+   Submit Button
+   ------------------------------------------------------------------------- */
+
+.newsletter-section__submit {
+	padding: 12px 28px;
+	background-color: var(--primary);
+	color: var(--bg-main);
+	border: none;
+	border-radius: 4px;
+	font-family: inherit;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.2s ease;
+	white-space: nowrap;
+	flex-shrink: 0;
+}
+
+.newsletter-section__submit:hover {
+	background-color: var(--primary-hover);
+}
+
+.newsletter-section__submit:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+
+/* ---------------------------------------------------------------------------
+   Privacy Consent
+   ------------------------------------------------------------------------- */
+
+.newsletter-section__consent {
+	display: flex;
+	align-items: flex-start;
+	gap: 10px;
+	text-align: left;
+	font-size: 0.875rem;
+	color: var(--text-muted);
+	cursor: pointer;
+}
+
+.newsletter-section__consent-checkbox {
+	margin-top: 2px;
+	flex-shrink: 0;
+	accent-color: var(--primary);
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+
+/* ---------------------------------------------------------------------------
+   Message Area
+   ------------------------------------------------------------------------- */
+
+.newsletter-section__message {
+	font-size: 0.9rem;
+	line-height: 1.5;
+	min-height: 0;
+}
+
+.newsletter-section__message:not(:empty) {
+	margin-top: 4px;
+	padding: 12px 16px;
+	border-radius: 4px;
+}
+
+.newsletter-section__message--success {
+	background-color: rgba(70, 180, 80, 0.12);
+	border: 1px solid rgba(70, 180, 80, 0.25);
+	color: #6ece7a;
+}
+
+.newsletter-section__message--error {
+	background-color: rgba(220, 50, 50, 0.10);
+	border: 1px solid rgba(220, 50, 50, 0.22);
+	color: #e07070;
+}
+
+/* ---------------------------------------------------------------------------
+   Responsive
+   ------------------------------------------------------------------------- */
+
+@media ( max-width: 600px ) {
+
+	.newsletter-section {
+		padding: 60px 0;
+	}
+
+	.newsletter-section__heading {
+		font-size: 1.6rem;
+	}
+
+	.newsletter-section__input-row {
+		flex-direction: column;
+	}
+
+	.newsletter-section__email {
+		min-width: 0;
+		width: 100%;
+	}
+
+	.newsletter-section__submit {
+		width: 100%;
+	}
+}

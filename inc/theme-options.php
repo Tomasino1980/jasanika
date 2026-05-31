@@ -259,6 +259,26 @@ function jasanika_get_latest_posts_count(): int {
 }
 
 // ---------------------------------------------------------------------------
+// Newsletter
+// ---------------------------------------------------------------------------
+
+function jasanika_get_newsletter_title(): string {
+	return (string) jasanika_get_option( 'newsletter_title', __( 'Newsletter', 'jasanika' ) );
+}
+
+function jasanika_get_newsletter_description(): string {
+	return (string) jasanika_get_option( 'newsletter_description', __( 'Subscribe to receive updates and special offers.', 'jasanika' ) );
+}
+
+function jasanika_get_newsletter_success(): string {
+	return (string) jasanika_get_option( 'newsletter_success', __( 'Thank you for subscribing.', 'jasanika' ) );
+}
+
+function jasanika_get_newsletter_privacy_text(): string {
+	return (string) jasanika_get_option( 'newsletter_privacy_text', __( 'I agree to the Privacy Policy.', 'jasanika' ) );
+}
+
+// ---------------------------------------------------------------------------
 // Footer Builder
 // ---------------------------------------------------------------------------
 

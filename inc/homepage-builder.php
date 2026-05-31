@@ -69,6 +69,12 @@ function jasanika_homepage_sections_registry(): array {
 			'default_order'   => 7,
 			'default_enabled' => true,
 		),
+		'newsletter' => array(
+			'label'           => __( 'Newsletter', 'jasanika' ),
+			'template'        => 'template-parts/components/newsletter',
+			'default_order'   => 8,
+			'default_enabled' => true,
+		),
 	);
 }
 

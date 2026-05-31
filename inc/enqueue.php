@@ -255,6 +255,38 @@ function jasanika_enqueue_assets() {
 			array( 'jasanika-variables', 'jasanika-buttons' ),
 			$ver
 		);
+
+		// Newsletter – load only when the section is enabled.
+		$sections = jasanika_get_homepage_sections();
+		if ( ! empty( $sections['newsletter']['enabled'] ) ) {
+			wp_enqueue_style(
+				'jasanika-newsletter',
+				$uri . '/assets/css/components/newsletter.css',
+				array( 'jasanika-variables', 'jasanika-buttons' ),
+				$ver
+			);
+
+			wp_enqueue_script(
+				'jasanika-newsletter',
+				$uri . '/assets/js/newsletter.js',
+				array(),
+				$ver,
+				true
+			);
+
+			wp_localize_script(
+				'jasanika-newsletter',
+				'jasanikaNL',
+				array(
+					'ajaxUrl'  => admin_url( 'admin-ajax.php' ),
+					'messages' => array(
+						'email_required'   => __( 'Please enter your email address.', 'jasanika' ),
+						'consent_required' => __( 'Please accept the privacy policy to subscribe.', 'jasanika' ),
+						'server_error'     => __( 'An error occurred. Please try again later.', 'jasanika' ),
+					),
+				)
+			);
+		}
 	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_assets' );
