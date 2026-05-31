@@ -14,5 +14,6 @@ require_once get_template_directory() . '/inc/theme-support.php';
 require_once get_template_directory() . '/inc/enqueue.php';
 require_once get_template_directory() . '/inc/menus.php';
 require_once get_template_directory() . '/inc/cleanup.php';
+require_once get_template_directory() . '/inc/comments.php';
 require_once get_template_directory() . '/inc/admin/admin.php';
 require_once get_template_directory() . '/inc/woocommerce.php';

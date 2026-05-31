@@ -31,7 +31,9 @@ get_header();
 					?>
 				</nav>
 
-				<?php // M15 - Comments System ?>
+				<?php if ( comments_open() || get_comments_number() ) : ?>
+					<?php comments_template(); ?>
+				<?php endif; ?>
 
 			<?php else : ?>
 

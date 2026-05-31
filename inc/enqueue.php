@@ -119,6 +119,13 @@ function jasanika_enqueue_assets() {
 			array( 'jasanika-variables', 'jasanika-buttons' ),
 			$ver
 		);
+
+		wp_enqueue_style(
+			'jasanika-comments',
+			$uri . '/assets/css/components/comments.css',
+			array( 'jasanika-variables', 'jasanika-buttons' ),
+			$ver
+		);
 	}
 
 	// Search results CSS – search pages only.

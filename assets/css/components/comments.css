@@ -1,0 +1,366 @@
+/* comments.css – Comments section component styles. */
+
+/* ---------------------------------------- */
+/* Section wrapper                          */
+/* ---------------------------------------- */
+
+.comments-section {
+	margin-top: var(--space-12);
+}
+
+.comments-section__inner {
+	max-width: var(--container-md);
+	margin: 0 auto;
+}
+
+.comments-section__title {
+	font-family: var(--font-heading);
+	font-size: var(--text-2xl);
+	font-weight: 600;
+	color: var(--text-main);
+	margin-bottom: var(--space-8);
+	padding-bottom: var(--space-4);
+	border-bottom: 1px solid var(--border-soft);
+}
+
+/* ---------------------------------------- */
+/* Empty state                              */
+/* ---------------------------------------- */
+
+.comments-section__empty {
+	font-size: var(--text-base);
+	color: var(--text-muted);
+	text-align: center;
+	padding: var(--space-10) var(--space-4);
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-lg);
+	margin-bottom: var(--space-10);
+}
+
+/* ---------------------------------------- */
+/* Comment list                             */
+/* ---------------------------------------- */
+
+.comments-list {
+	list-style: none;
+	padding: 0;
+	margin: 0 0 var(--space-10);
+}
+
+.comments-list .children {
+	list-style: none;
+	padding-left: var(--space-8);
+	margin: var(--space-4) 0 0;
+	border-left: 2px solid var(--border-soft);
+}
+
+/* ---------------------------------------- */
+/* Individual comment                       */
+/* ---------------------------------------- */
+
+.comment-item {
+	margin-bottom: var(--space-6);
+}
+
+.comment-item__body {
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-lg);
+	padding: var(--space-6);
+}
+
+/* ---------------------------------------- */
+/* Comment header                           */
+/* ---------------------------------------- */
+
+.comment-item__header {
+	display: flex;
+	align-items: center;
+	gap: var(--space-4);
+	margin-bottom: var(--space-4);
+	flex-wrap: wrap;
+}
+
+.comment-item__author,
+.comment-item__author a {
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	font-weight: 600;
+	color: var(--primary);
+	text-decoration: none;
+	transition: color var(--transition-fast);
+}
+
+.comment-item__author a:hover {
+	color: var(--primary-hover);
+}
+
+.comment-item__date {
+	font-size: var(--text-xs);
+	color: var(--text-muted);
+}
+
+/* ---------------------------------------- */
+/* Comment content                          */
+/* ---------------------------------------- */
+
+.comment-item__content {
+	font-size: var(--text-base);
+	color: var(--text-main);
+	line-height: var(--leading-loose);
+}
+
+.comment-item__content p {
+	margin: 0 0 var(--space-3);
+}
+
+.comment-item__content p:last-child {
+	margin-bottom: 0;
+}
+
+/* ---------------------------------------- */
+/* Reply link                               */
+/* ---------------------------------------- */
+
+.comment-item__reply {
+	margin-top: var(--space-4);
+}
+
+.comment-item__reply .comment-reply-link {
+	font-size: var(--text-sm);
+	font-weight: 500;
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color var(--transition-fast);
+}
+
+.comment-item__reply .comment-reply-link:hover {
+	color: var(--primary);
+}
+
+/* ---------------------------------------- */
+/* Comment awaiting moderation              */
+/* ---------------------------------------- */
+
+.comment-awaiting-moderation {
+	display: inline-block;
+	font-size: var(--text-xs);
+	color: var(--accent);
+	margin-top: var(--space-2);
+}
+
+/* ---------------------------------------- */
+/* Comments pagination                      */
+/* ---------------------------------------- */
+
+.comments-pagination {
+	display: flex;
+	justify-content: center;
+	gap: var(--space-3);
+	margin-bottom: var(--space-10);
+}
+
+.comments-pagination a,
+.comments-pagination .current {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	text-decoration: none;
+	padding: var(--space-2) var(--space-3);
+	border-radius: var(--radius-md);
+	transition: color var(--transition-fast), background var(--transition-fast);
+}
+
+.comments-pagination a:hover {
+	color: var(--primary);
+	background: var(--panel-bg);
+}
+
+.comments-pagination .current {
+	color: var(--primary);
+	font-weight: 600;
+}
+
+/* ---------------------------------------- */
+/* Native comment form                      */
+/* ---------------------------------------- */
+
+.comment-respond {
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-lg);
+	padding: var(--space-8);
+	margin-top: var(--space-8);
+}
+
+.comment-reply-title {
+	font-family: var(--font-heading);
+	font-size: var(--text-xl);
+	font-weight: 600;
+	color: var(--text-main);
+	margin-bottom: var(--space-6);
+}
+
+.comment-reply-title small {
+	display: block;
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	font-weight: 400;
+	margin-top: var(--space-2);
+}
+
+.comment-reply-title small a {
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: color var(--transition-fast);
+}
+
+.comment-reply-title small a:hover {
+	color: var(--primary);
+}
+
+.comment-form .comment-notes {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	margin-bottom: var(--space-6);
+}
+
+.comment-form .required-field-message {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	margin-bottom: var(--space-6);
+}
+
+/* Form field rows */
+.comment-form-author,
+.comment-form-email,
+.comment-form-url,
+.comment-form-comment {
+	margin-bottom: var(--space-5);
+}
+
+.comment-form label {
+	display: block;
+	font-size: var(--text-sm);
+	font-weight: 500;
+	color: var(--text-muted);
+	margin-bottom: var(--space-2);
+}
+
+.comment-form label .required {
+	color: var(--primary);
+	margin-left: var(--space-1);
+}
+
+/* Text inputs and textarea */
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form input[type="url"],
+.comment-form textarea {
+	display: block;
+	width: 100%;
+	padding: var(--space-3) var(--space-4);
+	background-color: var(--bg-secondary);
+	border: 1px solid var(--border-soft);
+	border-radius: var(--radius-md);
+	color: var(--text-main);
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	line-height: var(--leading-normal);
+	transition: border-color var(--transition-fast);
+	box-sizing: border-box;
+}
+
+.comment-form input[type="text"]:focus,
+.comment-form input[type="email"]:focus,
+.comment-form input[type="url"]:focus,
+.comment-form textarea:focus {
+	outline: none;
+	border-color: var(--primary);
+}
+
+.comment-form input[type="text"]::placeholder,
+.comment-form input[type="email"]::placeholder,
+.comment-form input[type="url"]::placeholder,
+.comment-form textarea::placeholder {
+	color: var(--text-muted);
+	opacity: 0.6;
+}
+
+.comment-form textarea {
+	resize: vertical;
+	min-height: 140px;
+}
+
+/* Submit button */
+.comment-form .form-submit {
+	margin-top: var(--space-6);
+	margin-bottom: 0;
+}
+
+.comment-form .submit {
+	display: inline-block;
+	padding: var(--space-3) var(--space-8);
+	background-color: var(--primary);
+	color: var(--bg-main);
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	font-weight: 600;
+	border: none;
+	border-radius: var(--radius-md);
+	cursor: pointer;
+	transition: background-color var(--transition-fast);
+}
+
+.comment-form .submit:hover,
+.comment-form .submit:focus {
+	background-color: var(--primary-hover);
+	outline: none;
+}
+
+/* Cookies consent checkbox */
+.comment-form-cookies-consent {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-3);
+	margin-bottom: var(--space-4);
+}
+
+.comment-form-cookies-consent input[type="checkbox"] {
+	margin-top: 2px;
+	flex-shrink: 0;
+	accent-color: var(--primary);
+}
+
+.comment-form-cookies-consent label {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	font-weight: 400;
+	margin-bottom: 0;
+	display: inline;
+}
+
+/* ---------------------------------------- */
+/* Responsive                               */
+/* ---------------------------------------- */
+
+@media ( max-width: 640px ) {
+	.comments-section__title {
+		font-size: var(--text-xl);
+	}
+
+	.comment-item__body,
+	.comment-respond {
+		padding: var(--space-4);
+	}
+
+	.comments-list .children {
+		padding-left: var(--space-4);
+	}
+
+	.comment-item__header {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: var(--space-1);
+	}
+}
