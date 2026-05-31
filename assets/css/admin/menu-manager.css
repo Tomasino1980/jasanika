@@ -1,0 +1,342 @@
+/**
+ * Jasanika Admin – Menu Manager Styles
+ *
+ * Styles for the Jasanika → Menu Manager admin page.
+ * Uses the Jasanika admin design system (dark theme, purple accents).
+ */
+
+/* ---------------------------------------------------------------------------
+   Page Layout
+--------------------------------------------------------------------------- */
+
+.jasanika-menu {
+	max-width: 1200px;
+	padding: 12px 0 40px;
+	color: #f5f2f7;
+}
+
+/* ---------------------------------------------------------------------------
+   Header
+--------------------------------------------------------------------------- */
+
+.jasanika-menu__header {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 28px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.jasanika-menu__header-icon {
+	font-size: 2rem;
+	color: #b78acb;
+}
+
+.jasanika-menu__title {
+	margin: 0 !important;
+	font-size: 1.6rem !important;
+	color: #f5f2f7 !important;
+	line-height: 1.2 !important;
+}
+
+.jasanika-menu__subtitle {
+	margin: 4px 0 0 !important;
+	color: #b9b1c4;
+	font-size: 0.9rem;
+}
+
+/* ---------------------------------------------------------------------------
+   Sections
+--------------------------------------------------------------------------- */
+
+.jasanika-menu__section {
+	margin-bottom: 28px;
+}
+
+.jasanika-menu__section-title {
+	font-size: 0.8rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	color: #b9b1c4;
+	margin: 0 0 12px;
+	padding-bottom: 8px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ---------------------------------------------------------------------------
+   Two-column layout
+--------------------------------------------------------------------------- */
+
+.jasanika-menu__two-col {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	margin-bottom: 0;
+}
+
+@media ( max-width: 900px ) {
+	.jasanika-menu__two-col {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* ---------------------------------------------------------------------------
+   Statistics Grid
+--------------------------------------------------------------------------- */
+
+.jasanika-menu__stats-grid {
+	display: grid;
+	grid-template-columns: repeat( 4, 1fr );
+	gap: 16px;
+}
+
+@media ( max-width: 900px ) {
+	.jasanika-menu__stats-grid {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+}
+
+@media ( max-width: 480px ) {
+	.jasanika-menu__stats-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+.jasanika-menu__stat-card {
+	background: #24212b;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	padding: 20px 22px;
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.jasanika-menu__stat-icon {
+	font-size: 1.75rem !important;
+	width: 1.75rem !important;
+	height: 1.75rem !important;
+	color: #b78acb;
+	flex-shrink: 0;
+}
+
+.jasanika-menu__stat-body {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.jasanika-menu__stat-value {
+	font-size: 1.75rem;
+	font-weight: 700;
+	color: #f5f2f7;
+	line-height: 1;
+}
+
+.jasanika-menu__stat-value--ok {
+	color: #6fcf97;
+}
+
+.jasanika-menu__stat-value--warn {
+	color: #f1c95d;
+}
+
+.jasanika-menu__stat-label {
+	font-size: 0.8rem;
+	color: #b9b1c4;
+	line-height: 1.2;
+}
+
+/* ---------------------------------------------------------------------------
+   Card
+--------------------------------------------------------------------------- */
+
+.jasanika-menu__card {
+	background: rgba(255, 255, 255, 0.03);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	padding: 20px 24px;
+}
+
+.jasanika-menu__empty {
+	color: #b9b1c4;
+	font-size: 0.9rem;
+	margin: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Table
+--------------------------------------------------------------------------- */
+
+.jasanika-menu__table {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 0.875rem;
+}
+
+.jasanika-menu__table thead tr {
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.jasanika-menu__table th {
+	color: #b9b1c4;
+	font-size: 0.75rem;
+	font-weight: 600;
+	text-transform: uppercase;
+	letter-spacing: 0.06em;
+	padding: 0 16px 10px 0;
+	text-align: left;
+}
+
+.jasanika-menu__table td {
+	padding: 12px 16px 12px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	vertical-align: middle;
+}
+
+.jasanika-menu__table tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.jasanika-menu__location-name {
+	color: #f5f2f7;
+	font-weight: 600;
+}
+
+.jasanika-menu__assigned-name {
+	color: #f5f2f7;
+}
+
+.jasanika-menu__none {
+	color: #b9b1c4;
+	font-style: italic;
+}
+
+.jasanika-menu__item-count {
+	display: inline-block;
+	background: rgba(183, 138, 203, 0.12);
+	border: 1px solid rgba(183, 138, 203, 0.25);
+	border-radius: 12px;
+	padding: 2px 10px;
+	font-size: 0.8rem;
+	color: #b78acb;
+}
+
+/* ---------------------------------------------------------------------------
+   Status Badges
+--------------------------------------------------------------------------- */
+
+.jasanika-menu__badge {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	padding: 3px 10px;
+	border-radius: 12px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.jasanika-menu__badge .dashicons {
+	font-size: 0.9rem !important;
+	width: 0.9rem !important;
+	height: 0.9rem !important;
+}
+
+.jasanika-menu__badge--ok {
+	background: rgba(111, 207, 151, 0.12);
+	border: 1px solid rgba(111, 207, 151, 0.3);
+	color: #6fcf97;
+}
+
+.jasanika-menu__badge--warn {
+	background: rgba(241, 201, 93, 0.12);
+	border: 1px solid rgba(241, 201, 93, 0.3);
+	color: #f1c95d;
+}
+
+/* ---------------------------------------------------------------------------
+   Quick Actions
+--------------------------------------------------------------------------- */
+
+.jasanika-menu__actions {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.jasanika-menu__action-btn {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 16px;
+	background: rgba(183, 138, 203, 0.08);
+	border: 1px solid rgba(183, 138, 203, 0.2);
+	border-radius: 6px;
+	color: #b78acb;
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-decoration: none;
+	transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.jasanika-menu__action-btn:hover {
+	background: rgba(183, 138, 203, 0.18);
+	border-color: rgba(183, 138, 203, 0.45);
+	color: #c79cda;
+	text-decoration: none;
+}
+
+.jasanika-menu__action-btn .dashicons {
+	font-size: 1.1rem !important;
+	width: 1.1rem !important;
+	height: 1.1rem !important;
+	flex-shrink: 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Diagnostics
+--------------------------------------------------------------------------- */
+
+.jasanika-menu__diag-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 12px 0;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+	font-size: 0.9rem;
+}
+
+.jasanika-menu__diag-row:last-child {
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+.jasanika-menu__diag-row:first-child {
+	padding-top: 0;
+}
+
+.jasanika-menu__diag-row .dashicons {
+	flex-shrink: 0;
+	font-size: 1.1rem !important;
+	width: 1.1rem !important;
+	height: 1.1rem !important;
+}
+
+.jasanika-menu__diag-row--ok .dashicons {
+	color: #6fcf97;
+}
+
+.jasanika-menu__diag-row--warn .dashicons {
+	color: #f1c95d;
+}
+
+.jasanika-menu__diag-label {
+	color: #f5f2f7;
+}
+
+.jasanika-menu__diag-row--warn .jasanika-menu__diag-label {
+	color: #f1c95d;
+}
