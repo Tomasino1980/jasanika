@@ -155,5 +155,79 @@ function jasanika_enqueue_woocommerce_styles() {
 			$ver
 		);
 	}
+
+	// Product filters stylesheet – shop, category, tag and search pages.
+	if ( is_shop() || is_product_category() || is_product_tag() || jasanika_is_product_search() ) {
+		wp_enqueue_style(
+			'jasanika-product-filters',
+			get_template_directory_uri() . '/assets/css/components/product-filters.css',
+			array( 'jasanika-woocommerce' ),
+			$ver
+		);
+
+		wp_enqueue_script(
+			'jasanika-product-filters',
+			get_template_directory_uri() . '/assets/js/product-filters.js',
+			array(),
+			$ver,
+			true
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_woocommerce_styles' );
+
+/**
+ * Remove the default WooCommerce catalog ordering above the product loop.
+ * Ordering is provided by the product-filters sidebar template instead.
+ */
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+
+/**
+ * Apply product filters (stock) on WooCommerce product queries (shop, category, tag).
+ *
+ * Price filtering (min_price / max_price) is handled natively by WooCommerce's
+ * WC_Query::price_filter_post_clauses() which reads the same GET params.
+ *
+ * @param WP_Query $q WooCommerce product query.
+ */
+function jasanika_apply_product_filters( $q ) {
+	// In-stock filter.
+	if ( isset( $_GET['instock'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['instock'] ) ) ) {
+		$meta_query   = (array) $q->get( 'meta_query' );
+		$meta_query[] = array(
+			'key'   => '_stock_status',
+			'value' => 'instock',
+		);
+		$q->set( 'meta_query', $meta_query );
+	}
+}
+add_action( 'woocommerce_product_query', 'jasanika_apply_product_filters' );
+
+/**
+ * Apply product filters on product search pages via pre_get_posts.
+ *
+ * The woocommerce_product_query hook does not fire for WP search queries,
+ * so stock filtering must be applied separately for product search results.
+ *
+ * @param WP_Query $q Query object.
+ */
+function jasanika_apply_product_search_filters( $q ) {
+	if ( is_admin() || ! $q->is_main_query() || ! $q->is_search() ) {
+		return;
+	}
+
+	if ( 'product' !== $q->get( 'post_type' ) ) {
+		return;
+	}
+
+	// In-stock filter.
+	if ( isset( $_GET['instock'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['instock'] ) ) ) {
+		$meta_query   = (array) $q->get( 'meta_query' );
+		$meta_query[] = array(
+			'key'   => '_stock_status',
+			'value' => 'instock',
+		);
+		$q->set( 'meta_query', $meta_query );
+	}
+}
+add_action( 'pre_get_posts', 'jasanika_apply_product_search_filters' );

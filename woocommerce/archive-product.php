@@ -36,36 +36,46 @@ get_header();
 		</header><!-- .product-archive__header -->
 	<?php endif; ?>
 
-	<?php do_action( 'woocommerce_before_shop_loop' ); ?>
+	<div class="product-archive__layout">
 
-	<?php if ( woocommerce_product_loop() ) : ?>
+		<aside class="product-archive__sidebar" aria-label="<?php esc_attr_e( 'Filtry produktů', 'jasanika' ); ?>">
+			<?php get_template_part( 'template-parts/woocommerce/product-filters' ); ?>
+		</aside><!-- .product-archive__sidebar -->
 
-		<ul class="product-archive__grid products">
-			<?php
-			while ( have_posts() ) :
-				the_post();
-				get_template_part( 'template-parts/woocommerce/product-card' );
-			endwhile;
-			?>
-		</ul><!-- .product-archive__grid -->
+		<div class="product-archive__main">
 
-		<?php do_action( 'woocommerce_after_shop_loop' ); ?>
+			<?php do_action( 'woocommerce_before_shop_loop' ); ?>
 
-		<div class="product-archive__pagination">
-			<?php
-			woocommerce_pagination();
-			?>
-		</div><!-- .product-archive__pagination -->
+			<?php if ( woocommerce_product_loop() ) : ?>
 
-	<?php else : ?>
+				<ul class="product-archive__grid products">
+					<?php
+					while ( have_posts() ) :
+						the_post();
+						get_template_part( 'template-parts/woocommerce/product-card' );
+					endwhile;
+					?>
+				</ul><!-- .product-archive__grid -->
 
-		<div class="product-archive__empty">
-			<p><?php esc_html_e( 'Momentálně nejsou dostupné žádné produkty.', 'jasanika' ); ?></p>
-		</div><!-- .product-archive__empty -->
+				<?php do_action( 'woocommerce_after_shop_loop' ); ?>
 
-	<?php endif; ?>
+				<div class="product-archive__pagination">
+					<?php woocommerce_pagination(); ?>
+				</div><!-- .product-archive__pagination -->
 
-	<?php do_action( 'woocommerce_after_shop_loop_item' ); ?>
+			<?php else : ?>
+
+				<div class="product-archive__empty">
+					<p><?php esc_html_e( 'Momentálně nejsou dostupné žádné produkty.', 'jasanika' ); ?></p>
+				</div><!-- .product-archive__empty -->
+
+			<?php endif; ?>
+
+			<?php do_action( 'woocommerce_after_shop_loop_item' ); ?>
+
+		</div><!-- .product-archive__main -->
+
+	</div><!-- .product-archive__layout -->
 
 <?php do_action( 'woocommerce_after_main_content' ); ?>
 
