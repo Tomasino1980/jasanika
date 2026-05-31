@@ -341,27 +341,23 @@ add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_cookie_consent_assets' );
 // ---------------------------------------------------------------------------
 
 /**
- * Inject dynamic brand-colour CSS variables as inline styles on the variables stylesheet.
- * Only fires when at least one brand colour is configured.
+ * Inject active preset CSS variables on the front-end.
  */
 function jasanika_enqueue_brand_css_variables(): void {
-	$primary   = jasanika_get_brand_color( 'primary',   '' );
-	$secondary = jasanika_get_brand_color( 'secondary', '' );
-	$accent    = jasanika_get_brand_color( 'accent',    '' );
-
-	if ( ! $primary && ! $secondary && ! $accent ) {
+	if ( ! function_exists( 'jasanika_theme_presets_get_css_variables' ) || ! function_exists( 'jasanika_theme_presets_build_root_css' ) ) {
 		return;
 	}
 
-	$vars = ':root{';
-	if ( $primary )   { $vars .= '--brand-primary:' . $primary . ';'; }
-	if ( $secondary ) { $vars .= '--brand-secondary:' . $secondary . ';'; }
-	if ( $accent )    { $vars .= '--brand-accent:' . $accent . ';'; }
-	$vars .= '}';
+	$variables = jasanika_theme_presets_get_css_variables();
+	$vars      = jasanika_theme_presets_build_root_css( $variables );
+
+	if ( '' === $vars ) {
+		return;
+	}
 
 	wp_add_inline_style( 'jasanika-variables', $vars );
 }
-add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_brand_css_variables' );
+add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_brand_css_variables', 20 );
 
 // ---------------------------------------------------------------------------
 // Favicon

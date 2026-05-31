@@ -16,6 +16,7 @@ require_once get_template_directory() . '/inc/menus.php';
 require_once get_template_directory() . '/inc/cleanup.php';
 require_once get_template_directory() . '/inc/comments.php';
 require_once get_template_directory() . '/inc/theme-options.php';
+require_once get_template_directory() . '/inc/theme-presets.php';
 require_once get_template_directory() . '/inc/woocommerce.php';
 require_once get_template_directory() . '/inc/slider.php';
 require_once get_template_directory() . '/inc/testimonials.php';

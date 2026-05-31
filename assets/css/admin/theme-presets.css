@@ -1,0 +1,220 @@
+/* Theme Presets – Jasanika Admin */
+
+.jasanika-presets {
+	max-width: 1400px;
+	padding-top: 10px;
+	color: var(--js-text, #f5f2f7);
+}
+
+.jasanika-presets__header {
+	display: flex;
+	align-items: center;
+	gap: 14px;
+	margin-bottom: 22px;
+	padding-bottom: 18px;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.jasanika-presets__header-icon {
+	color: var(--js-primary, #b78acb);
+	font-size: 28px;
+	width: 28px;
+	height: 28px;
+}
+
+.jasanika-presets__title {
+	margin: 0 !important;
+	color: var(--js-text, #f5f2f7) !important;
+}
+
+.jasanika-presets__subtitle {
+	margin: 4px 0 0;
+	color: var(--text-muted, #b9b1c4);
+}
+
+.jasanika-presets__preview {
+	background: var(--js-bg, #1b1a1f);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 10px;
+	padding: 16px;
+	margin-bottom: 18px;
+}
+
+.jasanika-presets__preview-head {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-bottom: 14px;
+}
+
+.jasanika-presets__preview-head strong {
+	color: var(--js-primary, #b78acb);
+}
+
+.jasanika-presets__preview-head span {
+	color: var(--text-muted, #b9b1c4);
+	font-size: 12px;
+}
+
+.jasanika-presets__preview-header,
+.jasanika-presets__preview-footer {
+	background: var(--js-secondary, #24212b);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	padding: 12px;
+	color: var(--js-text, #f5f2f7);
+}
+
+.jasanika-presets__preview-body {
+	display: grid;
+	grid-template-columns: 200px 1fr;
+	gap: 12px;
+	margin: 12px 0;
+}
+
+.jasanika-presets__preview-button {
+	background: var(--js-primary, #b78acb);
+	color: var(--js-bg, #1b1a1f);
+	border-radius: 6px;
+	border: 1px solid var(--js-primary, #b78acb);
+	padding: 10px 12px;
+	cursor: default;
+	font-weight: 600;
+}
+
+.jasanika-presets__preview-button--outline {
+	background: transparent;
+	color: var(--js-primary, #b78acb);
+	border-color: var(--js-primary, #b78acb);
+}
+
+.jasanika-presets__preview-button--ghost {
+	background: rgba(255, 255, 255, 0.05);
+	color: var(--js-text, #f5f2f7);
+	border-color: rgba(255, 255, 255, 0.1);
+}
+
+.jasanika-presets__preview-card {
+	background: rgba(255, 255, 255, 0.04);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 8px;
+	padding: 12px;
+	color: var(--js-text, #f5f2f7);
+}
+
+.jasanika-presets__grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+	gap: 14px;
+	margin-bottom: 18px;
+}
+
+.jasanika-presets__card {
+	background: var(--js-secondary, #24212b);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 10px;
+	padding: 14px;
+}
+
+.jasanika-presets__card-head {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+}
+
+.jasanika-presets__card-head h2 {
+	margin: 0;
+	font-size: 16px;
+	color: var(--js-text, #f5f2f7);
+}
+
+.jasanika-presets__badges {
+	display: flex;
+	gap: 6px;
+}
+
+.jasanika-presets__badge {
+	font-size: 11px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	padding: 2px 7px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.08);
+	color: var(--text-muted, #b9b1c4);
+}
+
+.jasanika-presets__badge--active {
+	background: rgba(183, 138, 203, 0.18);
+	color: var(--js-primary, #b78acb);
+}
+
+.jasanika-presets__swatches {
+	display: flex;
+	gap: 8px;
+	margin: 12px 0;
+}
+
+.jasanika-presets__swatches span {
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+	background: var(--swatch-color, #000);
+	border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.jasanika-presets__config {
+	margin: 0 0 12px;
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 4px 8px;
+}
+
+.jasanika-presets__config dt {
+	font-size: 12px;
+	color: var(--text-muted, #b9b1c4);
+}
+
+.jasanika-presets__config dd {
+	margin: 0;
+	font-size: 12px;
+	color: var(--js-text, #f5f2f7);
+}
+
+.jasanika-presets__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+}
+
+.jasanika-presets__tools {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	gap: 14px;
+}
+
+.jasanika-presets__tool {
+	background: var(--js-secondary, #24212b);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 10px;
+	padding: 14px;
+}
+
+.jasanika-presets__tool h2 {
+	margin-top: 0;
+	color: var(--js-text, #f5f2f7);
+}
+
+.jasanika-presets__tool p {
+	color: var(--text-muted, #b9b1c4);
+}
+
+.jasanika-presets__tool textarea {
+	margin-top: 6px;
+}
+
+@media screen and (max-width: 782px) {
+	.jasanika-presets__preview-body {
+		grid-template-columns: 1fr;
+	}
+}
