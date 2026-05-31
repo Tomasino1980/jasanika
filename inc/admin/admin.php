@@ -15,6 +15,7 @@ require_once get_template_directory() . '/inc/admin/dashboard-widgets.php';
 require_once get_template_directory() . '/inc/admin/pages/dashboard.php';
 require_once get_template_directory() . '/inc/admin/pages/menu-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/slider-manager.php';
+require_once get_template_directory() . '/inc/admin/pages/testimonials-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/theme-settings.php';
 
 add_action( 'admin_menu', 'jasanika_register_admin_menu' );
@@ -63,6 +64,16 @@ function jasanika_register_admin_menu(): void {
 		'manage_options',
 		'jasanika-slider-manager',
 		'jasanika_admin_page_slider_manager'
+	);
+
+	// Testimonials Manager sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Testimonials Manager', 'jasanika' ),
+		__( 'Testimonials Manager', 'jasanika' ),
+		'manage_options',
+		'jasanika-testimonials-manager',
+		'jasanika_admin_page_testimonials_manager'
 	);
 
 	// Theme Settings sub-page.

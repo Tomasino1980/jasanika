@@ -18,6 +18,7 @@ require_once get_template_directory() . '/inc/comments.php';
 require_once get_template_directory() . '/inc/theme-options.php';
 require_once get_template_directory() . '/inc/woocommerce.php';
 require_once get_template_directory() . '/inc/slider.php';
+require_once get_template_directory() . '/inc/testimonials.php';
 require_once get_template_directory() . '/inc/admin/login-branding.php';
 require_once get_template_directory() . '/inc/homepage-builder.php';
 

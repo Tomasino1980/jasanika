@@ -57,6 +57,12 @@ function jasanika_homepage_sections_registry(): array {
 			'default_order'   => 5,
 			'default_enabled' => true,
 		),
+		'testimonials' => array(
+			'label'           => __( 'Testimonials', 'jasanika' ),
+			'template'        => 'template-parts/components/testimonials',
+			'default_order'   => 6,
+			'default_enabled' => true,
+		),
 	);
 }
 
