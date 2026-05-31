@@ -17,6 +17,7 @@ require_once get_template_directory() . '/inc/cleanup.php';
 require_once get_template_directory() . '/inc/comments.php';
 require_once get_template_directory() . '/inc/theme-options.php';
 require_once get_template_directory() . '/inc/woocommerce.php';
+require_once get_template_directory() . '/inc/slider.php';
 
 if ( is_admin() ) {
 	require_once get_template_directory() . '/inc/admin/admin.php';
