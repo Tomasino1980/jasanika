@@ -14,10 +14,10 @@
 		<div class="site-footer__widgets">
 			<div class="site-footer__widgets-grid">
 
-				<div class="footer-widget">
-					<h3 class="footer-widget__title"><?php bloginfo( 'name' ); ?></h3>
+					<div class="footer-widget">
+					<h3 class="footer-widget__title"><?php echo esc_html( jasanika_get_company_name() ); ?></h3>
 					<p class="footer-widget__text">
-						<?php bloginfo( 'description' ); ?>
+						<?php echo esc_html( jasanika_get_company_slogan() ); ?>
 					</p>
 				</div>
 
@@ -37,7 +37,83 @@
 
 				<div class="footer-widget">
 					<h3 class="footer-widget__title"><?php esc_html_e( 'Contact', 'jasanika' ); ?></h3>
-					<?php /* Contact info will be implemented in a future milestone. */ ?>
+					<ul class="footer-contact__list">
+
+						<?php $phone = jasanika_get_phone(); ?>
+						<?php if ( $phone ) : ?>
+							<li class="footer-contact__item">
+								<a href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $phone ) ); ?>">
+									<?php echo esc_html( $phone ); ?>
+								</a>
+							</li>
+						<?php endif; ?>
+
+						<?php $email = jasanika_get_email(); ?>
+						<?php if ( $email ) : ?>
+							<li class="footer-contact__item">
+								<a href="mailto:<?php echo esc_attr( $email ); ?>">
+									<?php echo esc_html( $email ); ?>
+								</a>
+							</li>
+						<?php endif; ?>
+
+						<?php
+						$street = jasanika_get_address_street();
+						$city   = jasanika_get_address_city();
+						$zip    = jasanika_get_address_zip();
+						if ( $street || $city || $zip ) :
+						?>
+							<li class="footer-contact__item">
+								<?php if ( $street ) : ?>
+									<?php echo esc_html( $street ); ?><br>
+								<?php endif; ?>
+								<?php if ( $zip || $city ) : ?>
+									<?php echo esc_html( trim( $zip . ' ' . $city ) ); ?>
+								<?php endif; ?>
+							</li>
+						<?php endif; ?>
+
+					</ul>
+
+					<?php
+					$facebook  = jasanika_get_facebook_url();
+					$instagram = jasanika_get_instagram_url();
+					$youtube   = jasanika_get_youtube_url();
+					$linkedin  = jasanika_get_linkedin_url();
+					if ( $facebook || $instagram || $youtube || $linkedin ) :
+					?>
+						<ul class="footer-social__list">
+							<?php if ( $facebook ) : ?>
+								<li class="footer-social__item">
+									<a href="<?php echo esc_url( $facebook ); ?>" class="footer-social__link" target="_blank" rel="noopener noreferrer">
+										<?php esc_html_e( 'Facebook', 'jasanika' ); ?>
+									</a>
+								</li>
+							<?php endif; ?>
+							<?php if ( $instagram ) : ?>
+								<li class="footer-social__item">
+									<a href="<?php echo esc_url( $instagram ); ?>" class="footer-social__link" target="_blank" rel="noopener noreferrer">
+										<?php esc_html_e( 'Instagram', 'jasanika' ); ?>
+									</a>
+								</li>
+							<?php endif; ?>
+							<?php if ( $youtube ) : ?>
+								<li class="footer-social__item">
+									<a href="<?php echo esc_url( $youtube ); ?>" class="footer-social__link" target="_blank" rel="noopener noreferrer">
+										<?php esc_html_e( 'YouTube', 'jasanika' ); ?>
+									</a>
+								</li>
+							<?php endif; ?>
+							<?php if ( $linkedin ) : ?>
+								<li class="footer-social__item">
+									<a href="<?php echo esc_url( $linkedin ); ?>" class="footer-social__link" target="_blank" rel="noopener noreferrer">
+										<?php esc_html_e( 'LinkedIn', 'jasanika' ); ?>
+									</a>
+								</li>
+							<?php endif; ?>
+						</ul>
+					<?php endif; ?>
+
 				</div>
 
 			</div>
@@ -45,11 +121,14 @@
 
 		<div class="site-footer__info">
 			<span class="site-footer__copyright">
-				&copy; <?php echo esc_html( gmdate( 'Y' ) ); ?> <?php bloginfo( 'name' ); ?>
+				<?php echo esc_html( jasanika_get_copyright_text() ); ?>
 			</span>
-			<span class="site-footer__credits">
-				<?php esc_html_e( 'Handmade with love', 'jasanika' ); ?>
-			</span>
+			<?php $footer_note = jasanika_get_footer_note(); ?>
+			<?php if ( $footer_note ) : ?>
+				<span class="site-footer__credits">
+					<?php echo esc_html( $footer_note ); ?>
+				</span>
+			<?php endif; ?>
 		</div>
 
 	</div>

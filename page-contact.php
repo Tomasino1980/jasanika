@@ -23,37 +23,54 @@ get_header();
 
 			<div class="contact-page__body">
 
-				<aside class="contact-info">
+					<aside class="contact-info">
 
 					<h2 class="contact-info__title"><?php esc_html_e( 'Kontaktní informace', 'jasanika' ); ?></h2>
 
 					<ul class="contact-info__list">
 
-						<li class="contact-info__item">
-							<span class="contact-info__label"><?php esc_html_e( 'E-mail', 'jasanika' ); ?></span>
-							<span class="contact-info__value">
-								<a class="contact-info__link" href="<?php echo esc_url( 'mailto:info@jasanika.cz' ); ?>">
-									<?php echo esc_html( 'info@jasanika.cz' ); ?>
-								</a>
-							</span>
-						</li>
+						<?php $email = jasanika_get_email(); ?>
+						<?php if ( $email ) : ?>
+							<li class="contact-info__item">
+								<span class="contact-info__label"><?php esc_html_e( 'E-mail', 'jasanika' ); ?></span>
+								<span class="contact-info__value">
+									<a class="contact-info__link" href="mailto:<?php echo esc_attr( $email ); ?>">
+										<?php echo esc_html( $email ); ?>
+									</a>
+								</span>
+							</li>
+						<?php endif; ?>
 
-						<li class="contact-info__item">
-							<span class="contact-info__label"><?php esc_html_e( 'Telefon', 'jasanika' ); ?></span>
-							<span class="contact-info__value">
-								<a class="contact-info__link" href="<?php echo esc_url( 'tel:+420000000000' ); ?>">
-									<?php echo esc_html( '+420 000 000 000' ); ?>
-								</a>
-							</span>
-						</li>
+						<?php $phone = jasanika_get_phone(); ?>
+						<?php if ( $phone ) : ?>
+							<li class="contact-info__item">
+								<span class="contact-info__label"><?php esc_html_e( 'Telefon', 'jasanika' ); ?></span>
+								<span class="contact-info__value">
+									<a class="contact-info__link" href="tel:<?php echo esc_attr( preg_replace( '/\s+/', '', $phone ) ); ?>">
+										<?php echo esc_html( $phone ); ?>
+									</a>
+								</span>
+							</li>
+						<?php endif; ?>
 
-						<li class="contact-info__item">
-							<span class="contact-info__label"><?php esc_html_e( 'Adresa', 'jasanika' ); ?></span>
-							<span class="contact-info__value">
-								<?php echo esc_html( 'Jasanika' ); ?><br>
-								<?php echo esc_html( 'Česká republika' ); ?>
-							</span>
-						</li>
+						<?php
+						$street = jasanika_get_address_street();
+						$city   = jasanika_get_address_city();
+						$zip    = jasanika_get_address_zip();
+						if ( $street || $city || $zip ) :
+						?>
+							<li class="contact-info__item">
+								<span class="contact-info__label"><?php esc_html_e( 'Adresa', 'jasanika' ); ?></span>
+								<span class="contact-info__value">
+									<?php if ( $street ) : ?>
+										<?php echo esc_html( $street ); ?><br>
+									<?php endif; ?>
+									<?php if ( $zip || $city ) : ?>
+										<?php echo esc_html( trim( $zip . ' ' . $city ) ); ?>
+									<?php endif; ?>
+								</span>
+							</li>
+						<?php endif; ?>
 
 					</ul>
 

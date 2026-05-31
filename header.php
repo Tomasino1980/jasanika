@@ -21,11 +21,24 @@
 		<div class="site-header__inner">
 
 			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="site-branding">
-				<span class="site-branding__name"><?php bloginfo( 'name' ); ?></span>
-				<?php if ( get_bloginfo( 'description' ) ) : ?>
-					<span class="site-branding__tagline"><?php bloginfo( 'description' ); ?></span>
-				<?php endif; ?>
-			</a>
+
+			<?php $logo_url = jasanika_get_logo_url(); ?>
+			<?php if ( $logo_url ) : ?>
+				<img
+					src="<?php echo esc_url( $logo_url ); ?>"
+					alt="<?php echo esc_attr( jasanika_get_company_name() ); ?>"
+					class="site-branding__logo"
+				>
+			<?php else : ?>
+				<span class="site-branding__name"><?php echo esc_html( jasanika_get_company_name() ); ?></span>
+			<?php endif; ?>
+
+			<?php $slogan = jasanika_get_company_slogan(); ?>
+			<?php if ( $slogan ) : ?>
+				<span class="site-branding__tagline"><?php echo esc_html( $slogan ); ?></span>
+			<?php endif; ?>
+
+		</a>
 
 			<nav class="site-header__nav" aria-label="<?php esc_attr_e( 'Primary navigation', 'jasanika' ); ?>">
 				<?php
