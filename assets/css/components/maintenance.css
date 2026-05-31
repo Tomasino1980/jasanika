@@ -1,0 +1,360 @@
+/* maintenance.css – Maintenance Mode page styles */
+
+/* ============================================================
+   Base Layout
+   ============================================================ */
+
+.maintenance-page {
+	margin: 0;
+	padding: 0;
+	background-color: var(--bg-main);
+	color: var(--text-main);
+	font-family: var(--font-body);
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.maintenance-wrap {
+	width: 100%;
+	max-width: 700px;
+	margin: 0 auto;
+	padding: var(--space-16) var(--space-6);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-10);
+}
+
+/* ============================================================
+   Logo / Branding
+   ============================================================ */
+
+.maintenance-logo__img {
+	max-height: 72px;
+	width: auto;
+	display: block;
+	margin: 0 auto;
+}
+
+.maintenance-logo__name {
+	font-family: var(--font-heading);
+	font-size: var(--text-2xl);
+	color: var(--primary);
+	letter-spacing: 0.02em;
+}
+
+/* ============================================================
+   Main Content
+   ============================================================ */
+
+.maintenance-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-6);
+	width: 100%;
+}
+
+.maintenance-title {
+	font-family: var(--font-heading);
+	font-size: var(--text-4xl);
+	color: var(--text-main);
+	line-height: var(--leading-tight);
+	margin: 0;
+}
+
+.maintenance-description {
+	font-size: var(--text-md);
+	color: var(--text-muted);
+	line-height: var(--leading-loose);
+	max-width: 540px;
+	margin: 0;
+}
+
+/* ============================================================
+   Contact Information
+   ============================================================ */
+
+.maintenance-contact {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--space-4);
+}
+
+.maintenance-contact__link {
+	color: var(--primary);
+	text-decoration: none;
+	font-size: var(--text-base);
+	border-bottom: 1px solid transparent;
+	transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.maintenance-contact__link:hover,
+.maintenance-contact__link:focus {
+	color: var(--primary-hover);
+	border-bottom-color: var(--primary-hover);
+	outline: none;
+}
+
+/* ============================================================
+   Countdown Timer
+   ============================================================ */
+
+.maintenance-countdown {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--space-4);
+	width: 100%;
+}
+
+.maintenance-countdown__unit {
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	backdrop-filter: var(--glass-blur);
+	border-radius: var(--radius-lg);
+	padding: var(--space-6) var(--space-8);
+	min-width: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-2);
+}
+
+.maintenance-countdown__value {
+	font-family: var(--font-heading);
+	font-size: var(--text-4xl);
+	color: var(--primary);
+	line-height: 1;
+	font-variant-numeric: tabular-nums;
+}
+
+.maintenance-countdown__label {
+	font-size: var(--text-xs);
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+/* ============================================================
+   Social Links
+   ============================================================ */
+
+.maintenance-social {
+	display: flex;
+	justify-content: center;
+	gap: var(--space-4);
+	flex-wrap: wrap;
+}
+
+.maintenance-social__link {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 44px;
+	height: 44px;
+	border-radius: var(--radius-full);
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	color: var(--text-muted);
+	text-decoration: none;
+	transition: background var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.maintenance-social__link:hover,
+.maintenance-social__link:focus {
+	background: rgba(183, 138, 203, 0.15);
+	color: var(--primary);
+	border-color: var(--primary);
+	outline: none;
+}
+
+/* ============================================================
+   Newsletter Signup
+   ============================================================ */
+
+.maintenance-newsletter {
+	width: 100%;
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	backdrop-filter: var(--glass-blur);
+	border-radius: var(--radius-lg);
+	padding: var(--space-8) var(--space-10);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-4);
+}
+
+.maintenance-newsletter__title {
+	font-family: var(--font-heading);
+	font-size: var(--text-xl);
+	color: var(--text-main);
+	margin: 0;
+}
+
+.maintenance-newsletter__description {
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	margin: 0;
+	text-align: center;
+}
+
+.maintenance-newsletter__form {
+	width: 100%;
+	max-width: 480px;
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-3);
+}
+
+.maintenance-newsletter__row {
+	display: flex;
+	gap: var(--space-2);
+}
+
+.maintenance-newsletter__input {
+	flex: 1;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid var(--border-soft);
+	border-radius: var(--radius-md);
+	padding: var(--space-3) var(--space-4);
+	color: var(--text-main);
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	transition: border-color var(--transition-fast);
+	outline: none;
+}
+
+.maintenance-newsletter__input:focus {
+	border-color: var(--primary);
+}
+
+.maintenance-newsletter__input::placeholder {
+	color: var(--text-muted);
+}
+
+.maintenance-newsletter__btn {
+	background: var(--primary);
+	color: var(--bg-main);
+	border: none;
+	border-radius: var(--radius-md);
+	padding: var(--space-3) var(--space-6);
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	font-weight: 600;
+	cursor: pointer;
+	white-space: nowrap;
+	transition: background var(--transition-fast);
+}
+
+.maintenance-newsletter__btn:hover,
+.maintenance-newsletter__btn:focus {
+	background: var(--primary-hover);
+	outline: none;
+}
+
+.maintenance-newsletter__consent {
+	display: flex;
+	align-items: flex-start;
+	gap: var(--space-2);
+	font-size: var(--text-xs);
+	color: var(--text-muted);
+	cursor: pointer;
+	text-align: left;
+}
+
+.maintenance-newsletter__consent input[type="checkbox"] {
+	margin-top: 2px;
+	flex-shrink: 0;
+	accent-color: var(--primary);
+}
+
+.maintenance-newsletter__message {
+	font-size: var(--text-sm);
+	padding: var(--space-3) var(--space-4);
+	border-radius: var(--radius-md);
+	text-align: center;
+	display: none;
+}
+
+.maintenance-newsletter__message.is-success {
+	display: block;
+	color: #a8e6a3;
+	background: rgba(168, 230, 163, 0.1);
+	border: 1px solid rgba(168, 230, 163, 0.2);
+}
+
+.maintenance-newsletter__message.is-error {
+	display: block;
+	color: #e6a3a3;
+	background: rgba(230, 163, 163, 0.1);
+	border: 1px solid rgba(230, 163, 163, 0.2);
+}
+
+/* ============================================================
+   Responsive – Tablet
+   ============================================================ */
+
+@media ( max-width: 768px ) {
+
+	.maintenance-newsletter {
+		padding: var(--space-8) var(--space-6);
+	}
+}
+
+/* ============================================================
+   Responsive – Mobile
+   ============================================================ */
+
+@media ( max-width: 640px ) {
+
+	.maintenance-title {
+		font-size: var(--text-3xl);
+	}
+
+	.maintenance-countdown__unit {
+		min-width: 72px;
+		padding: var(--space-4) var(--space-5);
+	}
+
+	.maintenance-countdown__value {
+		font-size: var(--text-3xl);
+	}
+
+	.maintenance-newsletter {
+		padding: var(--space-6) var(--space-4);
+	}
+
+	.maintenance-newsletter__row {
+		flex-direction: column;
+	}
+
+	.maintenance-newsletter__btn {
+		width: 100%;
+	}
+}
+
+/* ============================================================
+   Responsive – Small Mobile
+   ============================================================ */
+
+@media ( max-width: 400px ) {
+
+	.maintenance-title {
+		font-size: var(--text-2xl);
+	}
+
+	.maintenance-countdown__unit {
+		min-width: 64px;
+		padding: var(--space-3) var(--space-4);
+	}
+
+	.maintenance-countdown__value {
+		font-size: var(--text-2xl);
+	}
+}

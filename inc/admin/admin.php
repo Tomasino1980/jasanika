@@ -23,6 +23,7 @@ require_once get_template_directory() . '/inc/admin/pages/cookie-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/backup-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/diagnostics-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/profile-manager.php';
+require_once get_template_directory() . '/inc/admin/pages/maintenance-manager.php';
 
 add_action( 'admin_menu', 'jasanika_register_admin_menu' );
 
@@ -150,5 +151,15 @@ function jasanika_register_admin_menu(): void {
 		'manage_options',
 		'jasanika-profile-manager',
 		'jasanika_admin_page_profile_manager'
+	);
+
+	// Maintenance Mode sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Maintenance Mode', 'jasanika' ),
+		__( 'Maintenance Mode', 'jasanika' ),
+		'manage_options',
+		'jasanika-maintenance-manager',
+		'jasanika_admin_page_maintenance_manager'
 	);
 }

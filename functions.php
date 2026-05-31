@@ -28,6 +28,7 @@ require_once get_template_directory() . '/inc/seo-meta-box.php';
 require_once get_template_directory() . '/inc/cookie-consent.php';
 require_once get_template_directory() . '/inc/backup-manager.php';
 require_once get_template_directory() . '/inc/profile-manager.php';
+require_once get_template_directory() . '/inc/maintenance.php';
 
 if ( is_admin() ) {
 	require_once get_template_directory() . '/inc/admin/admin.php';
