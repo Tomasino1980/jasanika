@@ -1,0 +1,141 @@
+/* product-search.css – WooCommerce product search results styles. */
+
+/* ------------------------------------------------------------------ */
+/* Search header                                                        */
+/* ------------------------------------------------------------------ */
+
+.product-search__header {
+	margin-bottom: var(--space-10);
+}
+
+.product-search__title {
+	font-family: var(--font-heading);
+	font-size: var(--text-3xl);
+	color: var(--text-main);
+	margin-bottom: var(--space-4);
+	line-height: var(--leading-tight);
+}
+
+.product-search__query {
+	color: var(--text-muted);
+	font-size: var(--text-base);
+	line-height: var(--leading-normal);
+	margin: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Search form                                                          */
+/* ------------------------------------------------------------------ */
+
+.product-search__form-wrap {
+	margin-bottom: var(--space-10);
+	max-width: 560px;
+}
+
+.product-search__form-wrap .woocommerce-product-search {
+	display: flex;
+	gap: var(--space-2);
+}
+
+.product-search__form-wrap .search-field {
+	flex: 1;
+	background: var(--bg-secondary);
+	border: 1px solid var(--border-soft);
+	border-radius: var(--radius-sm);
+	padding: var(--space-3) var(--space-4);
+	color: var(--text-main);
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	outline: none;
+	transition: border-color var(--transition-fast);
+}
+
+.product-search__form-wrap .search-field::placeholder {
+	color: var(--text-muted);
+	opacity: 0.6;
+}
+
+.product-search__form-wrap .search-field:focus {
+	border-color: var(--primary);
+}
+
+.product-search__form-wrap .woocommerce-product-search__submit {
+	background: var(--primary);
+	color: var(--bg-main);
+	border: none;
+	border-radius: var(--radius-sm);
+	padding: var(--space-3) var(--space-5);
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	font-weight: 600;
+	cursor: pointer;
+	transition: background var(--transition-fast);
+	white-space: nowrap;
+}
+
+.product-search__form-wrap .woocommerce-product-search__submit:hover {
+	background: var(--primary-hover);
+}
+
+/* ------------------------------------------------------------------ */
+/* Product card – short description (search results only)              */
+/* ------------------------------------------------------------------ */
+
+.product-card__short-desc {
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	line-height: var(--leading-normal);
+	margin: 0;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.product-card__short-desc p {
+	margin: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Empty state                                                          */
+/* ------------------------------------------------------------------ */
+
+.product-search__empty {
+	padding: var(--space-16) var(--space-4);
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-6);
+}
+
+.product-search__empty-message {
+	color: var(--text-muted);
+	font-size: var(--text-base);
+	margin: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive – Tablet                                                  */
+/* ------------------------------------------------------------------ */
+
+@media ( max-width: 1023px ) {
+	.product-search__form-wrap {
+		max-width: 100%;
+	}
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive – Mobile                                                  */
+/* ------------------------------------------------------------------ */
+
+@media ( max-width: 767px ) {
+	.product-search__title {
+		font-size: var(--text-2xl);
+	}
+
+	.product-search__form-wrap .woocommerce-product-search {
+		flex-direction: column;
+	}
+}
