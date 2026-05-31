@@ -158,6 +158,13 @@ function jasanika_enqueue_woocommerce_styles() {
 			array( 'jasanika-woocommerce' ),
 			$ver
 		);
+
+		wp_enqueue_style(
+			'jasanika-customer-dashboard',
+			get_template_directory_uri() . '/assets/css/components/customer-dashboard.css',
+			array( 'jasanika-my-account' ),
+			$ver
+		);
 	}
 
 	// Product search stylesheet – product search pages only.

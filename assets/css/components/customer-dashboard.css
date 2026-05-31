@@ -1,0 +1,345 @@
+/* customer-dashboard.css – Customer Dashboard styles for the Jasanika theme. */
+
+/* ------------------------------------------------------------------ */
+/* Dashboard wrapper                                                    */
+/* ------------------------------------------------------------------ */
+
+.jasanika-dashboard {
+	display: flex;
+	flex-direction: column;
+	gap: var(--space-8);
+}
+
+/* ------------------------------------------------------------------ */
+/* Welcome section                                                      */
+/* ------------------------------------------------------------------ */
+
+.jasanika-dashboard__welcome {
+	border-bottom: 1px solid var(--border-soft);
+	padding-bottom: var(--space-6);
+}
+
+.jasanika-dashboard__welcome-heading {
+	font-family: var(--font-heading);
+	font-size: var(--text-2xl);
+	font-weight: 600;
+	color: var(--text-main);
+	line-height: var(--leading-tight);
+	margin: 0 0 var(--space-3);
+}
+
+.jasanika-dashboard__welcome-text {
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	color: var(--text-muted);
+	line-height: var(--leading-normal);
+	margin: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Statistics row                                                       */
+/* ------------------------------------------------------------------ */
+
+.jasanika-dashboard__stats {
+	display: grid;
+	grid-template-columns: repeat( 2, 1fr );
+	gap: var(--space-4);
+}
+
+@media ( min-width: 640px ) {
+	.jasanika-dashboard__stats {
+		grid-template-columns: repeat( 2, minmax( 0, 220px ) );
+	}
+}
+
+/* ------------------------------------------------------------------ */
+/* Stat card                                                            */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account-stat {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--space-2);
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+	padding: var(--space-6) var(--space-4);
+	text-align: center;
+}
+
+.jasanika-account-stat__value {
+	font-family: var(--font-heading);
+	font-size: var(--text-3xl);
+	font-weight: 700;
+	color: var(--primary);
+	line-height: 1;
+}
+
+.jasanika-account-stat__label {
+	font-family: var(--font-body);
+	font-size: var(--text-xs);
+	font-weight: 500;
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+/* ------------------------------------------------------------------ */
+/* Navigation cards grid                                                */
+/* ------------------------------------------------------------------ */
+
+.jasanika-dashboard__nav-cards {
+	display: grid;
+	grid-template-columns: repeat( 2, 1fr );
+	gap: var(--space-4);
+}
+
+@media ( min-width: 640px ) {
+	.jasanika-dashboard__nav-cards {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+}
+
+@media ( min-width: 1024px ) {
+	.jasanika-dashboard__nav-cards {
+		grid-template-columns: repeat( 4, 1fr );
+	}
+}
+
+/* ------------------------------------------------------------------ */
+/* Navigation card                                                      */
+/* ------------------------------------------------------------------ */
+
+.jasanika-account-card {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-3);
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-md);
+	box-shadow: var(--shadow-sm);
+	padding: var(--space-6) var(--space-4);
+	text-align: center;
+	text-decoration: none;
+	transition:
+		background var(--transition-fast),
+		border-color var(--transition-fast),
+		box-shadow var(--transition-fast),
+		transform var(--transition-fast);
+}
+
+.jasanika-account-card:hover {
+	background: rgba( 183, 138, 203, 0.08 );
+	border-color: rgba( 183, 138, 203, 0.3 );
+	box-shadow: var(--shadow-md);
+	transform: translateY( -2px );
+}
+
+.jasanika-account-card__icon {
+	font-size: var(--text-3xl);
+	line-height: 1;
+	display: block;
+}
+
+.jasanika-account-card__title {
+	display: block;
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	font-weight: 600;
+	color: var(--text-main);
+	line-height: var(--leading-tight);
+}
+
+.jasanika-account-card__desc {
+	display: block;
+	font-family: var(--font-body);
+	font-size: var(--text-xs);
+	color: var(--text-muted);
+	line-height: var(--leading-normal);
+}
+
+/* ------------------------------------------------------------------ */
+/* Recent orders section                                                */
+/* ------------------------------------------------------------------ */
+
+.jasanika-dashboard__section-heading {
+	font-family: var(--font-heading);
+	font-size: var(--text-xl);
+	font-weight: 600;
+	color: var(--text-main);
+	line-height: var(--leading-tight);
+	margin: 0 0 var(--space-5);
+}
+
+/* ------------------------------------------------------------------ */
+/* Orders table                                                         */
+/* ------------------------------------------------------------------ */
+
+.jasanika-dashboard__orders-table-wrap {
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+	border: var(--glass-border);
+	border-radius: var(--radius-md);
+}
+
+.jasanika-dashboard__orders-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.jasanika-dashboard__orders-table thead {
+	background: var(--bg-secondary);
+}
+
+.jasanika-dashboard__orders-table th {
+	padding: var(--space-3) var(--space-4);
+	font-family: var(--font-body);
+	font-size: var(--text-xs);
+	font-weight: 600;
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	border-bottom: 1px solid var(--border-soft);
+	text-align: left;
+	white-space: nowrap;
+}
+
+.jasanika-dashboard__orders-table td {
+	padding: var(--space-4);
+	font-family: var(--font-body);
+	font-size: var(--text-sm);
+	color: var(--text-main);
+	border-bottom: 1px solid var(--border-soft);
+	vertical-align: middle;
+}
+
+.jasanika-dashboard__orders-table tbody tr:last-child td {
+	border-bottom: none;
+}
+
+.jasanika-dashboard__orders-table-number a {
+	color: var(--primary);
+	font-weight: 600;
+	text-decoration: none;
+	transition: color var(--transition-fast);
+}
+
+.jasanika-dashboard__orders-table-number a:hover {
+	color: var(--primary-hover);
+}
+
+.jasanika-dashboard__orders-table-total {
+	font-weight: 600;
+	color: var(--primary);
+}
+
+/* ------------------------------------------------------------------ */
+/* Order status badges                                                  */
+/* ------------------------------------------------------------------ */
+
+.jasanika-dashboard__order-status {
+	display: inline-block;
+	padding: var(--space-1) var(--space-3);
+	border-radius: var(--radius-full);
+	font-size: var(--text-xs);
+	font-weight: 600;
+	background: rgba( 183, 138, 203, 0.15 );
+	color: var(--primary);
+}
+
+.jasanika-dashboard__order-status--completed {
+	background: rgba( 126, 200, 126, 0.12 );
+	color: #7ec87e;
+}
+
+.jasanika-dashboard__order-status--processing {
+	background: rgba( 241, 201, 93, 0.15 );
+	color: var(--accent);
+}
+
+.jasanika-dashboard__order-status--cancelled,
+.jasanika-dashboard__order-status--failed {
+	background: rgba( 224, 112, 112, 0.12 );
+	color: #e07070;
+}
+
+.jasanika-dashboard__order-status--refunded {
+	background: rgba( 176, 138, 103, 0.15 );
+	color: var(--natural);
+}
+
+/* ------------------------------------------------------------------ */
+/* Orders table footer                                                  */
+/* ------------------------------------------------------------------ */
+
+.jasanika-dashboard__orders-footer {
+	margin-top: var(--space-5);
+	text-align: right;
+}
+
+/* ------------------------------------------------------------------ */
+/* Empty state                                                          */
+/* ------------------------------------------------------------------ */
+
+.jasanika-dashboard__empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--space-5);
+	padding: var(--space-10) var(--space-6);
+	background: var(--panel-bg);
+	border: var(--glass-border);
+	border-radius: var(--radius-md);
+	text-align: center;
+}
+
+.jasanika-dashboard__empty-text {
+	font-family: var(--font-body);
+	font-size: var(--text-base);
+	color: var(--text-muted);
+	margin: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive – tablet                                                  */
+/* ------------------------------------------------------------------ */
+
+@media ( max-width: 767px ) {
+
+	.jasanika-dashboard__nav-cards {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+
+	.jasanika-dashboard__stats {
+		grid-template-columns: repeat( 2, 1fr );
+	}
+}
+
+/* ------------------------------------------------------------------ */
+/* Responsive – mobile                                                  */
+/* ------------------------------------------------------------------ */
+
+@media ( max-width: 479px ) {
+
+	.jasanika-dashboard__nav-cards {
+		grid-template-columns: 1fr;
+	}
+
+	.jasanika-dashboard__stats {
+		grid-template-columns: 1fr;
+	}
+
+	.jasanika-dashboard__welcome-heading {
+		font-size: var(--text-xl);
+	}
+
+	.jasanika-dashboard__orders-table th,
+	.jasanika-dashboard__orders-table td {
+		padding: var(--space-2) var(--space-3);
+		font-size: var(--text-xs);
+	}
+}
