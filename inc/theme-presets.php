@@ -221,6 +221,27 @@ function jasanika_theme_presets_get_active(): array {
 }
 
 /**
+ * Update an existing custom preset's config.
+ *
+ * @param string               $preset_id Preset ID.
+ * @param array<string, mixed> $config    New config.
+ * @return bool True on success, false when preset not found.
+ */
+function jasanika_theme_presets_update_custom( string $preset_id, array $config ): bool {
+	$preset_id = sanitize_key( $preset_id );
+	$custom    = jasanika_theme_presets_get_custom();
+
+	if ( ! isset( $custom[ $preset_id ] ) ) {
+		return false;
+	}
+
+	$custom[ $preset_id ]['config'] = jasanika_theme_presets_sanitize_config( $config );
+	jasanika_theme_presets_save_custom( $custom );
+
+	return true;
+}
+
+/**
  * Create a custom preset.
  *
  * @param string               $name   Preset name.
