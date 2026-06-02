@@ -12,6 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 add_action( 'admin_enqueue_scripts', 'jasanika_theme_presets_enqueue' );
 add_action( 'admin_init', 'jasanika_theme_presets_handle_requests' );
+add_action( 'wp_ajax_jasanika_preset_editor_save', 'jasanika_preset_editor_ajax_save' );
+add_action( 'wp_ajax_jasanika_favorite_colors_save', 'jasanika_favorite_colors_ajax_save' );
 
 /**
  * Enqueue Theme Presets assets only on Theme Presets page.
@@ -25,21 +27,101 @@ function jasanika_theme_presets_enqueue( string $hook ): void {
 
 	$version = wp_get_theme()->get( 'Version' );
 
-	wp_enqueue_style( 'wp-color-picker' );
-
+	// Base presets stylesheet.
 	wp_enqueue_style(
 		'jasanika-theme-presets',
 		get_template_directory_uri() . '/assets/css/admin/theme-presets.css',
-		array( 'wp-color-picker' ),
+		array(),
 		$version
 	);
 
+	// Color editor modal stylesheet.
+	wp_enqueue_style(
+		'jasanika-theme-presets-editor',
+		get_template_directory_uri() . '/assets/css/admin/theme-presets-editor.css',
+		array( 'jasanika-theme-presets' ),
+		$version
+	);
+
+	// Color editor – vanilla JS, no jQuery dependency.
+	wp_enqueue_script(
+		'jasanika-theme-presets-editor',
+		get_template_directory_uri() . '/assets/js/admin/theme-presets-editor.js',
+		array(),
+		$version,
+		true
+	);
+
+	// Existing presets JS (preview triggers) – loads after editor.
 	wp_enqueue_script(
 		'jasanika-theme-presets',
 		get_template_directory_uri() . '/assets/js/admin/theme-presets.js',
-		array( 'jquery', 'wp-color-picker' ),
+		array( 'jasanika-theme-presets-editor' ),
 		$version,
 		true
+	);
+
+	// Prepare all preset data for the editor JS.
+	$all_presets    = jasanika_theme_presets_get_all();
+	$presets_for_js = array();
+	foreach ( $all_presets as $id => $preset ) {
+		$config                = jasanika_theme_presets_sanitize_config( $preset['config'] ?? array() );
+		$presets_for_js[ $id ] = array(
+			'id'      => $id,
+			'name'    => (string) $preset['name'],
+			'builtin' => ! empty( $preset['builtin'] ),
+			'config'  => $config,
+		);
+	}
+
+	// Load stored favorite colors.
+	$favorites = get_option( 'jasanika_favorite_colors', array() );
+	if ( ! is_array( $favorites ) ) {
+		$favorites = array();
+	}
+	$favorites = array_values(
+		array_filter(
+			array_map( 'sanitize_hex_color', $favorites )
+		)
+	);
+
+	wp_localize_script(
+		'jasanika-theme-presets-editor',
+		'jasanikaEditorData',
+		array(
+			'ajaxUrl'        => admin_url( 'admin-ajax.php' ),
+			'nonceSave'      => wp_create_nonce( 'jasanika_preset_editor_save' ),
+			'nonceFavorites' => wp_create_nonce( 'jasanika_favorite_colors' ),
+			'presets'        => $presets_for_js,
+			'favorites'      => $favorites,
+			'i18n'           => array(
+				'editColors'      => __( 'Edit Colors', 'jasanika' ),
+				'close'           => __( 'Close', 'jasanika' ),
+				'save'            => __( 'Save', 'jasanika' ),
+				'saving'          => __( 'Saving\u2026', 'jasanika' ),
+				'cancel'          => __( 'Cancel', 'jasanika' ),
+				'reset'           => __( 'Reset', 'jasanika' ),
+				'hue'             => __( 'Hue', 'jasanika' ),
+				'hex'             => __( 'HEX', 'jasanika' ),
+				'hexValue'        => __( 'HEX color value', 'jasanika' ),
+				'red'             => __( 'Red', 'jasanika' ),
+				'green'           => __( 'Green', 'jasanika' ),
+				'blue'            => __( 'Blue', 'jasanika' ),
+				'preview'         => __( 'Preview', 'jasanika' ),
+				'favoriteColors'  => __( 'Favorite Colors', 'jasanika' ),
+				'saveToFavorites' => __( 'Save to favorites', 'jasanika' ),
+				'noFavorites'     => __( 'No saved colors yet.', 'jasanika' ),
+				'colorSpectrum'   => __( 'Color spectrum. Use arrow keys to adjust.', 'jasanika' ),
+				'colorFields'     => __( 'Color fields', 'jasanika' ),
+				'primaryColor'    => __( 'Primary Color', 'jasanika' ),
+				'secondaryColor'  => __( 'Secondary Color', 'jasanika' ),
+				'accentColor'     => __( 'Accent Color', 'jasanika' ),
+				'backgroundColor' => __( 'Background Color', 'jasanika' ),
+				'textColor'       => __( 'Text Color', 'jasanika' ),
+				'saveError'       => __( 'Failed to save. Please try again.', 'jasanika' ),
+				'networkError'    => __( 'Network error. Please check your connection.', 'jasanika' ),
+			),
+		)
 	);
 
 	wp_localize_script(
@@ -51,6 +133,99 @@ function jasanika_theme_presets_enqueue( string $hook ): void {
 			),
 		)
 	);
+}
+
+/**
+ * AJAX handler: save preset colors from the color editor modal.
+ */
+function jasanika_preset_editor_ajax_save(): void {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'Insufficient permissions.', 'jasanika' ) );
+	}
+
+	$nonce = isset( $_POST['nonce'] ) ? (string) wp_unslash( $_POST['nonce'] ) : '';
+	if ( ! wp_verify_nonce( $nonce, 'jasanika_preset_editor_save' ) ) {
+		wp_send_json_error( __( 'Security check failed.', 'jasanika' ) );
+	}
+
+	$preset_id = isset( $_POST['preset_id'] ) ? sanitize_key( (string) wp_unslash( $_POST['preset_id'] ) ) : '';
+	if ( '' === $preset_id ) {
+		wp_send_json_error( __( 'Invalid preset ID.', 'jasanika' ) );
+	}
+
+	// Block editing of built-in presets.
+	$builtin = jasanika_theme_presets_builtin();
+	if ( isset( $builtin[ $preset_id ] ) ) {
+		wp_send_json_error( __( 'Built-in presets cannot be edited.', 'jasanika' ) );
+	}
+
+	$raw_config = isset( $_POST['config'] ) && is_array( $_POST['config'] )
+		? (array) wp_unslash( $_POST['config'] )
+		: array();
+
+	// Validate all required HEX color fields.
+	$color_keys = array( 'primary_color', 'secondary_color', 'accent_color', 'background_color', 'text_color' );
+	foreach ( $color_keys as $key ) {
+		$val = sanitize_hex_color( (string) ( $raw_config[ $key ] ?? '' ) );
+		if ( '' === $val ) {
+			wp_send_json_error( __( 'Invalid color value.', 'jasanika' ) );
+		}
+	}
+
+	// Preserve existing button_style.
+	$custom       = jasanika_theme_presets_get_custom();
+	$button_style = isset( $custom[ $preset_id ]['config']['button_style'] )
+		? sanitize_key( (string) $custom[ $preset_id ]['config']['button_style'] )
+		: 'solid';
+
+	$config = array(
+		'primary_color'    => sanitize_hex_color( (string) ( $raw_config['primary_color'] ?? '' ) ),
+		'secondary_color'  => sanitize_hex_color( (string) ( $raw_config['secondary_color'] ?? '' ) ),
+		'accent_color'     => sanitize_hex_color( (string) ( $raw_config['accent_color'] ?? '' ) ),
+		'background_color' => sanitize_hex_color( (string) ( $raw_config['background_color'] ?? '' ) ),
+		'text_color'       => sanitize_hex_color( (string) ( $raw_config['text_color'] ?? '' ) ),
+		'button_style'     => $button_style,
+	);
+
+	$ok = jasanika_theme_presets_update_custom( $preset_id, $config );
+	if ( $ok ) {
+		wp_send_json_success( array( 'config' => $config ) );
+	} else {
+		wp_send_json_error( __( 'Preset not found.', 'jasanika' ) );
+	}
+}
+
+/**
+ * AJAX handler: save the user's favorite colors list.
+ */
+function jasanika_favorite_colors_ajax_save(): void {
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_send_json_error( __( 'Insufficient permissions.', 'jasanika' ) );
+	}
+
+	$nonce = isset( $_POST['nonce'] ) ? (string) wp_unslash( $_POST['nonce'] ) : '';
+	if ( ! wp_verify_nonce( $nonce, 'jasanika_favorite_colors' ) ) {
+		wp_send_json_error( __( 'Security check failed.', 'jasanika' ) );
+	}
+
+	$raw_json = isset( $_POST['colors'] ) ? (string) wp_unslash( $_POST['colors'] ) : '[]';
+	$colors   = json_decode( $raw_json, true );
+
+	if ( ! is_array( $colors ) ) {
+		wp_send_json_error( __( 'Invalid data.', 'jasanika' ) );
+	}
+
+	$sanitized = array();
+	foreach ( $colors as $color ) {
+		$hex = sanitize_hex_color( (string) $color );
+		if ( '' !== $hex ) {
+			$sanitized[] = $hex;
+		}
+	}
+	$sanitized = array_values( array_unique( array_slice( $sanitized, 0, 20 ) ) );
+
+	update_option( 'jasanika_favorite_colors', $sanitized );
+	wp_send_json_success();
 }
 
 /**
@@ -359,10 +534,8 @@ function jasanika_admin_page_theme_presets(): void {
 						<?php if ( ! $is_builtin ) : ?>
 							<button
 								type="button"
-								class="button jasanika-presets__edit-toggle"
-								data-panel="jasanika-edit-panel-<?php echo esc_attr( $preset_id ); ?>"
-								data-label-edit="<?php esc_attr_e( 'Edit Colors', 'jasanika' ); ?>"
-								data-label-close="<?php esc_attr_e( 'Close Editor', 'jasanika' ); ?>"
+								class="button jasanika-open-color-editor"
+								data-preset-id="<?php echo esc_attr( $preset_id ); ?>"
 							><?php esc_html_e( 'Edit Colors', 'jasanika' ); ?></button>
 						<?php endif; ?>
 
@@ -375,51 +548,6 @@ function jasanika_admin_page_theme_presets(): void {
 							</form>
 						<?php endif; ?>
 					</div>
-
-					<?php if ( ! $is_builtin ) : ?>
-						<?php
-						$color_fields = array(
-							'primary_color'    => __( 'Primary Color', 'jasanika' ),
-							'secondary_color'  => __( 'Secondary Color', 'jasanika' ),
-							'accent_color'     => __( 'Accent Color', 'jasanika' ),
-							'background_color' => __( 'Background Color', 'jasanika' ),
-							'text_color'       => __( 'Text Color', 'jasanika' ),
-						);
-						?>
-						<div
-							id="jasanika-edit-panel-<?php echo esc_attr( $preset_id ); ?>"
-							class="jasanika-presets__edit-panel"
-							style="display:none;"
-						>
-							<form method="post" class="jasanika-presets__edit-form">
-								<?php wp_nonce_field( 'jasanika_theme_presets_action', 'jasanika_theme_presets_nonce' ); ?>
-								<input type="hidden" name="preset_action" value="save_colors">
-								<input type="hidden" name="preset_id" value="<?php echo esc_attr( $preset_id ); ?>">
-								<input type="hidden" name="config[button_style]" value="<?php echo esc_attr( $config['button_style'] ); ?>">
-
-								<div class="jasanika-presets__color-fields">
-									<?php foreach ( $color_fields as $field_key => $field_label ) : ?>
-										<div class="jasanika-presets__color-row">
-											<label class="jasanika-presets__color-label"><?php echo esc_html( $field_label ); ?></label>
-											<input
-												type="text"
-												name="config[<?php echo esc_attr( $field_key ); ?>]"
-												value="<?php echo esc_attr( $config[ $field_key ] ); ?>"
-												class="jasanika-color-picker"
-												data-field="<?php echo esc_attr( $field_key ); ?>"
-												data-default-color="<?php echo esc_attr( $config[ $field_key ] ); ?>"
-											>
-										</div>
-									<?php endforeach; ?>
-								</div>
-
-								<div class="jasanika-presets__edit-actions">
-									<button type="submit" class="button button-primary"><?php esc_html_e( 'Save Colors', 'jasanika' ); ?></button>
-									<span class="jasanika-presets__validation-error" style="display:none;color:#cc1818;margin-left:8px;"></span>
-								</div>
-							</form>
-						</div>
-					<?php endif; ?>
 				</div>
 			<?php endforeach; ?>
 		</div>
