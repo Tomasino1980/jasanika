@@ -72,10 +72,15 @@ function jasanika_get_logo(): string {
 
 /**
  * Return the footer logo as an HTML img element, or an empty string when none is configured.
+ * Respects the logo_show_footer visibility setting.
  *
  * The returned string is already properly escaped.
  */
 function jasanika_get_footer_logo(): string {
+	if ( ! jasanika_logo_is_shown_in( 'footer' ) ) {
+		return '';
+	}
+
 	$url = jasanika_get_footer_logo_url();
 
 	if ( ! $url ) {
@@ -83,6 +88,213 @@ function jasanika_get_footer_logo(): string {
 	}
 
 	return '<img src="' . esc_url( $url ) . '" alt="' . esc_attr( jasanika_get_company_name() ) . '" class="footer-branding__logo">';
+}
+
+// ---------------------------------------------------------------------------
+// Logo Placement – M55
+// ---------------------------------------------------------------------------
+
+/**
+ * Check whether the logo is configured to be shown in a given location.
+ *
+ * Locations: 'header' | 'footer' | 'hero' | 'mobile'
+ * Defaults (when the setting has never been saved): header=true, footer=true, hero=false, mobile=true.
+ *
+ * @param string $location Location identifier.
+ * @return bool
+ */
+function jasanika_logo_is_shown_in( string $location ): bool {
+	$options  = get_option( 'jasanika_settings', array() );
+	$defaults = array(
+		'header' => true,
+		'footer' => true,
+		'hero'   => false,
+		'mobile' => true,
+	);
+
+	$key = 'logo_show_' . $location;
+
+	if ( ! array_key_exists( $key, $options ) ) {
+		return $defaults[ $location ] ?? true;
+	}
+
+	return (bool) $options[ $key ];
+}
+
+/**
+ * Return the configured header logo position.
+ *
+ * @return string 'left' | 'center' | 'right'
+ */
+function jasanika_logo_get_header_position(): string {
+	$valid = array( 'left', 'center', 'right' );
+	$val   = (string) jasanika_get_option( 'logo_header_pos', 'left' );
+	return in_array( $val, $valid, true ) ? $val : 'left';
+}
+
+/**
+ * Return the configured footer logo position.
+ *
+ * @return string 'left' | 'center' | 'right'
+ */
+function jasanika_logo_get_footer_position(): string {
+	$valid = array( 'left', 'center', 'right' );
+	$val   = (string) jasanika_get_option( 'logo_footer_pos', 'left' );
+	return in_array( $val, $valid, true ) ? $val : 'left';
+}
+
+/**
+ * Return the configured hero logo position.
+ *
+ * @return string One of: top_left | top_center | top_right | center | bottom_left | bottom_center | bottom_right
+ */
+function jasanika_logo_get_hero_position(): string {
+	$valid = array( 'top_left', 'top_center', 'top_right', 'center', 'bottom_left', 'bottom_center', 'bottom_right' );
+	$val   = (string) jasanika_get_option( 'logo_hero_pos', 'center' );
+	return in_array( $val, $valid, true ) ? $val : 'center';
+}
+
+/**
+ * Return the general logo width in pixels (used for --js-logo-width CSS variable).
+ *
+ * @return int
+ */
+function jasanika_logo_get_width(): int {
+	$val = (int) jasanika_get_option( 'logo_width', 200 );
+	return min( 600, max( 50, $val ) );
+}
+
+/**
+ * Return the desktop logo width in pixels (used for --js-logo-desktop-width CSS variable).
+ *
+ * @return int
+ */
+function jasanika_logo_get_desktop_width(): int {
+	$val = (int) jasanika_get_option( 'logo_desktop_width', 200 );
+	return min( 600, max( 50, $val ) );
+}
+
+/**
+ * Return the tablet logo width in pixels (used for --js-logo-tablet-width CSS variable).
+ *
+ * @return int
+ */
+function jasanika_logo_get_tablet_width(): int {
+	$val = (int) jasanika_get_option( 'logo_tablet_width', 160 );
+	return min( 600, max( 50, $val ) );
+}
+
+/**
+ * Return the mobile logo width in pixels (used for --js-logo-mobile-width CSS variable).
+ *
+ * @return int
+ */
+function jasanika_logo_get_mobile_width(): int {
+	$val = (int) jasanika_get_option( 'logo_mobile_width', 120 );
+	return min( 600, max( 50, $val ) );
+}
+
+/**
+ * Return the logo height mode.
+ *
+ * @return string 'auto' | 'custom'
+ */
+function jasanika_logo_get_height_mode(): string {
+	$val = (string) jasanika_get_option( 'logo_height_mode', 'auto' );
+	return in_array( $val, array( 'auto', 'custom' ), true ) ? $val : 'auto';
+}
+
+/**
+ * Return the custom logo height in pixels (relevant only when height mode = 'custom').
+ *
+ * @return int
+ */
+function jasanika_logo_get_height(): int {
+	$val = (int) jasanika_get_option( 'logo_height', 100 );
+	return min( 600, max( 50, $val ) );
+}
+
+/**
+ * Return a single logo margin value in pixels.
+ *
+ * @param string $side 'top' | 'right' | 'bottom' | 'left'
+ * @return int
+ */
+function jasanika_logo_get_margin( string $side ): int {
+	$sides = array( 'top', 'right', 'bottom', 'left' );
+	if ( ! in_array( $side, $sides, true ) ) {
+		return 0;
+	}
+	$val = (int) jasanika_get_option( 'logo_margin_' . $side, 0 );
+	return min( 200, max( 0, $val ) );
+}
+
+/**
+ * Generate inline CSS for logo placement CSS custom properties.
+ *
+ * Returns a full :root { … } block ready to be injected via wp_add_inline_style().
+ * Only outputs when at least one non-default value is configured.
+ *
+ * @return string CSS string or empty string.
+ */
+function jasanika_logo_get_css_variables(): string {
+	$width         = jasanika_logo_get_width();
+	$desktop_width = jasanika_logo_get_desktop_width();
+	$tablet_width  = jasanika_logo_get_tablet_width();
+	$mobile_width  = jasanika_logo_get_mobile_width();
+	$height_mode   = jasanika_logo_get_height_mode();
+	$height        = 'custom' === $height_mode ? jasanika_logo_get_height() . 'px' : 'auto';
+	$margin_top    = jasanika_logo_get_margin( 'top' );
+	$margin_right  = jasanika_logo_get_margin( 'right' );
+	$margin_bottom = jasanika_logo_get_margin( 'bottom' );
+	$margin_left   = jasanika_logo_get_margin( 'left' );
+
+	$vars = ":root{\n";
+	$vars .= "\t--js-logo-width:{$width}px;\n";
+	$vars .= "\t--js-logo-desktop-width:{$desktop_width}px;\n";
+	$vars .= "\t--js-logo-tablet-width:{$tablet_width}px;\n";
+	$vars .= "\t--js-logo-mobile-width:{$mobile_width}px;\n";
+	$vars .= "\t--js-logo-height:{$height};\n";
+	$vars .= "\t--js-logo-margin-top:{$margin_top}px;\n";
+	$vars .= "\t--js-logo-margin-right:{$margin_right}px;\n";
+	$vars .= "\t--js-logo-margin-bottom:{$margin_bottom}px;\n";
+	$vars .= "\t--js-logo-margin-left:{$margin_left}px;\n";
+	$vars .= "}";
+
+	return $vars;
+}
+
+/**
+ * Return the hero logo HTML or empty string when not configured to show in the hero.
+ *
+ * The returned string is already properly escaped.
+ */
+function jasanika_get_hero_logo(): string {
+	if ( ! jasanika_logo_is_shown_in( 'hero' ) ) {
+		return '';
+	}
+
+	$url      = jasanika_get_logo_url();
+	$pos      = jasanika_logo_get_hero_position();
+	$pos_class = 'hero-logo--' . esc_attr( $pos );
+
+	ob_start();
+	?>
+	<div class="hero-logo <?php echo esc_attr( $pos_class ); ?>" aria-hidden="true">
+		<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+			<?php if ( $url ) : ?>
+				<img
+					src="<?php echo esc_url( $url ); ?>"
+					alt="<?php echo esc_attr( jasanika_get_company_name() ); ?>"
+					class="hero-logo__img"
+				>
+			<?php else : ?>
+				<span class="hero-logo__name"><?php echo esc_html( jasanika_get_company_name() ); ?></span>
+			<?php endif; ?>
+		</a>
+	</div>
+	<?php
+	return (string) ob_get_clean();
 }
 
 /**

@@ -110,6 +110,14 @@ function jasanika_enqueue_assets() {
 		$ver
 	);
 
+	// Logo placement – always loaded.
+	wp_enqueue_style(
+		'jasanika-logo-placement',
+		$uri . '/assets/css/components/logo-placement.css',
+		array( 'jasanika-variables' ),
+		$ver
+	);
+
 	// Pages layer.
 	wp_enqueue_style(
 		'jasanika-homepage',
@@ -358,6 +366,29 @@ function jasanika_enqueue_brand_css_variables(): void {
 	wp_add_inline_style( 'jasanika-variables', $vars );
 }
 add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_brand_css_variables', 20 );
+
+// ---------------------------------------------------------------------------
+// Logo Placement CSS Variables
+// ---------------------------------------------------------------------------
+
+/**
+ * Inject logo placement CSS custom properties on the front-end.
+ * Outputs a :root block with --js-logo-width, --js-logo-mobile-width, etc.
+ */
+function jasanika_enqueue_logo_css_variables(): void {
+	if ( ! function_exists( 'jasanika_logo_get_css_variables' ) ) {
+		return;
+	}
+
+	$vars = jasanika_logo_get_css_variables();
+
+	if ( '' === $vars ) {
+		return;
+	}
+
+	wp_add_inline_style( 'jasanika-logo-placement', $vars );
+}
+add_action( 'wp_enqueue_scripts', 'jasanika_enqueue_logo_css_variables', 20 );
 
 // ---------------------------------------------------------------------------
 // Favicon

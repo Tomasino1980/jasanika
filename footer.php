@@ -63,7 +63,11 @@
 			<div class="footer-builder__bottom">
 
 				<?php if ( $has_contact || $has_social ) : ?>
-					<div class="footer-builder__contact">
+					<?php
+					$footer_logo_pos  = function_exists( 'jasanika_logo_get_footer_position' ) ? jasanika_logo_get_footer_position() : 'left';
+					$footer_pos_class = 'left' !== $footer_logo_pos ? ' footer-builder__contact--pos-' . $footer_logo_pos : '';
+					?>
+					<div class="footer-builder__contact<?php echo esc_attr( $footer_pos_class ); ?>">
 
 						<?php
 						$footer_logo = jasanika_get_footer_logo();

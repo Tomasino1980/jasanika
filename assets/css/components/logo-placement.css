@@ -1,0 +1,143 @@
+/* logo-placement.css – Logo placement, sizing and spacing. */
+
+/* -------------------------------------------------- */
+/* Logo image size (CSS custom properties)            */
+/* -------------------------------------------------- */
+
+.site-branding__logo {
+	width:          var(--js-logo-width, 200px);
+	height:         var(--js-logo-height, auto);
+	max-width:      100%;
+	display:        block;
+	margin-top:     var(--js-logo-margin-top,    0px);
+	margin-bottom:  var(--js-logo-margin-bottom, 0px);
+	margin-left:    var(--js-logo-margin-left,   0px);
+	margin-right:   var(--js-logo-margin-right,  0px);
+}
+
+.footer-branding__logo {
+	width:     var(--js-logo-width, 200px);
+	height:    var(--js-logo-height, auto);
+	max-width: 100%;
+	display:   block;
+}
+
+/* -------------------------------------------------- */
+/* Responsive logo widths                             */
+/* -------------------------------------------------- */
+
+@media (max-width: 767px) {
+	.site-branding__logo,
+	.footer-branding__logo,
+	.hero-logo__img {
+		width: var(--js-logo-mobile-width, var(--js-logo-width, 120px));
+	}
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+	.site-branding__logo,
+	.footer-branding__logo,
+	.hero-logo__img {
+		width: var(--js-logo-tablet-width, var(--js-logo-width, 160px));
+	}
+}
+
+@media (min-width: 1024px) {
+	.site-branding__logo,
+	.footer-branding__logo,
+	.hero-logo__img {
+		width: var(--js-logo-desktop-width, var(--js-logo-width, 200px));
+	}
+}
+
+/* -------------------------------------------------- */
+/* Header logo position                               */
+/* -------------------------------------------------- */
+
+/* Center: site-branding is absolutely centred; nav retains its natural position */
+.site-header--logo-center .site-header__inner {
+	position: relative;
+}
+
+.site-header--logo-center .site-branding {
+	position:  absolute;
+	left:      50%;
+	transform: translateX(-50%);
+}
+
+/* Right: reverse the flex row so branding appears on the right */
+.site-header--logo-right .site-header__inner {
+	flex-direction: row-reverse;
+}
+
+/* -------------------------------------------------- */
+/* Mobile logo visibility                             */
+/* -------------------------------------------------- */
+
+@media (max-width: 767px) {
+	.site-header--hide-mobile-logo .site-branding {
+		display: none;
+	}
+}
+
+/* -------------------------------------------------- */
+/* Footer logo position                               */
+/* -------------------------------------------------- */
+
+.footer-builder__contact--pos-center {
+	text-align:  center;
+	align-items: center;
+}
+
+.footer-builder__contact--pos-right {
+	text-align:  right;
+	align-items: flex-end;
+}
+
+/* -------------------------------------------------- */
+/* Hero logo overlay                                  */
+/* -------------------------------------------------- */
+
+/* Ensure hero section is a positioning context */
+.hero-slider {
+	position: relative;
+}
+
+.hero-logo {
+	position:       absolute;
+	z-index:        10;
+	padding:        16px;
+	pointer-events: none;
+}
+
+.hero-logo a {
+	pointer-events: all;
+}
+
+/* Position modifiers */
+.hero-logo--top_left     { top: 0;   left: 0; }
+.hero-logo--top_center   { top: 0;   left: 50%; transform: translateX(-50%); }
+.hero-logo--top_right    { top: 0;   right: 0; }
+.hero-logo--center       { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.hero-logo--bottom_left  { bottom: 0; left: 0; }
+.hero-logo--bottom_center { bottom: 0; left: 50%; transform: translateX(-50%); }
+.hero-logo--bottom_right { bottom: 0; right: 0; }
+
+.hero-logo__img {
+	display:   block;
+	width:     var(--js-logo-width, 200px);
+	height:    var(--js-logo-height, auto);
+	max-width: 100%;
+}
+
+.hero-logo__name {
+	font-family:   var(--font-heading);
+	font-size:     var(--text-xl);
+	font-weight:   700;
+	color:         var(--text-main);
+	text-shadow:   0 1px 4px rgba(0, 0, 0, 0.7);
+	padding:       var(--space-2) var(--space-4);
+	background:    rgba(0, 0, 0, 0.4);
+	border-radius: var(--radius-md);
+	display:       inline-block;
+}

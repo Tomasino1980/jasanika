@@ -1,0 +1,222 @@
+/* logo-placement.css – Admin UI for Logo Placement settings and live preview. */
+
+/* -------------------------------------------------- */
+/* Visibility checkboxes                              */
+/* -------------------------------------------------- */
+
+.jasanika-logo-visibility {
+	display:    flex;
+	flex-wrap:  wrap;
+	gap:        8px 20px;
+	border:     none;
+	padding:    0;
+	margin:     0;
+}
+
+.jasanika-logo-vis-label {
+	display:     flex;
+	align-items: center;
+	gap:         6px;
+	font-weight: 500;
+	cursor:      pointer;
+}
+
+/* -------------------------------------------------- */
+/* Radio button groups                                */
+/* -------------------------------------------------- */
+
+.jasanika-logo-radio-group {
+	display:    flex;
+	flex-wrap:  wrap;
+	gap:        8px 16px;
+}
+
+.jasanika-logo-radio {
+	display:     flex;
+	align-items: center;
+	gap:         6px;
+	cursor:      pointer;
+}
+
+/* -------------------------------------------------- */
+/* Range sliders                                      */
+/* -------------------------------------------------- */
+
+.jasanika-range-wrap {
+	display:     flex;
+	align-items: center;
+	gap:         10px;
+	max-width:   360px;
+}
+
+.jasanika-range-input {
+	flex:       1;
+	max-width:  280px;
+	cursor:     pointer;
+	accent-color: #b78acb;
+}
+
+.jasanika-range-display {
+	min-width:   44px;
+	text-align:  right;
+	font-family: monospace;
+	font-size:   13px;
+	color:       #555;
+	font-weight: 600;
+}
+
+/* -------------------------------------------------- */
+/* Logo height composite field                        */
+/* -------------------------------------------------- */
+
+.jasanika-logo-height-wrap {
+	display:        flex;
+	flex-direction: column;
+	gap:            10px;
+}
+
+.jasanika-height-custom {
+	margin-top: 4px;
+}
+
+/* -------------------------------------------------- */
+/* Live preview container                             */
+/* -------------------------------------------------- */
+
+.jasanika-logo-placement-preview {
+	display:   flex;
+	flex-wrap: wrap;
+	gap:       16px;
+	margin:    4px 0 0;
+}
+
+/* -------------------------------------------------- */
+/* Individual preview panel                           */
+/* -------------------------------------------------- */
+
+.jlp-preview-panel {
+	flex:           1;
+	min-width:      200px;
+	max-width:      340px;
+}
+
+.jlp-preview-label {
+	font-size:     12px;
+	font-weight:   600;
+	color:         #666;
+	margin-bottom: 6px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
+
+/* -------------------------------------------------- */
+/* Header preview                                     */
+/* -------------------------------------------------- */
+
+.jlp-header-preview {
+	display:       flex;
+	align-items:   center;
+	height:        48px;
+	background:    rgba(183, 138, 203, 0.12);
+	border:        1px solid rgba(183, 138, 203, 0.35);
+	border-radius: 6px;
+	padding:       0 12px;
+	position:      relative;
+	transition:    all 0.2s ease;
+}
+
+/* Logo right = row-reverse */
+.jlp-header-preview[data-pos="right"] {
+	flex-direction: row-reverse;
+}
+
+/* Logo center = absolute centre */
+.jlp-header-preview[data-pos="center"] {
+	justify-content: flex-end;
+}
+
+.jlp-header-preview[data-pos="center"] .jlp-logo-dot {
+	position:  absolute;
+	left:      50%;
+	transform: translateX(-50%);
+}
+
+/* -------------------------------------------------- */
+/* Hero preview                                       */
+/* -------------------------------------------------- */
+
+.jlp-hero-preview {
+	height:        100px;
+	background:    linear-gradient(135deg, #24212b 0%, #1b1a1f 100%);
+	border:        1px solid rgba(183, 138, 203, 0.35);
+	border-radius: 6px;
+	position:      relative;
+	overflow:      hidden;
+}
+
+.jlp-hero-logo-dot {
+	position: absolute;
+	padding:  6px;
+}
+
+.jlp-hero-preview[data-pos="top_left"]     .jlp-hero-logo-dot { top: 0;   left: 0; }
+.jlp-hero-preview[data-pos="top_center"]   .jlp-hero-logo-dot { top: 0;   left: 50%; transform: translateX(-50%); }
+.jlp-hero-preview[data-pos="top_right"]    .jlp-hero-logo-dot { top: 0;   right: 0; }
+.jlp-hero-preview[data-pos="center"]       .jlp-hero-logo-dot { top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.jlp-hero-preview[data-pos="bottom_left"]  .jlp-hero-logo-dot { bottom: 0; left: 0; }
+.jlp-hero-preview[data-pos="bottom_center"].jlp-hero-logo-dot { bottom: 0; left: 50%; transform: translateX(-50%); }
+.jlp-hero-preview[data-pos="bottom_right"] .jlp-hero-logo-dot { bottom: 0; right: 0; }
+
+/* -------------------------------------------------- */
+/* Footer preview                                     */
+/* -------------------------------------------------- */
+
+.jlp-footer-preview {
+	display:       flex;
+	align-items:   center;
+	height:        48px;
+	background:    rgba(36, 33, 43, 0.6);
+	border:        1px solid rgba(183, 138, 203, 0.35);
+	border-radius: 6px;
+	padding:       0 12px;
+	transition:    all 0.2s ease;
+}
+
+.jlp-footer-preview[data-pos="center"] { justify-content: center; }
+.jlp-footer-preview[data-pos="right"]  { justify-content: flex-end; }
+
+/* -------------------------------------------------- */
+/* Logo dot (the indicator inside preview panels)     */
+/* -------------------------------------------------- */
+
+.jlp-logo-dot {
+	display:     flex;
+	align-items: center;
+}
+
+.jlp-logo-img {
+	max-height: 28px;
+	max-width:  80px;
+	object-fit: contain;
+	border-radius: 3px;
+}
+
+.jlp-logo-text {
+	font-size:     11px;
+	font-weight:   700;
+	color:         #b78acb;
+	background:    rgba(183, 138, 203, 0.15);
+	border:        1px dashed #b78acb;
+	padding:       3px 8px;
+	border-radius: 3px;
+	letter-spacing: 0.05em;
+}
+
+/* Nav placeholder in header preview */
+.jlp-nav-placeholder {
+	font-size:   11px;
+	color:       #888;
+	background:  rgba(255, 255, 255, 0.07);
+	padding:     4px 10px;
+	border-radius: 3px;
+}

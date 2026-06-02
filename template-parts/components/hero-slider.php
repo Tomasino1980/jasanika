@@ -45,6 +45,16 @@ if ( ! empty( $managed_slides ) ) {
 
 <section class="hero-slider" aria-label="<?php esc_attr_e( 'Hero slider', 'jasanika' ); ?>">
 
+	<?php
+	// Hero logo overlay – shown when "Homepage Hero" is enabled in Logo Placement.
+	if ( function_exists( 'jasanika_get_hero_logo' ) ) {
+		$hero_logo_html = jasanika_get_hero_logo();
+		if ( $hero_logo_html ) {
+			echo $hero_logo_html; // Escaped within helper.
+		}
+	}
+	?>
+
 	<div class="hero-slider__track">
 
 		<?php foreach ( $hero_slides as $index => $slide ) : ?>

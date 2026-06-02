@@ -52,6 +52,21 @@ function jasanika_theme_settings_enqueue( string $hook ): void {
 		wp_get_theme()->get( 'Version' ),
 		true
 	);
+
+	wp_enqueue_style(
+		'jasanika-logo-placement-admin',
+		get_template_directory_uri() . '/assets/css/admin/logo-placement.css',
+		array(),
+		wp_get_theme()->get( 'Version' )
+	);
+
+	wp_enqueue_script(
+		'jasanika-logo-placement-admin',
+		get_template_directory_uri() . '/assets/js/admin/logo-placement.js',
+		array(),
+		wp_get_theme()->get( 'Version' ),
+		true
+	);
 }
 
 // ---------------------------------------------------------------------------
@@ -178,6 +193,214 @@ function jasanika_theme_settings_init(): void {
 			'key'     => 'brand_accent',
 			'default' => '#f1c95d',
 		)
+	);
+
+	// --- Logo Placement Section ---------------------------------------------
+
+	add_settings_section(
+		'jasanika_section_logo_placement',
+		__( 'Logo Placement', 'jasanika' ),
+		'__return_false',
+		'jasanika-theme-settings'
+	);
+
+	add_settings_field(
+		'jasanika_logo_display_in',
+		__( 'Display Logo In', 'jasanika' ),
+		'jasanika_settings_field_logo_visibility',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement'
+	);
+
+	add_settings_field(
+		'jasanika_logo_header_pos',
+		__( 'Header Position', 'jasanika' ),
+		'jasanika_settings_field_radio',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_header_pos',
+			'options' => array(
+				'left'   => __( 'Left', 'jasanika' ),
+				'center' => __( 'Center', 'jasanika' ),
+				'right'  => __( 'Right', 'jasanika' ),
+			),
+			'default' => 'left',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_footer_pos',
+		__( 'Footer Position', 'jasanika' ),
+		'jasanika_settings_field_radio',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_footer_pos',
+			'options' => array(
+				'left'   => __( 'Left', 'jasanika' ),
+				'center' => __( 'Center', 'jasanika' ),
+				'right'  => __( 'Right', 'jasanika' ),
+			),
+			'default' => 'left',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_hero_pos',
+		__( 'Hero Position', 'jasanika' ),
+		'jasanika_settings_field_radio',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_hero_pos',
+			'options' => array(
+				'top_left'      => __( 'Top Left', 'jasanika' ),
+				'top_center'    => __( 'Top Center', 'jasanika' ),
+				'top_right'     => __( 'Top Right', 'jasanika' ),
+				'center'        => __( 'Center', 'jasanika' ),
+				'bottom_left'   => __( 'Bottom Left', 'jasanika' ),
+				'bottom_center' => __( 'Bottom Center', 'jasanika' ),
+				'bottom_right'  => __( 'Bottom Right', 'jasanika' ),
+			),
+			'default' => 'center',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_width',
+		__( 'Logo Width', 'jasanika' ),
+		'jasanika_settings_field_range',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_width',
+			'min'     => 50,
+			'max'     => 600,
+			'default' => 200,
+			'unit'    => 'px',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_height_mode',
+		__( 'Logo Height', 'jasanika' ),
+		'jasanika_settings_field_logo_height',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement'
+	);
+
+	add_settings_field(
+		'jasanika_logo_desktop_width',
+		__( 'Desktop Width', 'jasanika' ),
+		'jasanika_settings_field_range',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_desktop_width',
+			'min'     => 50,
+			'max'     => 600,
+			'default' => 200,
+			'unit'    => 'px',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_tablet_width',
+		__( 'Tablet Width', 'jasanika' ),
+		'jasanika_settings_field_range',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_tablet_width',
+			'min'     => 50,
+			'max'     => 600,
+			'default' => 160,
+			'unit'    => 'px',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_mobile_width',
+		__( 'Mobile Width', 'jasanika' ),
+		'jasanika_settings_field_range',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_mobile_width',
+			'min'     => 50,
+			'max'     => 600,
+			'default' => 120,
+			'unit'    => 'px',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_margin_top',
+		__( 'Top Margin', 'jasanika' ),
+		'jasanika_settings_field_range',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_margin_top',
+			'min'     => 0,
+			'max'     => 200,
+			'default' => 0,
+			'unit'    => 'px',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_margin_bottom',
+		__( 'Bottom Margin', 'jasanika' ),
+		'jasanika_settings_field_range',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_margin_bottom',
+			'min'     => 0,
+			'max'     => 200,
+			'default' => 0,
+			'unit'    => 'px',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_margin_left',
+		__( 'Left Margin', 'jasanika' ),
+		'jasanika_settings_field_range',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_margin_left',
+			'min'     => 0,
+			'max'     => 200,
+			'default' => 0,
+			'unit'    => 'px',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_margin_right',
+		__( 'Right Margin', 'jasanika' ),
+		'jasanika_settings_field_range',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement',
+		array(
+			'key'     => 'logo_margin_right',
+			'min'     => 0,
+			'max'     => 200,
+			'default' => 0,
+			'unit'    => 'px',
+		)
+	);
+
+	add_settings_field(
+		'jasanika_logo_placement_preview',
+		__( 'Alignment Preview', 'jasanika' ),
+		'jasanika_settings_field_logo_placement_preview',
+		'jasanika-theme-settings',
+		'jasanika_section_logo_placement'
 	);
 
 	// --- Contact Information Section ----------------------------------------
@@ -811,6 +1034,48 @@ function jasanika_sanitize_settings( mixed $input ): array {
 	$sanitized['brand_primary']       = jasanika_sanitize_hex_color( $input['brand_primary']   ?? '' );
 	$sanitized['brand_secondary']     = jasanika_sanitize_hex_color( $input['brand_secondary'] ?? '' );
 	$sanitized['brand_accent']        = jasanika_sanitize_hex_color( $input['brand_accent']    ?? '' );
+
+	// Logo Placement – visibility flags.
+	$sanitized['logo_show_header'] = isset( $input['logo_show_header'] ) ? 1 : 0;
+	$sanitized['logo_show_footer'] = isset( $input['logo_show_footer'] ) ? 1 : 0;
+	$sanitized['logo_show_hero']   = isset( $input['logo_show_hero'] )   ? 1 : 0;
+	$sanitized['logo_show_mobile'] = isset( $input['logo_show_mobile'] ) ? 1 : 0;
+
+	// Logo Placement – position values.
+	$valid_logo_pos_h = array( 'left', 'center', 'right' );
+	$valid_logo_pos_v = array( 'top_left', 'top_center', 'top_right', 'center', 'bottom_left', 'bottom_center', 'bottom_right' );
+
+	$logo_header_pos = sanitize_key( $input['logo_header_pos'] ?? 'left' );
+	$sanitized['logo_header_pos'] = in_array( $logo_header_pos, $valid_logo_pos_h, true ) ? $logo_header_pos : 'left';
+
+	$logo_footer_pos = sanitize_key( $input['logo_footer_pos'] ?? 'left' );
+	$sanitized['logo_footer_pos'] = in_array( $logo_footer_pos, $valid_logo_pos_h, true ) ? $logo_footer_pos : 'left';
+
+	$logo_hero_pos = sanitize_key( $input['logo_hero_pos'] ?? 'center' );
+	$sanitized['logo_hero_pos'] = in_array( $logo_hero_pos, $valid_logo_pos_v, true ) ? $logo_hero_pos : 'center';
+
+	// Logo Placement – height mode.
+	$logo_height_mode = sanitize_key( $input['logo_height_mode'] ?? 'auto' );
+	$sanitized['logo_height_mode'] = in_array( $logo_height_mode, array( 'auto', 'custom' ), true ) ? $logo_height_mode : 'auto';
+
+	// Logo Placement – numeric size and spacing fields.
+	$logo_numeric_fields = array(
+		'logo_width'         => array( 50, 600, 200 ),
+		'logo_height'        => array( 50, 600, 100 ),
+		'logo_desktop_width' => array( 50, 600, 200 ),
+		'logo_tablet_width'  => array( 50, 600, 160 ),
+		'logo_mobile_width'  => array( 50, 600, 120 ),
+		'logo_margin_top'    => array(  0, 200,   0 ),
+		'logo_margin_bottom' => array(  0, 200,   0 ),
+		'logo_margin_left'   => array(  0, 200,   0 ),
+		'logo_margin_right'  => array(  0, 200,   0 ),
+	);
+
+	foreach ( $logo_numeric_fields as $field => $range ) {
+		[ $min, $max, $default ] = $range;
+		$val = absint( $input[ $field ] ?? $default );
+		$sanitized[ $field ] = min( $max, max( $min, $val ) );
+	}
 
 	// Contact.
 	$sanitized['phone']          = sanitize_text_field( $input['phone']          ?? '' );
@@ -1474,6 +1739,217 @@ function jasanika_settings_field_color( array $args ): void {
 		>
 	</div>
 	<p class="description"><?php esc_html_e( 'Enter a HEX colour, e.g. #c89af5', 'jasanika' ); ?></p>
+	<?php
+}
+
+// ---------------------------------------------------------------------------
+// Logo Placement Field Renderers – M55
+// ---------------------------------------------------------------------------
+
+/**
+ * Render logo visibility multi-checkboxes.
+ */
+function jasanika_settings_field_logo_visibility(): void {
+	$options   = get_option( 'jasanika_settings', array() );
+	$locations = array(
+		'logo_show_header' => array(
+			'label'   => __( 'Header', 'jasanika' ),
+			'default' => 1,
+		),
+		'logo_show_footer' => array(
+			'label'   => __( 'Footer', 'jasanika' ),
+			'default' => 1,
+		),
+		'logo_show_hero'   => array(
+			'label'   => __( 'Homepage Hero', 'jasanika' ),
+			'default' => 0,
+		),
+		'logo_show_mobile' => array(
+			'label'   => __( 'Mobile Header', 'jasanika' ),
+			'default' => 1,
+		),
+	);
+
+	echo '<fieldset class="jasanika-logo-visibility">';
+	foreach ( $locations as $key => $loc ) {
+		$checked = array_key_exists( $key, $options )
+			? (bool) $options[ $key ]
+			: (bool) $loc['default'];
+
+		printf(
+			'<label class="jasanika-logo-vis-label" data-location="%1$s"><input type="checkbox" name="jasanika_settings[%1$s]" value="1" %2$s> %3$s</label>',
+			esc_attr( $key ),
+			checked( $checked, true, false ),
+			esc_html( $loc['label'] )
+		);
+	}
+	echo '</fieldset>';
+}
+
+/**
+ * Render a radio button group.
+ *
+ * @param array $args Field arguments: key, options (assoc array value=>label), default.
+ */
+function jasanika_settings_field_radio( array $args ): void {
+	$options = get_option( 'jasanika_settings', array() );
+	$current = $options[ $args['key'] ] ?? ( $args['default'] ?? '' );
+
+	echo '<div class="jasanika-logo-radio-group">';
+	foreach ( $args['options'] as $value => $label ) {
+		printf(
+			'<label class="jasanika-logo-radio"><input type="radio" name="jasanika_settings[%1$s]" value="%2$s" %3$s> %4$s</label>',
+			esc_attr( $args['key'] ),
+			esc_attr( $value ),
+			checked( $current, $value, false ),
+			esc_html( $label )
+		);
+	}
+	echo '</div>';
+}
+
+/**
+ * Render a range slider with live value display.
+ *
+ * @param array $args Field arguments: key, min, max, default, unit.
+ */
+function jasanika_settings_field_range( array $args ): void {
+	$options  = get_option( 'jasanika_settings', array() );
+	$key      = $args['key'];
+	$default  = $args['default'] ?? 0;
+	$min      = $args['min']     ?? 0;
+	$max      = $args['max']     ?? 100;
+	$unit     = $args['unit']    ?? '';
+	$value    = isset( $options[ $key ] ) && '' !== $options[ $key ] ? (int) $options[ $key ] : $default;
+	$value    = min( $max, max( $min, $value ) );
+	$disp_id  = 'jasanika_range_display_' . $key;
+	?>
+	<div class="jasanika-range-wrap">
+		<input
+			type="range"
+			id="jasanika_<?php echo esc_attr( $key ); ?>"
+			name="jasanika_settings[<?php echo esc_attr( $key ); ?>]"
+			min="<?php echo esc_attr( (string) $min ); ?>"
+			max="<?php echo esc_attr( (string) $max ); ?>"
+			value="<?php echo esc_attr( (string) $value ); ?>"
+			class="jasanika-range-input"
+			data-display="<?php echo esc_attr( $disp_id ); ?>"
+			data-unit="<?php echo esc_attr( $unit ); ?>"
+		>
+		<span id="<?php echo esc_attr( $disp_id ); ?>" class="jasanika-range-display">
+			<?php echo esc_html( $value . $unit ); ?>
+		</span>
+	</div>
+	<?php
+}
+
+/**
+ * Render the logo height composite field (auto / custom toggle + range slider).
+ */
+function jasanika_settings_field_logo_height(): void {
+	$options   = get_option( 'jasanika_settings', array() );
+	$mode      = $options['logo_height_mode'] ?? 'auto';
+	$height    = isset( $options['logo_height'] ) ? (int) $options['logo_height'] : 100;
+	$height    = min( 600, max( 50, $height ) );
+	$disp_id   = 'jasanika_range_display_logo_height';
+	$is_custom = 'custom' === $mode;
+	?>
+	<div class="jasanika-logo-height-wrap">
+		<div class="jasanika-logo-radio-group">
+			<label class="jasanika-logo-radio">
+				<input
+					type="radio"
+					name="jasanika_settings[logo_height_mode]"
+					value="auto"
+					<?php checked( $mode, 'auto' ); ?>
+					class="jasanika-height-mode-radio"
+				>
+				<?php esc_html_e( 'Auto', 'jasanika' ); ?>
+			</label>
+			<label class="jasanika-logo-radio">
+				<input
+					type="radio"
+					name="jasanika_settings[logo_height_mode]"
+					value="custom"
+					<?php checked( $mode, 'custom' ); ?>
+					class="jasanika-height-mode-radio"
+				>
+				<?php esc_html_e( 'Custom', 'jasanika' ); ?>
+			</label>
+		</div>
+		<div class="jasanika-range-wrap jasanika-height-custom" style="<?php echo $is_custom ? '' : 'display:none;'; ?>">
+			<input
+				type="range"
+				id="jasanika_logo_height"
+				name="jasanika_settings[logo_height]"
+				min="50"
+				max="600"
+				value="<?php echo esc_attr( (string) $height ); ?>"
+				class="jasanika-range-input"
+				data-display="<?php echo esc_attr( $disp_id ); ?>"
+				data-unit="px"
+			>
+			<span id="<?php echo esc_attr( $disp_id ); ?>" class="jasanika-range-display">
+				<?php echo esc_html( $height . 'px' ); ?>
+			</span>
+		</div>
+	</div>
+	<?php
+}
+
+/**
+ * Render the live Alignment Preview panel for Logo Placement.
+ */
+function jasanika_settings_field_logo_placement_preview(): void {
+	$options    = get_option( 'jasanika_settings', array() );
+	$logo_url   = $options['logo_url']       ?? '';
+	$header_pos = $options['logo_header_pos'] ?? 'left';
+	$hero_pos   = $options['logo_hero_pos']   ?? 'center';
+	$footer_pos = $options['logo_footer_pos'] ?? 'left';
+	?>
+	<div id="jasanika-logo-placement-preview" class="jasanika-logo-placement-preview">
+
+		<div class="jlp-preview-panel">
+			<div class="jlp-preview-label"><?php esc_html_e( 'Header Example', 'jasanika' ); ?></div>
+			<div class="jlp-header-preview" data-pos="<?php echo esc_attr( $header_pos ); ?>">
+				<div class="jlp-logo-dot" id="jlp-header-logo">
+					<?php if ( $logo_url ) : ?>
+						<img src="<?php echo esc_url( $logo_url ); ?>" alt="" class="jlp-logo-img">
+					<?php else : ?>
+						<span class="jlp-logo-text">LOGO</span>
+					<?php endif; ?>
+				</div>
+				<div class="jlp-nav-placeholder">NAV</div>
+			</div>
+		</div>
+
+		<div class="jlp-preview-panel">
+			<div class="jlp-preview-label"><?php esc_html_e( 'Hero Example', 'jasanika' ); ?></div>
+			<div class="jlp-hero-preview" data-pos="<?php echo esc_attr( $hero_pos ); ?>">
+				<div class="jlp-logo-dot jlp-hero-logo-dot">
+					<?php if ( $logo_url ) : ?>
+						<img src="<?php echo esc_url( $logo_url ); ?>" alt="" class="jlp-logo-img">
+					<?php else : ?>
+						<span class="jlp-logo-text">LOGO</span>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+
+		<div class="jlp-preview-panel">
+			<div class="jlp-preview-label"><?php esc_html_e( 'Footer Example', 'jasanika' ); ?></div>
+			<div class="jlp-footer-preview" data-pos="<?php echo esc_attr( $footer_pos ); ?>">
+				<div class="jlp-logo-dot">
+					<?php if ( $logo_url ) : ?>
+						<img src="<?php echo esc_url( $logo_url ); ?>" alt="" class="jlp-logo-img">
+					<?php else : ?>
+						<span class="jlp-logo-text">LOGO</span>
+					<?php endif; ?>
+				</div>
+			</div>
+		</div>
+
+	</div>
 	<?php
 }
 
