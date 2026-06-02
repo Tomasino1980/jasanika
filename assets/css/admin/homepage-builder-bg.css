@@ -1,0 +1,141 @@
+/**
+ * Jasanika Admin – Homepage Builder Background Settings
+ *
+ * Styles the background configuration panel rendered inside the
+ * Homepage Builder table in Jasanika → Theme Settings.
+ */
+
+/* Panel wrapper */
+.jasanika-bg-settings {
+	margin: 0;
+}
+
+.jasanika-bg-settings summary {
+	cursor: pointer;
+	padding: 4px 0;
+	font-weight: 600;
+	color: #2271b1;
+	list-style: none;
+	user-select: none;
+}
+
+.jasanika-bg-settings summary::-webkit-details-marker {
+	display: none;
+}
+
+.jasanika-bg-settings summary::before {
+	content: '▶ ';
+	font-size: 10px;
+}
+
+.jasanika-bg-settings[open] summary::before {
+	content: '▼ ';
+}
+
+/* Badge showing current type */
+.jbg-type-badge {
+	display: inline-block;
+	margin-left: 6px;
+	padding: 1px 7px;
+	border-radius: 10px;
+	font-size: 11px;
+	font-weight: 400;
+	background: #ddd;
+	color: #333;
+	vertical-align: middle;
+}
+
+.jbg-type-badge--image,
+.jbg-type-badge--color_image {
+	background: #2271b1;
+	color: #fff;
+}
+
+/* Fields container */
+.jasanika-bg-fields {
+	padding: 12px 0 4px 0;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+/* Individual field row */
+.jbg-field {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.jbg-field-label {
+	font-weight: 600;
+	font-size: 12px;
+	color: #3c434a;
+	text-transform: uppercase;
+	letter-spacing: 0.03em;
+}
+
+/* Radio group */
+.jbg-radio-group {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px 16px;
+}
+
+.jbg-radio-group label {
+	display: flex;
+	align-items: center;
+	gap: 4px;
+	cursor: pointer;
+	font-size: 13px;
+}
+
+/* Image preview */
+.jbg-preview-img {
+	max-width: 120px;
+	max-height: 80px;
+	object-fit: cover;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin-top: 6px;
+}
+
+/* Fit / Position selects */
+.jbg-select {
+	max-width: 200px;
+}
+
+/* Overlay color */
+.jbg-color-wrap {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+/* Opacity */
+.jbg-opacity-wrap {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.jbg-opacity-range {
+	width: 160px;
+}
+
+.jbg-opacity-display {
+	font-size: 13px;
+	min-width: 38px;
+}
+
+/* Separator between sections */
+.jbg-divider {
+	border: none;
+	border-top: 1px solid #e0e0e0;
+	margin: 8px 0 4px;
+}
+
+/* Homepage Builder table – bg column */
+.jasanika-homepage-builder-table th:last-child,
+.jasanika-homepage-builder-table td:last-child {
+	min-width: 180px;
+}

@@ -37,6 +37,21 @@ function jasanika_theme_settings_enqueue( string $hook ): void {
 		wp_get_theme()->get( 'Version' ),
 		true
 	);
+
+	wp_enqueue_style(
+		'jasanika-homepage-builder-bg',
+		get_template_directory_uri() . '/assets/css/admin/homepage-builder-bg.css',
+		array(),
+		wp_get_theme()->get( 'Version' )
+	);
+
+	wp_enqueue_script(
+		'jasanika-homepage-builder-bg',
+		get_template_directory_uri() . '/assets/js/admin/homepage-builder-bg.js',
+		array(),
+		wp_get_theme()->get( 'Version' ),
+		true
+	);
 }
 
 // ---------------------------------------------------------------------------
@@ -888,6 +903,38 @@ function jasanika_sanitize_settings( mixed $input ): array {
 		$sanitized[ $order_key ] = max( 1, min( 99, $order ) );
 	}
 
+	// Homepage Builder – section background settings.
+	$valid_bg_types     = array( 'none', 'color', 'image', 'color_image' );
+	$valid_bg_fits      = array( 'cover', 'contain', 'stretch', 'original', 'repeat' );
+	$valid_bg_positions = array( 'center', 'top', 'bottom', 'left', 'right', 'top_left', 'top_right', 'bottom_left', 'bottom_right' );
+
+	foreach ( array_keys( jasanika_homepage_sections_registry() ) as $key ) {
+		$prefix = 'hb_' . $key . '_bg_';
+
+		$bg_type = sanitize_key( $input[ $prefix . 'type' ] ?? 'color' );
+		$sanitized[ $prefix . 'type' ] = in_array( $bg_type, $valid_bg_types, true ) ? $bg_type : 'color';
+
+		$image_id = absint( $input[ $prefix . 'image_id' ] ?? 0 );
+		if ( $image_id > 0 && ! wp_attachment_is_image( $image_id ) ) {
+			$image_id = 0;
+		}
+		$sanitized[ $prefix . 'image_id' ] = $image_id;
+
+		$bg_fit = sanitize_key( $input[ $prefix . 'fit' ] ?? 'cover' );
+		$sanitized[ $prefix . 'fit' ] = in_array( $bg_fit, $valid_bg_fits, true ) ? $bg_fit : 'cover';
+
+		$bg_pos = sanitize_key( $input[ $prefix . 'position' ] ?? 'center' );
+		$sanitized[ $prefix . 'position' ] = in_array( $bg_pos, $valid_bg_positions, true ) ? $bg_pos : 'center';
+
+		$sanitized[ $prefix . 'repeat' ] = isset( $input[ $prefix . 'repeat' ] ) ? 1 : 0;
+
+		$overlay_color = jasanika_sanitize_hex_color( $input[ $prefix . 'overlay_color' ] ?? '' );
+		$sanitized[ $prefix . 'overlay_color' ] = '' !== $overlay_color ? $overlay_color : '#000000';
+
+		$opacity = absint( $input[ $prefix . 'overlay_opacity' ] ?? 50 );
+		$sanitized[ $prefix . 'overlay_opacity' ] = min( 100, max( 0, $opacity ) );
+	}
+
 	return $sanitized;
 }
 
@@ -1023,16 +1070,43 @@ function jasanika_settings_field_media( array $args ): void {
 /**
  * Renders the Homepage Builder table in the Theme Settings admin page.
  *
- * Displays a table-like interface listing each registered homepage section
- * with its Enabled checkbox and Sort Order number input. Fields are saved
- * as part of the jasanika_settings option group.
+ * Displays a table listing each registered homepage section with its
+ * Enabled checkbox, Sort Order input and a collapsible Background Settings
+ * panel. Fields are saved as part of the jasanika_settings option group.
  */
 function jasanika_settings_section_homepage_builder_cb(): void {
 	$registry = jasanika_homepage_sections_registry();
 	$settings = get_option( 'jasanika_settings', array() );
+
+	$bg_type_labels = array(
+		'none'        => __( 'None', 'jasanika' ),
+		'color'       => __( 'Color', 'jasanika' ),
+		'image'       => __( 'Image', 'jasanika' ),
+		'color_image' => __( 'Color + Image Overlay', 'jasanika' ),
+	);
+
+	$fit_options = array(
+		'cover'    => __( 'Cover', 'jasanika' ),
+		'contain'  => __( 'Contain', 'jasanika' ),
+		'stretch'  => __( 'Stretch', 'jasanika' ),
+		'original' => __( 'Original Size', 'jasanika' ),
+		'repeat'   => __( 'Repeat', 'jasanika' ),
+	);
+
+	$position_options = array(
+		'center'       => __( 'Center', 'jasanika' ),
+		'top'          => __( 'Top', 'jasanika' ),
+		'bottom'       => __( 'Bottom', 'jasanika' ),
+		'left'         => __( 'Left', 'jasanika' ),
+		'right'        => __( 'Right', 'jasanika' ),
+		'top_left'     => __( 'Top Left', 'jasanika' ),
+		'top_right'    => __( 'Top Right', 'jasanika' ),
+		'bottom_left'  => __( 'Bottom Left', 'jasanika' ),
+		'bottom_right' => __( 'Bottom Right', 'jasanika' ),
+	);
 	?>
 	<p class="description">
-		<?php esc_html_e( 'Enable or disable each homepage section and set its display order.', 'jasanika' ); ?>
+		<?php esc_html_e( 'Enable or disable each homepage section, set its display order and configure its background.', 'jasanika' ); ?>
 	</p>
 	<table class="widefat striped jasanika-homepage-builder-table" style="margin-top:12px;">
 		<thead>
@@ -1040,12 +1114,14 @@ function jasanika_settings_section_homepage_builder_cb(): void {
 				<th><?php esc_html_e( 'Section Name', 'jasanika' ); ?></th>
 				<th><?php esc_html_e( 'Enabled', 'jasanika' ); ?></th>
 				<th><?php esc_html_e( 'Sort Order', 'jasanika' ); ?></th>
+				<th><?php esc_html_e( 'Background', 'jasanika' ); ?></th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php foreach ( $registry as $key => $section ) :
 				$enabled_key = 'hb_' . $key . '_enabled';
 				$order_key   = 'hb_' . $key . '_order';
+				$prefix      = 'hb_' . $key . '_bg_';
 
 				$enabled = isset( $settings[ $enabled_key ] )
 					? (bool) $settings[ $enabled_key ]
@@ -1054,6 +1130,35 @@ function jasanika_settings_section_homepage_builder_cb(): void {
 				$order = ( isset( $settings[ $order_key ] ) && '' !== $settings[ $order_key ] )
 					? (int) $settings[ $order_key ]
 					: $section['default_order'];
+
+				// Background settings.
+				$bg_type            = $settings[ $prefix . 'type' ]            ?? 'color';
+				$bg_image_id        = absint( $settings[ $prefix . 'image_id' ] ?? 0 );
+				$bg_fit             = $settings[ $prefix . 'fit' ]             ?? 'cover';
+				$bg_position        = $settings[ $prefix . 'position' ]        ?? 'center';
+				$bg_repeat          = ! empty( $settings[ $prefix . 'repeat' ] );
+				$bg_overlay_color   = $settings[ $prefix . 'overlay_color' ]   ?? '#000000';
+				$bg_overlay_opacity = min( 100, max( 0, absint( $settings[ $prefix . 'overlay_opacity' ] ?? 50 ) ) );
+
+				// Image preview URL for admin.
+				$bg_preview_url = ( $bg_image_id > 0 && wp_attachment_is_image( $bg_image_id ) )
+					? wp_get_attachment_image_url( $bg_image_id, 'thumbnail' )
+					: '';
+
+				// Unique field IDs.
+				$id_field_id        = 'jbg_' . $key . '_image_id';
+				$preview_id         = 'jbg_' . $key . '_preview';
+				$remove_btn_id      = 'jbg_' . $key . '_remove_btn';
+				$overlay_text_id    = 'jbg_' . $key . '_overlay_color';
+				$opacity_display_id = 'jbg_' . $key . '_opacity_val';
+
+				// Open details when a background image type is active.
+				$details_open = ( 'image' === $bg_type || 'color_image' === $bg_type ) ? ' open' : '';
+
+				// Badge class.
+				$badge_class = in_array( $bg_type, array( 'image', 'color_image' ), true )
+					? 'jbg-type-badge jbg-type-badge--' . $bg_type
+					: 'jbg-type-badge';
 			?>
 			<tr>
 				<td><strong><?php echo esc_html( $section['label'] ); ?></strong></td>
@@ -1077,6 +1182,189 @@ function jasanika_settings_section_homepage_builder_cb(): void {
 						max="99"
 						class="small-text"
 					>
+				</td>
+				<td>
+					<details class="jasanika-bg-settings"<?php echo $details_open; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- safe constant string. ?>>
+						<summary>
+							<?php esc_html_e( 'Background Settings', 'jasanika' ); ?>
+							<span class="<?php echo esc_attr( $badge_class ); ?>">
+								<?php echo esc_html( $bg_type_labels[ $bg_type ] ?? $bg_type ); ?>
+							</span>
+						</summary>
+
+						<div class="jasanika-bg-fields">
+
+							<!-- Background Type -->
+							<div class="jbg-field">
+								<span class="jbg-field-label"><?php esc_html_e( 'Background Type', 'jasanika' ); ?></span>
+								<div class="jbg-radio-group">
+									<?php foreach ( $bg_type_labels as $type_val => $type_label ) : ?>
+										<label>
+											<input
+												type="radio"
+												class="jbg-type-radio"
+												name="jasanika_settings[<?php echo esc_attr( $prefix . 'type' ); ?>]"
+												value="<?php echo esc_attr( $type_val ); ?>"
+												<?php checked( $bg_type, $type_val ); ?>
+											>
+											<?php echo esc_html( $type_label ); ?>
+										</label>
+									<?php endforeach; ?>
+								</div>
+							</div>
+
+							<hr class="jbg-divider">
+
+							<!-- Background Image -->
+							<div class="jbg-field jbg-image-row">
+								<span class="jbg-field-label"><?php esc_html_e( 'Background Image', 'jasanika' ); ?></span>
+								<input
+									type="hidden"
+									id="<?php echo esc_attr( $id_field_id ); ?>"
+									name="jasanika_settings[<?php echo esc_attr( $prefix . 'image_id' ); ?>]"
+									value="<?php echo esc_attr( (string) $bg_image_id ); ?>"
+								>
+								<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+									<button
+										type="button"
+										class="button jasanika-bg-select-btn"
+										data-id-target="<?php echo esc_attr( $id_field_id ); ?>"
+										data-preview="<?php echo esc_attr( $preview_id ); ?>"
+										data-remove-btn="<?php echo esc_attr( $remove_btn_id ); ?>"
+										data-title="<?php esc_attr_e( 'Select Background Image', 'jasanika' ); ?>"
+									>
+										<?php esc_html_e( 'Select Image', 'jasanika' ); ?>
+									</button>
+									<button
+										type="button"
+										id="<?php echo esc_attr( $remove_btn_id ); ?>"
+										class="button jasanika-bg-remove-btn"
+										data-id-target="<?php echo esc_attr( $id_field_id ); ?>"
+										data-preview="<?php echo esc_attr( $preview_id ); ?>"
+										style="<?php echo $bg_preview_url ? '' : 'display:none;'; ?>"
+									>
+										<?php esc_html_e( 'Remove Image', 'jasanika' ); ?>
+									</button>
+								</div>
+								<img
+									id="<?php echo esc_attr( $preview_id ); ?>"
+									src="<?php echo $bg_preview_url ? esc_url( $bg_preview_url ) : ''; ?>"
+									class="jbg-preview-img"
+									alt=""
+									style="<?php echo $bg_preview_url ? '' : 'display:none;'; ?>"
+								>
+							</div>
+
+							<!-- Image Fit -->
+							<div class="jbg-field jbg-fit-row">
+								<label
+									for="<?php echo esc_attr( 'jbg_' . $key . '_fit' ); ?>"
+									class="jbg-field-label"
+								>
+									<?php esc_html_e( 'Image Fit', 'jasanika' ); ?>
+								</label>
+								<select
+									id="<?php echo esc_attr( 'jbg_' . $key . '_fit' ); ?>"
+									name="jasanika_settings[<?php echo esc_attr( $prefix . 'fit' ); ?>]"
+									class="jbg-select"
+								>
+									<?php foreach ( $fit_options as $fit_val => $fit_label ) : ?>
+										<option
+											value="<?php echo esc_attr( $fit_val ); ?>"
+											<?php selected( $bg_fit, $fit_val ); ?>
+										>
+											<?php echo esc_html( $fit_label ); ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+
+							<!-- Image Position -->
+							<div class="jbg-field jbg-position-row">
+								<label
+									for="<?php echo esc_attr( 'jbg_' . $key . '_position' ); ?>"
+									class="jbg-field-label"
+								>
+									<?php esc_html_e( 'Image Position', 'jasanika' ); ?>
+								</label>
+								<select
+									id="<?php echo esc_attr( 'jbg_' . $key . '_position' ); ?>"
+									name="jasanika_settings[<?php echo esc_attr( $prefix . 'position' ); ?>]"
+									class="jbg-select"
+								>
+									<?php foreach ( $position_options as $pos_val => $pos_label ) : ?>
+										<option
+											value="<?php echo esc_attr( $pos_val ); ?>"
+											<?php selected( $bg_position, $pos_val ); ?>
+										>
+											<?php echo esc_html( $pos_label ); ?>
+										</option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+
+							<!-- Repeat Image -->
+							<div class="jbg-field jbg-repeat-row">
+								<label>
+									<input
+										type="checkbox"
+										name="jasanika_settings[<?php echo esc_attr( $prefix . 'repeat' ); ?>]"
+										value="1"
+										<?php checked( $bg_repeat ); ?>
+									>
+									<?php esc_html_e( 'Repeat Image', 'jasanika' ); ?>
+								</label>
+							</div>
+
+							<hr class="jbg-divider">
+
+							<!-- Overlay Color + Opacity -->
+							<div class="jbg-field jbg-overlay-row">
+								<span class="jbg-field-label"><?php esc_html_e( 'Overlay Color', 'jasanika' ); ?></span>
+								<div class="jbg-color-wrap">
+									<input
+										type="color"
+										class="jbg-overlay-color-native"
+										value="<?php echo esc_attr( $bg_overlay_color ); ?>"
+										data-text-target="<?php echo esc_attr( $overlay_text_id ); ?>"
+									>
+									<input
+										type="text"
+										id="<?php echo esc_attr( $overlay_text_id ); ?>"
+										name="jasanika_settings[<?php echo esc_attr( $prefix . 'overlay_color' ); ?>]"
+										value="<?php echo esc_attr( $bg_overlay_color ); ?>"
+										class="small-text"
+										pattern="^#[0-9a-fA-F]{6}$"
+										maxlength="7"
+										style="font-family:monospace;"
+									>
+								</div>
+							</div>
+
+							<div class="jbg-field jbg-overlay-row">
+								<span class="jbg-field-label"><?php esc_html_e( 'Overlay Opacity', 'jasanika' ); ?></span>
+								<div class="jbg-opacity-wrap">
+									<input
+										type="range"
+										class="jbg-opacity-range"
+										name="jasanika_settings[<?php echo esc_attr( $prefix . 'overlay_opacity' ); ?>]"
+										min="0"
+										max="100"
+										value="<?php echo esc_attr( (string) $bg_overlay_opacity ); ?>"
+										data-display="<?php echo esc_attr( $opacity_display_id ); ?>"
+									>
+									<span
+										id="<?php echo esc_attr( $opacity_display_id ); ?>"
+										class="jbg-opacity-display"
+									>
+										<?php echo esc_html( $bg_overlay_opacity . '%' ); ?>
+									</span>
+								</div>
+							</div>
+
+						</div><!-- .jasanika-bg-fields -->
+
+					</details>
 				</td>
 			</tr>
 			<?php endforeach; ?>
