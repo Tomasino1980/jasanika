@@ -433,6 +433,16 @@
 		setColorFromHex( hex, 'switch' );
 	}
 
+	// ─── Session-persistent favorites store ──────────────────────
+
+	/**
+	 * Module-level favorites list persisted across modal opens within
+	 * the same page session.  Initialised from data.favorites in init().
+	 *
+	 * @type {string[]}
+	 */
+	let sessionFavorites = null;
+
 	// ─── Favorites ────────────────────────────────────────────────
 
 	/**
@@ -490,6 +500,9 @@
 			state.favorites.shift();
 		}
 		state.favorites.push( hex );
+		// Keep session store and data.favorites in sync so reopening the modal
+		// shows the current list rather than the stale page-load snapshot.
+		sessionFavorites = state.favorites.slice();
 		saveFavoritesAjax();
 		renderFavorites();
 	}
@@ -501,6 +514,8 @@
 	 */
 	function removeFavorite( index ) {
 		state.favorites.splice( index, 1 );
+		// Keep session store in sync.
+		sessionFavorites = state.favorites.slice();
 		saveFavoritesAjax();
 		renderFavorites();
 	}
@@ -543,7 +558,22 @@
 			.then( function ( r ) { return r.json(); } )
 			.then( function ( response ) {
 				if ( response.success ) {
-					updateCardUI( state.presetId, state.current );
+					const savedConfig = ( response.data && response.data.config )
+						? response.data.config
+						: state.current;
+
+					updateCardUI( state.presetId, savedConfig );
+
+					// Refresh admin :root CSS variables when the active preset
+					// was just edited so the admin UI reflects the new colors
+					// without a full page reload.
+					if ( response.data && response.data.css ) {
+						const adminStyle = document.getElementById( 'jasanika-theme-preset-admin-vars' );
+						if ( adminStyle ) {
+							adminStyle.textContent = response.data.css;
+						}
+					}
+
 					closeModal( false );
 				} else {
 					showError( response.data || i18n.saveError || 'Save failed.' );
@@ -639,8 +669,14 @@
 			}
 		}
 
-		// Update this button's stored config for the next open
+		// Update edit button stored config for next open
 		editBtn.setAttribute( 'data-preset-config', JSON.stringify( config ) );
+
+		// Update in-memory preset data so reopening the modal loads saved colors
+		// rather than the stale page-load snapshot.
+		if ( data.presets && data.presets[ presetId ] ) {
+			Object.assign( data.presets[ presetId ].config, config );
+		}
 	}
 
 	// ─── Modal lifecycle ──────────────────────────────────────────
@@ -777,7 +813,7 @@
 		state.original    = Object.assign( {}, presetData.config );
 		state.defaults    = Object.assign( {}, presetData.config );
 		state.current     = Object.assign( {}, presetData.config );
-		state.favorites   = Array.isArray( data.favorites ) ? data.favorites.slice() : [];
+		state.favorites   = Array.isArray( sessionFavorites ) ? sessionFavorites.slice() : [];
 
 		// Update title
 		const title = document.getElementById( 'jse-modal-title' );
@@ -1025,6 +1061,12 @@
 		if ( ! data || ! data.presets ) {
 			return;
 		}
+
+		// Seed the session favorites from the server-provided snapshot.
+		// After this point all add/remove operations keep sessionFavorites
+		// up-to-date so the list persists across modal opens within the same
+		// page session.
+		sessionFavorites = Array.isArray( data.favorites ) ? data.favorites.slice() : [];
 
 		buildModal();
 

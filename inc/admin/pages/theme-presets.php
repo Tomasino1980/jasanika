@@ -189,7 +189,31 @@ function jasanika_preset_editor_ajax_save(): void {
 
 	$ok = jasanika_theme_presets_update_custom( $preset_id, $config );
 	if ( $ok ) {
-		wp_send_json_success( array( 'config' => $config ) );
+		// If the saved preset is currently active, propagate the new colors to
+		// jasanika_settings so the entire theme (frontend + admin) reflects the
+		// change without requiring a manual re-activation.
+		$active_id = jasanika_theme_presets_get_active_id();
+		if ( $active_id === $preset_id ) {
+			$current_settings = get_option( 'jasanika_settings', array() );
+			$current_settings = is_array( $current_settings ) ? $current_settings : array();
+
+			$current_settings['brand_primary']   = $config['primary_color'];
+			$current_settings['brand_secondary'] = $config['secondary_color'];
+			$current_settings['brand_accent']    = $config['accent_color'];
+
+			update_option( 'jasanika_settings', $current_settings );
+		}
+
+		// Build fresh CSS variables block so the JS client can update the
+		// admin :root style element immediately without a full page reload.
+		$css = jasanika_theme_presets_build_root_css( jasanika_theme_presets_get_css_variables() );
+
+		wp_send_json_success(
+			array(
+				'config' => $config,
+				'css'    => $css,
+			)
+		);
 	} else {
 		wp_send_json_error( __( 'Preset not found.', 'jasanika' ) );
 	}
