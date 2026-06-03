@@ -1,0 +1,299 @@
+/* logo-settings.css – Admin UI for Jasanika Logo Settings page. */
+
+/* -------------------------------------------------- */
+/* Page wrapper                                        */
+/* -------------------------------------------------- */
+
+.jasanika-logo-settings-wrap {
+	max-width: 980px;
+}
+
+.jasanika-logo-settings-wrap .jasanika-admin-header {
+	display:     flex;
+	align-items: center;
+	gap:         14px;
+	margin-bottom: 24px;
+	padding:     20px 24px;
+	background:  #1e1e2e;
+	border:      1px solid #3a3a5c;
+	border-radius: 6px;
+}
+
+.jasanika-logo-settings-wrap .jasanika-admin-header .dashicons {
+	font-size: 32px;
+	width:     32px;
+	height:    32px;
+	color:     #b78acb;
+}
+
+.jasanika-logo-settings-wrap .jasanika-admin-header h1 {
+	margin:    0;
+	font-size: 22px;
+	color:     #f5f2f7;
+}
+
+.jasanika-logo-settings-wrap .jasanika-admin-header p {
+	margin: 4px 0 0;
+	color:  #b9b1c4;
+}
+
+/* -------------------------------------------------- */
+/* Location accordion panels                           */
+/* -------------------------------------------------- */
+
+.jasanika-logo-location {
+	margin-bottom: 16px;
+	border:        1px solid #3a3a5c;
+	border-radius: 6px;
+	overflow:      hidden;
+}
+
+.jasanika-logo-location summary {
+	padding:     12px 18px;
+	background:  #2a2a3e;
+	cursor:      pointer;
+	font-weight: 600;
+	font-size:   14px;
+	color:       #f5f2f7;
+	display:     flex;
+	align-items: center;
+	gap:         10px;
+	user-select: none;
+}
+
+.jasanika-logo-location summary .dashicons {
+	color: #b78acb;
+}
+
+.jasanika-logo-location[open] summary {
+	border-bottom: 1px solid #3a3a5c;
+}
+
+.jasanika-logo-location-body {
+	display:        grid;
+	grid-template-columns: 1fr 300px;
+	gap:            24px;
+	padding:        20px 18px;
+	background:     #1e1e2e;
+}
+
+@media ( max-width: 900px ) {
+	.jasanika-logo-location-body {
+		grid-template-columns: 1fr;
+	}
+}
+
+.jasanika-logo-location-fields {
+	display:        flex;
+	flex-direction: column;
+	gap:            14px;
+}
+
+/* -------------------------------------------------- */
+/* Individual field rows                               */
+/* -------------------------------------------------- */
+
+.jasanika-lsf-row {
+	display:     flex;
+	align-items: flex-start;
+	gap:         12px;
+}
+
+.jasanika-lsf-label {
+	width:      160px;
+	min-width:  160px;
+	font-size:  13px;
+	font-weight: 500;
+	color:      #b9b1c4;
+	padding-top: 4px;
+}
+
+.jasanika-lsf-control {
+	flex: 1;
+}
+
+/* -------------------------------------------------- */
+/* Numeric px inputs                                   */
+/* -------------------------------------------------- */
+
+.jasanika-px-field {
+	display:     flex;
+	align-items: center;
+	gap:         6px;
+}
+
+.jasanika-px-field input[type="number"] {
+	width: 80px;
+}
+
+.jasanika-px-unit {
+	font-size:   13px;
+	color:       #b9b1c4;
+	font-family: monospace;
+}
+
+/* -------------------------------------------------- */
+/* Margin grid                                         */
+/* -------------------------------------------------- */
+
+.jasanika-margin-grid {
+	display:   grid;
+	grid-template-columns: repeat(2, auto);
+	gap:       6px 12px;
+}
+
+.jasanika-margin-grid label {
+	display:     flex;
+	align-items: center;
+	gap:         6px;
+	font-size:   13px;
+	color:       #b9b1c4;
+}
+
+.jasanika-margin-grid input[type="number"] {
+	width: 60px;
+}
+
+/* -------------------------------------------------- */
+/* Radio groups (positions)                            */
+/* -------------------------------------------------- */
+
+.jasanika-logo-radio-group {
+	display:   flex;
+	flex-wrap: wrap;
+	gap:       6px 14px;
+}
+
+.jasanika-logo-radio {
+	display:     flex;
+	align-items: center;
+	gap:         5px;
+	cursor:      pointer;
+	font-size:   13px;
+}
+
+/* -------------------------------------------------- */
+/* Visibility checkbox                                 */
+/* -------------------------------------------------- */
+
+.jasanika-lsf-toggle {
+	display:     flex;
+	align-items: center;
+	gap:         8px;
+	font-size:   13px;
+	cursor:      pointer;
+}
+
+/* -------------------------------------------------- */
+/* Preview panel                                       */
+/* -------------------------------------------------- */
+
+.jasanika-logo-location-preview {
+	display:        flex;
+	flex-direction: column;
+	gap:            10px;
+}
+
+.jasanika-lsp-title {
+	font-size:  12px;
+	font-weight: 600;
+	color:      #b9b1c4;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+}
+
+.jasanika-lsp-canvas {
+	position:     relative;
+	background:   #2a2a3e;
+	border:       1px solid #3a3a5c;
+	border-radius: 4px;
+	overflow:     hidden;
+}
+
+.jasanika-lsp-header {
+	height: 48px;
+	display: flex;
+	align-items: center;
+	padding: 0 12px;
+}
+
+.jasanika-lsp-footer {
+	height: 48px;
+	display: flex;
+	align-items: center;
+	padding: 0 12px;
+	background: #1b1a1f;
+}
+
+.jasanika-lsp-hero {
+	height: 100px;
+	display: flex;
+	background: linear-gradient(135deg, #2a2a3e, #1b1a1f);
+}
+
+.jasanika-lsp-mobile {
+	height: 44px;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+	background: #24212b;
+}
+
+/* Position helpers */
+.jasanika-lsp-header.pos-left,
+.jasanika-lsp-footer.pos-left,
+.jasanika-lsp-mobile.pos-left {
+	justify-content: flex-start;
+}
+
+.jasanika-lsp-header.pos-center,
+.jasanika-lsp-footer.pos-center,
+.jasanika-lsp-mobile.pos-center {
+	justify-content: center;
+}
+
+.jasanika-lsp-header.pos-right,
+.jasanika-lsp-footer.pos-right,
+.jasanika-lsp-mobile.pos-right {
+	justify-content: flex-end;
+}
+
+/* Hero positions */
+.jasanika-lsp-hero.pos-top_left     { align-items: flex-start; justify-content: flex-start; }
+.jasanika-lsp-hero.pos-top_center   { align-items: flex-start; justify-content: center; }
+.jasanika-lsp-hero.pos-top_right    { align-items: flex-start; justify-content: flex-end; }
+.jasanika-lsp-hero.pos-center       { align-items: center;     justify-content: center; }
+.jasanika-lsp-hero.pos-bottom_left  { align-items: flex-end;   justify-content: flex-start; }
+.jasanika-lsp-hero.pos-bottom_center{ align-items: flex-end;   justify-content: center; }
+.jasanika-lsp-hero.pos-bottom_right { align-items: flex-end;   justify-content: flex-end; }
+
+.jasanika-lsp-logo {
+	max-width:  80px;
+	max-height: 28px;
+	object-fit: contain;
+}
+
+.jasanika-lsp-logo-text {
+	font-size:   11px;
+	font-weight: 700;
+	color:       #b78acb;
+	padding:     4px 8px;
+	border:      1px solid #b78acb;
+	border-radius: 3px;
+}
+
+/* -------------------------------------------------- */
+/* Favicon section                                     */
+/* -------------------------------------------------- */
+
+.jasanika-favicon-wrap {
+	padding:    20px 18px;
+	background: #1e1e2e;
+	border-top: 1px solid #3a3a5c;
+}
+
+.jasanika-favicon-wrap h3 {
+	margin:    0 0 14px;
+	color:     #f5f2f7;
+	font-size: 14px;
+}

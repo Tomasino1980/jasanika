@@ -1,0 +1,54 @@
+/* color-settings.css – Admin UI for Jasanika Color Settings page. */
+
+.jasanika-color-settings-wrap {
+	max-width: 900px;
+}
+
+.jasanika-color-settings-wrap .jasanika-admin-header {
+	display:     flex;
+	align-items: center;
+	gap:         14px;
+	margin-bottom: 24px;
+	padding:     20px 24px;
+	background:  #1e1e2e;
+	border:      1px solid #3a3a5c;
+	border-radius: 6px;
+}
+
+.jasanika-color-settings-wrap .jasanika-admin-header .dashicons {
+	font-size: 32px;
+	width:     32px;
+	height:    32px;
+	color:     #b78acb;
+}
+
+.jasanika-color-settings-wrap .jasanika-admin-header h1 {
+	margin:    0;
+	font-size: 22px;
+	color:     #f5f2f7;
+}
+
+.jasanika-color-settings-wrap .jasanika-admin-header p {
+	margin: 4px 0 0;
+	color:  #b9b1c4;
+}
+
+.jasanika-color-info {
+	background: #2a2a3e;
+	border:     1px solid #3a3a5c;
+	border-radius: 6px;
+	padding:    16px 20px;
+	margin-bottom: 20px;
+}
+
+.jasanika-color-info p {
+	margin: 0;
+	color:  #b9b1c4;
+	font-size: 13px;
+}
+
+.jasanika-color-wrap {
+	display:     flex;
+	align-items: center;
+	gap:         8px;
+}

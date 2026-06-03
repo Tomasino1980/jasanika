@@ -12,7 +12,7 @@ Vlastní WordPress 7 téma pro prezentaci a prodej ručně vyráběných dekorac
 
 ## Aktuální verze
 
-0.50.0 – Release Candidate
+0.56.0 – Administration Reorganization
 
 ## Dokumentace
 
@@ -72,3 +72,32 @@ docs/
 * M48 – Update Center
 * M49 – Theme Presets
 * M50 – Release Candidate & Stabilization
+* M51 – Administration Foundation II
+* M52 – Theme Presets II
+* M53 – Color System
+* M54 – Logo System
+* M55 – Homepage Builder II
+* M56 – Administration Reorganization
+
+## Administration Structure (v0.56.0)
+
+```
+Jasanika
+├─ Dashboard
+├─ Theme Settings       (Site Information, Contact, Social, Footer, Footer Builder)
+├─ Color Settings       (Primary Color, Secondary Color, Accent Color)
+├─ Logo Settings        (Header Logo, Footer Logo, Hero Logo, Mobile Logo, Favicon)
+├─ Homepage Builder     (Section Builder, Hero Content, Feature Blocks, CTA, Other Sections)
+├─ Menu Manager
+├─ Slider Manager
+├─ Testimonials Manager
+├─ Newsletter Manager
+├─ SEO Manager
+├─ Cookie Manager
+├─ Backup Manager
+├─ Diagnostics
+├─ Profile Manager
+├─ Maintenance Mode
+├─ Theme Presets
+└─ Update Center
+```

@@ -13,18 +13,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 require_once get_template_directory() . '/inc/admin/dashboard-widgets.php';
 require_once get_template_directory() . '/inc/admin/pages/dashboard.php';
+require_once get_template_directory() . '/inc/admin/pages/theme-settings.php';
+require_once get_template_directory() . '/inc/admin/pages/color-settings.php';
+require_once get_template_directory() . '/inc/admin/pages/logo-settings.php';
+require_once get_template_directory() . '/inc/admin/pages/homepage-builder.php';
 require_once get_template_directory() . '/inc/admin/pages/menu-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/slider-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/testimonials-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/newsletter-manager.php';
-require_once get_template_directory() . '/inc/admin/pages/theme-settings.php';
-require_once get_template_directory() . '/inc/admin/pages/theme-presets.php';
 require_once get_template_directory() . '/inc/admin/pages/seo-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/cookie-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/backup-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/diagnostics-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/profile-manager.php';
 require_once get_template_directory() . '/inc/admin/pages/maintenance-manager.php';
+require_once get_template_directory() . '/inc/admin/pages/theme-presets.php';
 require_once get_template_directory() . '/inc/admin/pages/update-center.php';
 
 add_action( 'admin_menu', 'jasanika_register_admin_menu' );
@@ -53,6 +56,46 @@ function jasanika_register_admin_menu(): void {
 		'manage_options',
 		'jasanika',
 		'jasanika_admin_page_dashboard'
+	);
+
+	// Theme Settings sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Theme Settings', 'jasanika' ),
+		__( 'Theme Settings', 'jasanika' ),
+		'manage_options',
+		'jasanika-theme-settings',
+		'jasanika_admin_page_theme_settings'
+	);
+
+	// Color Settings sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Color Settings', 'jasanika' ),
+		__( 'Color Settings', 'jasanika' ),
+		'manage_options',
+		'jasanika-color-settings',
+		'jasanika_admin_page_color_settings'
+	);
+
+	// Logo Settings sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Logo Settings', 'jasanika' ),
+		__( 'Logo Settings', 'jasanika' ),
+		'manage_options',
+		'jasanika-logo-settings',
+		'jasanika_admin_page_logo_settings'
+	);
+
+	// Homepage Builder sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Homepage Builder', 'jasanika' ),
+		__( 'Homepage Builder', 'jasanika' ),
+		'manage_options',
+		'jasanika-homepage-builder',
+		'jasanika_admin_page_homepage_builder'
 	);
 
 	// Menu Manager sub-page.
@@ -93,26 +136,6 @@ function jasanika_register_admin_menu(): void {
 		'manage_options',
 		'jasanika-newsletter-manager',
 		'jasanika_admin_page_newsletter_manager'
-	);
-
-	// Theme Settings sub-page.
-	add_submenu_page(
-		'jasanika',
-		__( 'Theme Settings', 'jasanika' ),
-		__( 'Theme Settings', 'jasanika' ),
-		'manage_options',
-		'jasanika-theme-settings',
-		'jasanika_admin_page_theme_settings'
-	);
-
-	// Theme Presets sub-page.
-	add_submenu_page(
-		'jasanika',
-		__( 'Theme Presets', 'jasanika' ),
-		__( 'Theme Presets', 'jasanika' ),
-		'manage_options',
-		'jasanika-theme-presets',
-		'jasanika_admin_page_theme_presets'
 	);
 
 	// SEO Manager sub-page.
@@ -173,6 +196,16 @@ function jasanika_register_admin_menu(): void {
 		'manage_options',
 		'jasanika-maintenance-manager',
 		'jasanika_admin_page_maintenance_manager'
+	);
+
+	// Theme Presets sub-page.
+	add_submenu_page(
+		'jasanika',
+		__( 'Theme Presets', 'jasanika' ),
+		__( 'Theme Presets', 'jasanika' ),
+		'manage_options',
+		'jasanika-theme-presets',
+		'jasanika_admin_page_theme_presets'
 	);
 
 	// Update Center sub-page.

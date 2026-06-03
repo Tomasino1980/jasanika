@@ -238,10 +238,51 @@ function jasanika_logo_get_margin( string $side ): int {
  * @return string CSS string or empty string.
  */
 function jasanika_logo_get_css_variables(): string {
+	$opts = get_option( 'jasanika_settings', array() );
+
+	// Per-location width with fallback chain to legacy unified keys.
+	$header_width = (int) ( $opts['logo_header_width'] ?? $opts['logo_desktop_width'] ?? $opts['logo_width'] ?? 200 );
+	$footer_width = (int) ( $opts['logo_footer_width'] ?? $opts['logo_desktop_width'] ?? $opts['logo_width'] ?? 200 );
+	$hero_width   = (int) ( $opts['logo_hero_width']   ?? $opts['logo_desktop_width'] ?? $opts['logo_width'] ?? 200 );
+	$mobile_width = (int) ( $opts['logo_mobile_width'] ?? 120 );
+
+	// Per-location height.
+	$header_hmode = (string) ( $opts['logo_header_height_mode'] ?? $opts['logo_height_mode'] ?? 'auto' );
+	$footer_hmode = (string) ( $opts['logo_footer_height_mode'] ?? $opts['logo_height_mode'] ?? 'auto' );
+	$hero_hmode   = (string) ( $opts['logo_hero_height_mode']   ?? $opts['logo_height_mode'] ?? 'auto' );
+	$mobile_hmode = (string) ( $opts['logo_mobile_height_mode'] ?? $opts['logo_height_mode'] ?? 'auto' );
+
+	$header_height = 'custom' === $header_hmode ? ( (int) ( $opts['logo_header_height'] ?? $opts['logo_height'] ?? 100 ) ) . 'px' : 'auto';
+	$footer_height = 'custom' === $footer_hmode ? ( (int) ( $opts['logo_footer_height'] ?? $opts['logo_height'] ?? 100 ) ) . 'px' : 'auto';
+	$hero_height   = 'custom' === $hero_hmode   ? ( (int) ( $opts['logo_hero_height']   ?? $opts['logo_height'] ?? 100 ) ) . 'px' : 'auto';
+	$mobile_height = 'custom' === $mobile_hmode ? ( (int) ( $opts['logo_mobile_height'] ?? $opts['logo_height'] ?? 100 ) ) . 'px' : 'auto';
+
+	// Per-location margins with fallback to legacy unified margins.
+	$header_mt = (int) ( $opts['logo_header_margin_top']    ?? $opts['logo_margin_top']    ?? 0 );
+	$header_mr = (int) ( $opts['logo_header_margin_right']  ?? $opts['logo_margin_right']  ?? 0 );
+	$header_mb = (int) ( $opts['logo_header_margin_bottom'] ?? $opts['logo_margin_bottom'] ?? 0 );
+	$header_ml = (int) ( $opts['logo_header_margin_left']   ?? $opts['logo_margin_left']   ?? 0 );
+
+	$footer_mt = (int) ( $opts['logo_footer_margin_top']    ?? 0 );
+	$footer_mr = (int) ( $opts['logo_footer_margin_right']  ?? 0 );
+	$footer_mb = (int) ( $opts['logo_footer_margin_bottom'] ?? 0 );
+	$footer_ml = (int) ( $opts['logo_footer_margin_left']   ?? 0 );
+
+	$hero_mt = (int) ( $opts['logo_hero_margin_top']    ?? 0 );
+	$hero_mr = (int) ( $opts['logo_hero_margin_right']  ?? 0 );
+	$hero_mb = (int) ( $opts['logo_hero_margin_bottom'] ?? 0 );
+	$hero_ml = (int) ( $opts['logo_hero_margin_left']   ?? 0 );
+
+	$mobile_mt = (int) ( $opts['logo_mobile_margin_top']    ?? 0 );
+	$mobile_mr = (int) ( $opts['logo_mobile_margin_right']  ?? 0 );
+	$mobile_mb = (int) ( $opts['logo_mobile_margin_bottom'] ?? 0 );
+	$mobile_ml = (int) ( $opts['logo_mobile_margin_left']   ?? 0 );
+
+	// Legacy unified variables kept for backward-compat with existing front-end CSS.
 	$width         = jasanika_logo_get_width();
 	$desktop_width = jasanika_logo_get_desktop_width();
 	$tablet_width  = jasanika_logo_get_tablet_width();
-	$mobile_width  = jasanika_logo_get_mobile_width();
+	$mobile_bkp    = jasanika_logo_get_mobile_width();
 	$height_mode   = jasanika_logo_get_height_mode();
 	$height        = 'custom' === $height_mode ? jasanika_logo_get_height() . 'px' : 'auto';
 	$margin_top    = jasanika_logo_get_margin( 'top' );
@@ -249,11 +290,27 @@ function jasanika_logo_get_css_variables(): string {
 	$margin_bottom = jasanika_logo_get_margin( 'bottom' );
 	$margin_left   = jasanika_logo_get_margin( 'left' );
 
-	$vars = ":root{\n";
+	$vars  = ":root{\n";
+
+	// Per-location CSS variables.
+	$vars .= "\t--js-logo-header-width:{$header_width}px;\n";
+	$vars .= "\t--js-logo-header-height:{$header_height};\n";
+	$vars .= "\t--js-logo-header-margin:{$header_mt}px {$header_mr}px {$header_mb}px {$header_ml}px;\n";
+	$vars .= "\t--js-logo-footer-width:{$footer_width}px;\n";
+	$vars .= "\t--js-logo-footer-height:{$footer_height};\n";
+	$vars .= "\t--js-logo-footer-margin:{$footer_mt}px {$footer_mr}px {$footer_mb}px {$footer_ml}px;\n";
+	$vars .= "\t--js-logo-hero-width:{$hero_width}px;\n";
+	$vars .= "\t--js-logo-hero-height:{$hero_height};\n";
+	$vars .= "\t--js-logo-hero-margin:{$hero_mt}px {$hero_mr}px {$hero_mb}px {$hero_ml}px;\n";
+	$vars .= "\t--js-logo-mobile-width:{$mobile_width}px;\n";
+	$vars .= "\t--js-logo-mobile-height:{$mobile_height};\n";
+	$vars .= "\t--js-logo-mobile-margin:{$mobile_mt}px {$mobile_mr}px {$mobile_mb}px {$mobile_ml}px;\n";
+
+	// Legacy variables (backward-compat).
 	$vars .= "\t--js-logo-width:{$width}px;\n";
 	$vars .= "\t--js-logo-desktop-width:{$desktop_width}px;\n";
 	$vars .= "\t--js-logo-tablet-width:{$tablet_width}px;\n";
-	$vars .= "\t--js-logo-mobile-width:{$mobile_width}px;\n";
+	$vars .= "\t--js-logo-mobile-width:{$mobile_bkp}px;\n";
 	$vars .= "\t--js-logo-height:{$height};\n";
 	$vars .= "\t--js-logo-margin-top:{$margin_top}px;\n";
 	$vars .= "\t--js-logo-margin-right:{$margin_right}px;\n";
@@ -274,7 +331,12 @@ function jasanika_get_hero_logo(): string {
 		return '';
 	}
 
-	$url      = jasanika_get_logo_url();
+	// Use dedicated hero logo URL if set, fall back to header logo.
+	$url = (string) jasanika_get_option( 'logo_hero_url', '' );
+	if ( ! $url ) {
+		$url = jasanika_get_logo_url();
+	}
+
 	$pos      = jasanika_logo_get_hero_position();
 	$pos_class = 'hero-logo--' . esc_attr( $pos );
 

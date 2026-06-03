@@ -1,0 +1,106 @@
+/* homepage-builder-admin.css – Admin UI for Jasanika Homepage Builder admin page. */
+
+.jasanika-hb-admin-wrap {
+	max-width: 1100px;
+}
+
+.jasanika-hb-admin-wrap .jasanika-admin-header {
+	display:     flex;
+	align-items: center;
+	gap:         14px;
+	margin-bottom: 24px;
+	padding:     20px 24px;
+	background:  #1e1e2e;
+	border:      1px solid #3a3a5c;
+	border-radius: 6px;
+}
+
+.jasanika-hb-admin-wrap .jasanika-admin-header .dashicons {
+	font-size: 32px;
+	width:     32px;
+	height:    32px;
+	color:     #b78acb;
+}
+
+.jasanika-hb-admin-wrap .jasanika-admin-header h1 {
+	margin:    0;
+	font-size: 22px;
+	color:     #f5f2f7;
+}
+
+.jasanika-hb-admin-wrap .jasanika-admin-header p {
+	margin: 4px 0 0;
+	color:  #b9b1c4;
+}
+
+/* -------------------------------------------------- */
+/* Content tabs                                        */
+/* -------------------------------------------------- */
+
+.jasanika-hb-tabs {
+	display:        flex;
+	gap:            4px;
+	margin-bottom:  20px;
+	border-bottom:  2px solid #3a3a5c;
+}
+
+.jasanika-hb-tab-btn {
+	padding:     8px 18px;
+	background:  transparent;
+	border:      1px solid transparent;
+	border-bottom: none;
+	border-radius: 4px 4px 0 0;
+	color:       #b9b1c4;
+	cursor:      pointer;
+	font-size:   13px;
+	font-weight: 500;
+	transition:  background 0.15s;
+}
+
+.jasanika-hb-tab-btn.active,
+.jasanika-hb-tab-btn:hover {
+	background: #2a2a3e;
+	color:      #f5f2f7;
+	border-color: #3a3a5c;
+}
+
+.jasanika-hb-tab-btn.active {
+	border-color: #b78acb #3a3a5c #2a2a3e;
+	color:        #b78acb;
+}
+
+.jasanika-hb-panel {
+	display: none;
+}
+
+.jasanika-hb-panel.active {
+	display: block;
+}
+
+/* -------------------------------------------------- */
+/* Builder table                                       */
+/* -------------------------------------------------- */
+
+.jasanika-homepage-builder-table {
+	background: #1e1e2e;
+	border:     1px solid #3a3a5c;
+	border-radius: 4px;
+	width:      100%;
+	border-collapse: collapse;
+}
+
+.jasanika-homepage-builder-table th,
+.jasanika-homepage-builder-table td {
+	padding:     10px 14px;
+	border-bottom: 1px solid #3a3a5c;
+	vertical-align: top;
+	color:       #f5f2f7;
+}
+
+.jasanika-homepage-builder-table thead th {
+	background: #2a2a3e;
+	font-size:  12px;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+	color:      #b9b1c4;
+}
