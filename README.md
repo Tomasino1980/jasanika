@@ -12,7 +12,7 @@ Vlastní WordPress 7 téma pro prezentaci a prodej ručně vyráběných dekorac
 
 ## Aktuální verze
 
-0.56.0 – Administration Reorganization
+0.58.0 – Modular Architecture Foundation
 
 ## Dokumentace
 

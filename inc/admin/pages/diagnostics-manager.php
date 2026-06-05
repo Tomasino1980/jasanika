@@ -176,7 +176,12 @@ function jasanika_diagnostics_collect(): array {
 		'max_exec_time'    => ini_get( 'max_execution_time' ),
 	);
 
-	return compact( 'system', 'health', 'menus', 'homepage', 'woocommerce', 'content', 'security', 'performance' );
+	$modules = array(
+	'registered' => function_exists( 'jasanika_get_registered_modules' ) ? jasanika_get_registered_modules() : array(),
+	'loaded'     => function_exists( 'jasanika_get_loaded_modules' ) ? jasanika_get_loaded_modules() : array(),
+);
+
+return compact( 'system', 'health', 'menus', 'homepage', 'woocommerce', 'content', 'security', 'performance', 'modules' );
 }
 
 // ---------------------------------------------------------------------------
@@ -564,6 +569,34 @@ function jasanika_admin_page_diagnostics(): void {
 							<td><?php esc_html_e( 'Max Execution Time', 'jasanika' ); ?></td>
 							<td><span class="jasanika-diag__value"><?php echo esc_html( $data['performance']['max_exec_time'] ); ?>s</span></td>
 						</tr>
+					</table>
+				</div>
+
+				<!-- Modules -->
+				<div class="jasanika-diag__card">
+					<h2 class="jasanika-diag__card-title">
+						<span class="dashicons dashicons-networking"></span>
+						<?php esc_html_e( 'Modules', 'jasanika' ); ?>
+					</h2>
+					<table class="jasanika-diag__table">
+						<tr>
+							<th><?php esc_html_e( 'ID', 'jasanika' ); ?></th>
+							<th><?php esc_html_e( 'Name', 'jasanika' ); ?></th>
+							<th><?php esc_html_e( 'Version', 'jasanika' ); ?></th>
+							<th><?php esc_html_e( 'Status', 'jasanika' ); ?></th>
+						</tr>
+						<?php
+						$mods = $data['modules']['registered'] ?? array();
+						foreach ( $mods as $m ) :
+							$status = ! empty( $m['loaded'] ) ? esc_html__( 'Loaded', 'jasanika' ) : ( ! empty( $m['enabled'] ) ? esc_html__( 'Registered', 'jasanika' ) : esc_html__( 'Disabled', 'jasanika' ) );
+							?>
+							<tr>
+								<td><?php echo esc_html( $m['id'] ?? '' ); ?></td>
+								<td><?php echo esc_html( $m['name'] ?? '' ); ?></td>
+								<td><?php echo esc_html( $m['version'] ?? '' ); ?></td>
+								<td><?php echo $status; ?></td>
+							</tr>
+						<?php endforeach; ?>
 					</table>
 				</div>
 
