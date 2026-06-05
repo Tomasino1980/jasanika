@@ -14,6 +14,35 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 add_action( 'admin_init', 'jasanika_slider_process_actions' );
+add_action( 'admin_enqueue_scripts', 'jasanika_slider_manager_admin_enqueue' );
+
+/**
+ * Enqueue Slider Manager admin assets only on the Slider Manager admin page.
+ *
+ * @param string $hook Current admin page hook.
+ */
+function jasanika_slider_manager_admin_enqueue( string $hook ): void {
+	if ( 'jasanika_page_jasanika-slider-manager' !== $hook ) {
+		return;
+	}
+
+	wp_enqueue_media();
+
+	wp_enqueue_style(
+		'jasanika-slider-manager-admin',
+		get_template_directory_uri() . '/assets/css/admin/slider-manager-admin.css',
+		array(),
+		wp_get_theme()->get( 'Version' )
+	);
+
+	wp_enqueue_script(
+		'jasanika-slider-manager-admin',
+		get_template_directory_uri() . '/assets/js/admin/slider-manager.js',
+		array(),
+		wp_get_theme()->get( 'Version' ),
+		true
+	);
+}
 
 // ---------------------------------------------------------------------------
 // Action Processing
@@ -101,6 +130,7 @@ function jasanika_slider_save_slide( int $slide_id, array $data ): void {
 		$slides = array();
 	}
 
+	// sanitize and validate inputs
 	$sanitized = array(
 		'id'          => $slide_id,
 		'title'       => sanitize_text_field( $data['slide_title'] ?? '' ),
@@ -110,6 +140,30 @@ function jasanika_slider_save_slide( int $slide_id, array $data ): void {
 		'button_url'  => esc_url_raw( $data['slide_button_url'] ?? '' ),
 		'sort_order'  => absint( $data['slide_sort_order'] ?? 0 ),
 		'active'      => isset( $data['slide_active'] ) ? 1 : 0,
+
+		// Layout / content
+		'content_position'          => in_array( ( $data['slide_content_position'] ?? '' ), array( 'left', 'center', 'right' ), true ) ? $data['slide_content_position'] : 'center',
+		'text_alignment'            => in_array( ( $data['slide_text_alignment'] ?? '' ), array( 'left', 'center', 'right' ), true ) ? $data['slide_text_alignment'] : 'left',
+		'content_width'             => absint( $data['slide_content_width'] ?? 60 ), // percent
+		'content_vertical_position' => in_array( ( $data['slide_content_vertical_position'] ?? '' ), array( 'top', 'center', 'bottom' ), true ) ? $data['slide_content_vertical_position'] : 'center',
+
+		// Heights (px)
+		'height_desktop' => absint( $data['slide_height_desktop'] ?? 600 ),
+		'height_tablet'  => absint( $data['slide_height_tablet'] ?? 400 ),
+		'height_mobile'  => absint( $data['slide_height_mobile'] ?? 300 ),
+
+		// Overlay
+		'overlay_color'  => function_exists( 'sanitize_hex_color' ) ? sanitize_hex_color( $data['slide_overlay_color'] ?? '' ) : sanitize_text_field( $data['slide_overlay_color'] ?? '' ),
+		'overlay_opacity' => min( 100, max( 0, absint( $data['slide_overlay_opacity'] ?? 50 ) ) ),
+
+		// Image behaviour
+		'image_fit'      => in_array( ( $data['slide_image_fit'] ?? '' ), array( 'cover', 'contain', 'stretch' ), true ) ? $data['slide_image_fit'] : 'cover',
+		'image_position' => in_array( ( $data['slide_image_position'] ?? '' ), array( 'center', 'top', 'bottom', 'left', 'right' ), true ) ? $data['slide_image_position'] : 'center',
+
+		// Button
+		'button_alignment' => in_array( ( $data['slide_button_alignment'] ?? '' ), array( 'left', 'center', 'right' ), true ) ? $data['slide_button_alignment'] : 'left',
+		'button_width'     => absint( $data['slide_button_width'] ?? 200 ),
+		'button_style'     => in_array( ( $data['slide_button_style'] ?? '' ), array( 'solid', 'outline', 'ghost' ), true ) ? $data['slide_button_style'] : 'solid',
 	);
 
 	if ( 0 === $slide_id ) {
@@ -420,6 +474,26 @@ function jasanika_slider_render_form_fields( array $slide ): void {
 	$button_url  = esc_attr( $slide['button_url'] ?? '' );
 	$sort_order  = isset( $slide['sort_order'] ) ? (int) $slide['sort_order'] : 0;
 	$active      = ! empty( $slide['active'] );
+
+	// new fields with defaults
+	$content_position = esc_attr( $slide['content_position'] ?? 'center' );
+	$text_alignment = esc_attr( $slide['text_alignment'] ?? 'left' );
+	$content_width = esc_attr( $slide['content_width'] ?? 60 );
+	$content_vertical_position = esc_attr( $slide['content_vertical_position'] ?? 'center' );
+
+	$height_desktop = esc_attr( $slide['height_desktop'] ?? 600 );
+	$height_tablet  = esc_attr( $slide['height_tablet'] ?? 400 );
+	$height_mobile  = esc_attr( $slide['height_mobile'] ?? 300 );
+
+	$overlay_color = esc_attr( $slide['overlay_color'] ?? '' );
+	$overlay_opacity = esc_attr( $slide['overlay_opacity'] ?? 50 );
+
+	$image_fit = esc_attr( $slide['image_fit'] ?? 'cover' );
+	$image_position = esc_attr( $slide['image_position'] ?? 'center' );
+
+	$button_alignment = esc_attr( $slide['button_alignment'] ?? 'left' );
+	$button_width = esc_attr( $slide['button_width'] ?? 200 );
+	$button_style = esc_attr( $slide['button_style'] ?? 'solid' );
 	?>
 	<table class="form-table" role="presentation">
 
@@ -428,14 +502,7 @@ function jasanika_slider_render_form_fields( array $slide ): void {
 				<label for="slide_title"><?php esc_html_e( 'Title', 'jasanika' ); ?></label>
 			</th>
 			<td>
-				<input
-					type="text"
-					id="slide_title"
-					name="slide_title"
-					value="<?php echo $title; ?>"
-					class="regular-text"
-					placeholder="<?php esc_attr_e( 'Vítejte na Jasanika', 'jasanika' ); ?>"
-				>
+				<input type="text" id="slide_title" name="slide_title" value="<?php echo $title; ?>" class="regular-text" placeholder="<?php esc_attr_e( 'Vítejte na Jasanika', 'jasanika' ); ?>">
 			</td>
 		</tr>
 
@@ -444,13 +511,7 @@ function jasanika_slider_render_form_fields( array $slide ): void {
 				<label for="slide_description"><?php esc_html_e( 'Description', 'jasanika' ); ?></label>
 			</th>
 			<td>
-				<textarea
-					id="slide_description"
-					name="slide_description"
-					class="large-text"
-					rows="3"
-					placeholder="<?php esc_attr_e( 'Ručně tvořené výrobky a originální dekorace.', 'jasanika' ); ?>"
-				><?php echo $description; ?></textarea>
+				<textarea id="slide_description" name="slide_description" class="large-text" rows="3" placeholder="<?php esc_attr_e( 'Ručně tvořené výrobky a originální dekorace.', 'jasanika' ); ?>"><?php echo $description; ?></textarea>
 			</td>
 		</tr>
 
@@ -459,21 +520,13 @@ function jasanika_slider_render_form_fields( array $slide ): void {
 				<label for="slide_image_url"><?php esc_html_e( 'Image URL', 'jasanika' ); ?></label>
 			</th>
 			<td>
-				<input
-					type="url"
-					id="slide_image_url"
-					name="slide_image_url"
-					value="<?php echo $image_url; ?>"
-					class="large-text"
-					placeholder="https://"
-				>
+				<input type="url" id="slide_image_url" name="slide_image_url" value="<?php echo $image_url; ?>" class="large-text" placeholder="https://">
+				<p class="description"><?php esc_html_e( 'You can paste an image URL or use the media uploader.', 'jasanika' ); ?>
+					<button type="button" class="button" id="jasanika-slide-image-select"><?php esc_html_e( 'Select from Media', 'jasanika' ); ?></button>
+				</p>
 				<?php if ( $image_url ) : ?>
 					<p>
-						<img
-							src="<?php echo esc_url( $slide['image_url'] ); ?>"
-							alt=""
-							style="max-width:200px;max-height:120px;margin-top:6px;display:block;"
-						>
+						<img src="<?php echo esc_url( $slide['image_url'] ); ?>" alt="" style="max-width:200px;max-height:120px;margin-top:6px;display:block;">
 					</p>
 				<?php endif; ?>
 			</td>
@@ -481,34 +534,161 @@ function jasanika_slider_render_form_fields( array $slide ): void {
 
 		<tr>
 			<th scope="row">
-				<label for="slide_button_text"><?php esc_html_e( 'Button Text', 'jasanika' ); ?></label>
+				<label for="slide_image_fit"><?php esc_html_e( 'Image Fit', 'jasanika' ); ?></label>
 			</th>
 			<td>
-				<input
-					type="text"
-					id="slide_button_text"
-					name="slide_button_text"
-					value="<?php echo $button_text; ?>"
-					class="regular-text"
-					placeholder="<?php esc_attr_e( 'Zjistit více', 'jasanika' ); ?>"
-				>
+				<select id="slide_image_fit" name="slide_image_fit">
+					<option value="cover" <?php selected( $image_fit, 'cover' ); ?>><?php esc_html_e( 'Cover', 'jasanika' ); ?></option>
+					<option value="contain" <?php selected( $image_fit, 'contain' ); ?>><?php esc_html_e( 'Contain', 'jasanika' ); ?></option>
+					<option value="stretch" <?php selected( $image_fit, 'stretch' ); ?>><?php esc_html_e( 'Stretch', 'jasanika' ); ?></option>
+				</select>
 			</td>
 		</tr>
 
 		<tr>
 			<th scope="row">
-				<label for="slide_button_url"><?php esc_html_e( 'Button URL', 'jasanika' ); ?></label>
+				<label for="slide_image_position"><?php esc_html_e( 'Image Position', 'jasanika' ); ?></label>
 			</th>
 			<td>
-				<input
-					type="text"
-					id="slide_button_url"
-					name="slide_button_url"
-					value="<?php echo $button_url; ?>"
-					class="large-text"
-					placeholder="/obchod"
-				>
-				<p class="description"><?php esc_html_e( 'Relative paths (e.g. /obchod) and full URLs are both accepted.', 'jasanika' ); ?></p>
+				<select id="slide_image_position" name="slide_image_position">
+					<option value="center" <?php selected( $image_position, 'center' ); ?>><?php esc_html_e( 'Center', 'jasanika' ); ?></option>
+					<option value="top" <?php selected( $image_position, 'top' ); ?>><?php esc_html_e( 'Top', 'jasanika' ); ?></option>
+					<option value="bottom" <?php selected( $image_position, 'bottom' ); ?>><?php esc_html_e( 'Bottom', 'jasanika' ); ?></option>
+					<option value="left" <?php selected( $image_position, 'left' ); ?>><?php esc_html_e( 'Left', 'jasanika' ); ?></option>
+					<option value="right" <?php selected( $image_position, 'right' ); ?>><?php esc_html_e( 'Right', 'jasanika' ); ?></option>
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_content_position"><?php esc_html_e( 'Content Horizontal Position', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<select id="slide_content_position" name="slide_content_position">
+					<option value="left" <?php selected( $content_position, 'left' ); ?>><?php esc_html_e( 'Left', 'jasanika' ); ?></option>
+					<option value="center" <?php selected( $content_position, 'center' ); ?>><?php esc_html_e( 'Center', 'jasanika' ); ?></option>
+					<option value="right" <?php selected( $content_position, 'right' ); ?>><?php esc_html_e( 'Right', 'jasanika' ); ?></option>
+				</select>
+				<p class="description"><?php esc_html_e( 'Controls where the content block sits horizontally.', 'jasanika' ); ?></p>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_content_vertical_position"><?php esc_html_e( 'Content Vertical Position', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<select id="slide_content_vertical_position" name="slide_content_vertical_position">
+					<option value="top" <?php selected( $content_vertical_position, 'top' ); ?>><?php esc_html_e( 'Top', 'jasanika' ); ?></option>
+					<option value="center" <?php selected( $content_vertical_position, 'center' ); ?>><?php esc_html_e( 'Center', 'jasanika' ); ?></option>
+					<option value="bottom" <?php selected( $content_vertical_position, 'bottom' ); ?>><?php esc_html_e( 'Bottom', 'jasanika' ); ?></option>
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_content_width"><?php esc_html_e( 'Content Width (percent)', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<input type="number" id="slide_content_width" name="slide_content_width" value="<?php echo $content_width; ?>" class="small-text" min="10" max="100"> %
+				<p class="description"><?php esc_html_e( 'Width of the content block in percent.', 'jasanika' ); ?></p>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_text_alignment"><?php esc_html_e( 'Text Alignment', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<select id="slide_text_alignment" name="slide_text_alignment">
+					<option value="left" <?php selected( $text_alignment, 'left' ); ?>><?php esc_html_e( 'Left', 'jasanika' ); ?></option>
+					<option value="center" <?php selected( $text_alignment, 'center' ); ?>><?php esc_html_e( 'Center', 'jasanika' ); ?></option>
+					<option value="right" <?php selected( $text_alignment, 'right' ); ?>><?php esc_html_e( 'Right', 'jasanika' ); ?></option>
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_height_desktop"><?php esc_html_e( 'Desktop Height (px)', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<input type="number" id="slide_height_desktop" name="slide_height_desktop" value="<?php echo $height_desktop; ?>" class="small-text" min="0"> px
+				<p class="description"><?php esc_html_e( 'Height used on desktop devices.', 'jasanika' ); ?></p>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_height_tablet"><?php esc_html_e( 'Tablet Height (px)', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<input type="number" id="slide_height_tablet" name="slide_height_tablet" value="<?php echo $height_tablet; ?>" class="small-text" min="0"> px
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_height_mobile"><?php esc_html_e( 'Mobile Height (px)', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<input type="number" id="slide_height_mobile" name="slide_height_mobile" value="<?php echo $height_mobile; ?>" class="small-text" min="0"> px
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_overlay_color"><?php esc_html_e( 'Overlay Color', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<input type="text" id="slide_overlay_color" name="slide_overlay_color" value="<?php echo $overlay_color; ?>" class="regular-text" placeholder="#000000">
+				<p class="description"><?php esc_html_e( 'Hex color used as an overlay to improve text readability.', 'jasanika' ); ?></p>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_overlay_opacity"><?php esc_html_e( 'Overlay Opacity', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<input type="number" id="slide_overlay_opacity" name="slide_overlay_opacity" value="<?php echo $overlay_opacity; ?>" class="small-text" min="0" max="100"> %
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_button_alignment"><?php esc_html_e( 'Button Alignment', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<select id="slide_button_alignment" name="slide_button_alignment">
+					<option value="left" <?php selected( $button_alignment, 'left' ); ?>><?php esc_html_e( 'Left', 'jasanika' ); ?></option>
+					<option value="center" <?php selected( $button_alignment, 'center' ); ?>><?php esc_html_e( 'Center', 'jasanika' ); ?></option>
+					<option value="right" <?php selected( $button_alignment, 'right' ); ?>><?php esc_html_e( 'Right', 'jasanika' ); ?></option>
+				</select>
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_button_width"><?php esc_html_e( 'Button Width (px)', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<input type="number" id="slide_button_width" name="slide_button_width" value="<?php echo $button_width; ?>" class="small-text" min="0"> px
+			</td>
+		</tr>
+
+		<tr>
+			<th scope="row">
+				<label for="slide_button_style"><?php esc_html_e( 'Button Style', 'jasanika' ); ?></label>
+			</th>
+			<td>
+				<select id="slide_button_style" name="slide_button_style">
+					<option value="solid" <?php selected( $button_style, 'solid' ); ?>><?php esc_html_e( 'Solid', 'jasanika' ); ?></option>
+					<option value="outline" <?php selected( $button_style, 'outline' ); ?>><?php esc_html_e( 'Outline', 'jasanika' ); ?></option>
+					<option value="ghost" <?php selected( $button_style, 'ghost' ); ?>><?php esc_html_e( 'Ghost', 'jasanika' ); ?></option>
+				</select>
 			</td>
 		</tr>
 
@@ -517,15 +697,7 @@ function jasanika_slider_render_form_fields( array $slide ): void {
 				<label for="slide_sort_order"><?php esc_html_e( 'Sort Order', 'jasanika' ); ?></label>
 			</th>
 			<td>
-				<input
-					type="number"
-					id="slide_sort_order"
-					name="slide_sort_order"
-					value="<?php echo esc_attr( $sort_order ); ?>"
-					class="small-text"
-					min="0"
-					step="1"
-				>
+				<input type="number" id="slide_sort_order" name="slide_sort_order" value="<?php echo esc_attr( $sort_order ); ?>" class="small-text" min="0" step="1">
 				<p class="description"><?php esc_html_e( 'Lower number = displayed first.', 'jasanika' ); ?></p>
 			</td>
 		</tr>
@@ -541,5 +713,17 @@ function jasanika_slider_render_form_fields( array $slide ): void {
 		</tr>
 
 	</table>
+
+	<!-- Live Preview -->
+	<div id="jasanika-slide-preview" class="jasanika-slide-preview" data-image="<?php echo esc_attr( $image_url ); ?>" style="max-width:900px;margin-top:18px;">
+		<div class="jasanika-slide-preview__image" style="background-image:url('<?php echo esc_url( $image_url ); ?>');">
+			<div class="jasanika-slide-preview__overlay"></div>
+			<div class="jasanika-slide-preview__content">
+				<h3 class="preview-title"><?php echo $title; ?></h3>
+				<p class="preview-desc"><?php echo $description; ?></p>
+				<p class="preview-button"><a class="button"><?php echo $button_text; ?></a></p>
+			</div>
+		</div>
+	</div>
 	<?php
 }

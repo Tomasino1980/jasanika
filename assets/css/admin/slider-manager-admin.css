@@ -1,0 +1,17 @@
+/* Minimal admin CSS for Slider Manager live preview and spacing improvements */
+.jasanika-slide-preview{border:1px solid #e5e5e5;border-radius:4px;overflow:hidden}
+.jasanika-slide-preview__image{position:relative;padding-top:40%;background-color:#f5f5f5;background-size:cover;background-position:center;display:flex}
+.jasanika-slide-preview__overlay{position:absolute;left:0;top:0;right:0;bottom:0;background:#000;opacity:.5}
+.jasanika-slide-preview__content{position:relative;z-index:2;padding:20px;display:flex;flex-direction:column}
+.jasanika-slide-preview__content .preview-title{margin:0 0 6px;font-size:18px}
+.jasanika-slide-preview__content .preview-desc{margin:0 0 10px}
+.jasanika-slide-preview__content .preview-button .button{padding:8px 14px}
+
+/* Button style variants for preview */
+.jasanika-slide-preview .button.solid{background:#222;color:#fff;border:0}
+.jasanika-slide-preview .button.outline{background:transparent;color:#222;border:2px solid #222}
+.jasanika-slide-preview .button.ghost{background:transparent;color:#222;border:0;opacity:.75}
+
+/* Small admin spacing fixes */
+.form-table th{vertical-align:top}
+.form-table .description{margin-top:6px;color:#666}
